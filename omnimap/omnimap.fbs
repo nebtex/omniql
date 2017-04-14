@@ -1,0 +1,10 @@
+
+table ResourceEntry{
+  path: [double];
+  buffer: [ubyte];
+}
+
+table Message {
+  application:string (required);
+  resources: [ResourceEntry];
+}
