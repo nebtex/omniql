@@ -1,0 +1,6 @@
+package: github.com/nebtex/omnibuff
+import:
+- package: github.com/google/flatbuffers
+  version: ^1.6.0
+  subpackages:
+  - go
