@@ -1,0 +1,8 @@
+hash: 2efd94fb016b19c9e340e5976a0153bc13f918314f1f7a60c92e4e681babffd9
+updated: 2017-04-13T23:10:58.498188184-05:00
+imports:
+- name: github.com/google/flatbuffers
+  version: cebdad4d2381ca4d6325121c4189ce0b754ecfeb
+  subpackages:
+  - go
+testImports: []
