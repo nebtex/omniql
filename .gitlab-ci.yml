@@ -14,6 +14,7 @@ publish docs:
     - master
   stage: publish
   script:
+    - npm install gitbook-cli -g
     - mkdir -p $HOME/.ssh
     - ssh-keyscan github.com >> ~/.ssh/known_hosts
     - git config --global user.name "nebot"
@@ -24,5 +25,5 @@ publish docs:
     - echo -e "$nebot_gpg" > $HOME/private.key
     - gpg --import $HOME/private.key
     - chmod 400 $HOME/.ssh/id_rsa
-    - cp -rf README.md /docs/README.md
+    - cp -rf README.md docs/README.md
     - make docs
