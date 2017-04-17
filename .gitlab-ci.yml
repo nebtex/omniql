@@ -5,13 +5,14 @@ cache:
   paths:
   - node_modules/
   untracked: true
+
 stages:
   - publish
 
 publish docs:
   only:
     - master
-  stage: push
+  stage: publish
   script:
     - mkdir -p $HOME/.ssh
     - ssh-keyscan github.com >> ~/.ssh/known_hosts
