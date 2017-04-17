@@ -1,0 +1,27 @@
+image: node:6
+
+cache:
+  key: "$CI_COMMIT_REF_NAME"
+  paths:
+  - node_modules/
+  untracked: true
+stages:
+  - publish
+
+publish docs:
+  only:
+    - master
+  stage: push
+  script:
+    - mkdir -p $HOME/.ssh
+    - ssh-keyscan github.com >> ~/.ssh/known_hosts
+    - git config --global user.name "nebot"
+    - git config --global user.email devbot@nebtex.com
+    - git config --global user.signingkey $nebot_secret_key_gpg
+    - git config --global commit.gpgsign true
+    - echo -e "$nebot_key" > $HOME/.ssh/id_rsa
+    - echo -e "$nebot_gpg" > $HOME/private.key
+    - gpg --import $HOME/private.key
+    - chmod 400 $HOME/.ssh/id_rsa
+    - cp -rf README.md /docs/README.md
+    - make docs
