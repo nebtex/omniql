@@ -1,0 +1,12 @@
+api: io.omniql.core.v1
+kind: Union
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: UnionItems
+  types:
+    UnionResource:
+      items:
+      - Resource/Interface
+      - Resource/Table
+      - Resource/Resource

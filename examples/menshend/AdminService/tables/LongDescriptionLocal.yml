@@ -1,0 +1,12 @@
+api: io.omniql.core.v1
+kind: Table
+spec:
+  meta:
+    application: io.menshend.v1alpha
+    resource: AdminService
+    name: LongDocumentationLocal
+  fields:
+  - name: content
+    schema: io.omniql.core.v1/String
+    documentation:
+      short: Service long documentation, it supports markdown !!!;

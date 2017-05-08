@@ -1,0 +1,20 @@
+api: io.omniql.core.v1
+kind: Table
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Metadata
+    documentation:
+      short: documentation type
+  fields:
+  - name: application
+    type: String
+    required: true
+  - name: name
+    type: String
+    required: true
+  - name: documentation
+    type: Table/Documentation
+  - name: groups
+    type: Vector
+    items: String

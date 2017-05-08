@@ -1,0 +1,43 @@
+api: io.omniql.core.v1
+kind: Enumeration
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: BasicTypes
+  kind: Byte
+  items:
+  - name: byte
+    groups:
+    - scalars
+  - name: unsignedByte
+    groups:
+    - scalars
+  - name: boolean
+    groups:
+    - scalars
+  - name: short
+    groups:
+    - scalars
+  - name: unsignedShort
+    groups:
+    - scalars
+  - name: integer
+    groups:
+    - scalars
+  - name: unsignedInteger
+    groups:
+    - scalars
+  - name: float
+    groups:
+    - scalars
+  - name: long
+    groups:
+    - scalars
+  - name: unsignedLong
+    groups:
+    - scalars
+  - name: double
+    groups:
+    - scalars
+  - name: vector
+  - name: string

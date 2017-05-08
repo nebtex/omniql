@@ -1,0 +1,55 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;omnibuff&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../k8s.io" />
+      <root url="file://$PROJECT_DIR$/../../../labix.org" />
+      <root url="file://$PROJECT_DIR$/../../../AegisDevops" />
+      <root url="file://$PROJECT_DIR$/../../../react-hot-boilerplate-vscode" />
+      <root url="file://$PROJECT_DIR$/../../../gitlab.com" />
+      <root url="file://$PROJECT_DIR$/../../../tzk-daemon" />
+      <root url="file://$PROJECT_DIR$/../../../storage" />
+      <root url="file://$PROJECT_DIR$/../../../gitlab-group-compose" />
+      <root url="file://$PROJECT_DIR$/../../../eltiempo.com" />
+      <root url="file://$PROJECT_DIR$/../../../chihiro" />
+      <root url="file://$PROJECT_DIR$/../../../ttest" />
+      <root url="file://$PROJECT_DIR$/../../../tzk" />
+      <root url="file://$PROJECT_DIR$/../../../admin-console" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../git.genos.nebtex.com" />
+      <root url="file://$PROJECT_DIR$/../../../drone" />
+      <root url="file://$PROJECT_DIR$/../../../MyGame" />
+      <root url="file://$PROJECT_DIR$/../../../consultool" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../../../tzn-facts" />
+      <root url="file://$PROJECT_DIR$/../../../sourcegraph.com" />
+    </CLASSES>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../k8s.io" />
+      <root url="file://$PROJECT_DIR$/../../../labix.org" />
+      <root url="file://$PROJECT_DIR$/../../../AegisDevops" />
+      <root url="file://$PROJECT_DIR$/../../../react-hot-boilerplate-vscode" />
+      <root url="file://$PROJECT_DIR$/../../../gitlab.com" />
+      <root url="file://$PROJECT_DIR$/../../../tzk-daemon" />
+      <root url="file://$PROJECT_DIR$/../../../storage" />
+      <root url="file://$PROJECT_DIR$/../../../gitlab-group-compose" />
+      <root url="file://$PROJECT_DIR$/../../../eltiempo.com" />
+      <root url="file://$PROJECT_DIR$/../../../chihiro" />
+      <root url="file://$PROJECT_DIR$/../../../ttest" />
+      <root url="file://$PROJECT_DIR$/../../../tzk" />
+      <root url="file://$PROJECT_DIR$/../../../admin-console" />
+      <root url="file://$PROJECT_DIR$/../.." />
+      <root url="file://$PROJECT_DIR$/../../../golang.org" />
+      <root url="file://$PROJECT_DIR$/../../../git.genos.nebtex.com" />
+      <root url="file://$PROJECT_DIR$/../../../drone" />
+      <root url="file://$PROJECT_DIR$/../../../MyGame" />
+      <root url="file://$PROJECT_DIR$/../../../consultool" />
+      <root url="file://$PROJECT_DIR$/../../../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../../../tzn-facts" />
+      <root url="file://$PROJECT_DIR$/../../../sourcegraph.com" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>

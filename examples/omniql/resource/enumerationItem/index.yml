@@ -1,0 +1,13 @@
+api: io.omniql.core.v1
+kind: Resource
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: EnumerationItem
+  fields:
+  - name: name
+    type: String
+    required: true
+  - name: groups
+    type: Vector
+    items: String

@@ -2,14 +2,15 @@ package generators
 
 //GoGenerator generate the code for read omnibuff schemas in golang
 type GoGenerator struct {
-}
-
-//Boolean implements AccessorsGenerator.Boolean
-func (gc *GoGenerator) Boolean(mutationAllowed bool) string {
-	return `
-	`
 
 }
+
+//Scalar implements AccessorsGenerator.Boolean
+func (gc *GoGenerator) Scalar(mutationAllowed bool) string {
+	return `func ({instance} *{object}){field.Name}(){GoType}{
+		return {instance}._fbo.{field.Name}()
+	}
+}`}
 
 type Tree struct {
 	offset   int32
@@ -40,4 +41,19 @@ Monster.SetNmae()
 
 all.sssss=function(){
 	return 
+}
+
+
+struct Table {
+	scalars = []byte
+	nonScalars [][]byte
+	children []interface{}
+}
+
+func (t *Table)Name(){
+	return (childs[1])
+}
+
+func (t Table)AAA(){
+	tables[1]
 }

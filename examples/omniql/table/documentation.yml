@@ -1,0 +1,13 @@
+api: io.omniql.core.v1
+kind: Table
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Documentation
+    documentation:
+      short: documentation type
+  fields:
+  - name: short
+    type: String
+  - name: long
+    type: String

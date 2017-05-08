@@ -1,0 +1,14 @@
+api: io.omniql.core.v1
+kind: Resource
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Enumeration
+  fields:
+  - name: meta
+    type: Table/Metadata
+    required: true
+  - name: kind
+    type: Enumeration/BasicTypes/Group/Scalars
+  - name: items
+    type: Resource/EnumerationItem

@@ -1,0 +1,10 @@
+api: io.omniql.core.v1
+kind: Union
+spec:
+  meta:
+    application: io.menshend.v1alpha
+    name: LongDocumentation
+    resource: AdminService
+  schemas:
+    - io.menshend.v1alpha/Resource/AdminService/Table/LongDocumentationRemote
+    - io.menshend.v1alpha/Resource/AdminService/Table/LongDocumentationLocal

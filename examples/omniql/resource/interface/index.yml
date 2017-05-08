@@ -1,0 +1,15 @@
+api: io.omniql.core.v1
+kind: Resource
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Interface
+    groups:
+    - UnionTypes
+  fields:
+  - name: meta
+    type: Table/Metadata
+    required: true
+  - name: fields
+    type: Vector
+    items: Resource/Field

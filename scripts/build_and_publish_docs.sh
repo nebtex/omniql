@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-cp REA
 cd docs
 gitbook install
 gitbook build

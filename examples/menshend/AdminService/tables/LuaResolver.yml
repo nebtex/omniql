@@ -1,0 +1,19 @@
+api: io.omniql.core.v1
+kind: Table
+spec:
+  meta:
+    application: io.menshend.v1alpha
+    resource: AdminService
+    name: LuaResolver
+    documentation:
+      short: define the backend service as a lua script
+  fields:
+  - name: content
+    schema: io.omniql.core.v1/String
+    required: true
+    documentation:
+      short: lua script code
+  - name: makeBodyAvailable
+    schema: io.omniql.core.v1/Boolean
+    documentation:
+      short: pass the request body to the lua script for futher analysis, this only work on strategies that support this operation (proxy, redirect)

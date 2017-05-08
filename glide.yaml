@@ -4,3 +4,5 @@ import:
   version: ^1.6.0
   subpackages:
   - go
+- package: github.com/ghodss/yaml
+  version: ^1.0.0
