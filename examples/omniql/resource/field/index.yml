@@ -1,5 +1,5 @@
 api: io.omniql.core.v1
-kind: Resource
+oqlid: Resource/Field
 spec:
   meta:
     application: io.omniql.core.v1

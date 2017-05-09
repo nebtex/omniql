@@ -1,5 +1,5 @@
 api: io.omniql.core.v1
-kind: Table
+oqlid: Resource/Union/Table/Table
 spec:
   meta:
     application: io.omniql.core.v1
