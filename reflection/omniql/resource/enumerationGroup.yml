@@ -1,0 +1,11 @@
+api: io.omniql.core.v1
+oqlid: Resource/EnumerationGroup
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: EnumerationGroup
+    documentation:
+      short: allow to group enumeration by delibarate groups
+  fields:
+  - name: documentation
+    type: Table/Documentation

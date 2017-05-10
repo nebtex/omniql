@@ -1,0 +1,15 @@
+---
+api: io.omniql.core.v1alpha
+kind: Resource
+spec:
+  meta:
+    application: io.example.chat.v1
+    name: Message
+  paths:
+    - User/Room/Message
+    - User/User/Message
+  fields:
+    - name: Value
+      schema: io.omniql.core.v1alpha/String
+    - name: CreatedAt
+      schema: io.omniql.core.v1alpha/Integer

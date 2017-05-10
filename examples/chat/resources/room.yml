@@ -1,0 +1,18 @@
+---
+api: io.omniql.core.v1alpha
+kind: Resource
+spec:
+  meta:
+    application: io.example.chat.v1
+    name: Room
+    documentation:
+      short: where people meet and chat
+  fields:
+    - name: Name
+      schema: io.omniql.core.v1alpha/String
+    - name: Username
+      schema: io.omniql.core.v1alpha/String
+    - name: IsOnline
+      schema: io.omniql.core.v1alpha/Boolean
+    - name: LastSeen
+      schema: io.omniql.core.v1alpha/Integer

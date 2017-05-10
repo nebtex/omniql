@@ -1,0 +1,8 @@
+api: io.omniql.core.v1
+oqlid: Enumeration/BasicTypes/EnumerationGroup/Scalars
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Scalars
+  documentation:
+    short: scalar types

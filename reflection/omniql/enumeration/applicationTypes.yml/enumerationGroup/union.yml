@@ -1,0 +1,8 @@
+api: io.omniql.core.v1
+oqlid: Enumeration/ApplicationTypes/EnumerationGroup/Unions
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Unions
+  documentation:
+    short: the application Unions
