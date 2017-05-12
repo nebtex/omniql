@@ -1,5 +1,5 @@
 api: io.omniql.core.v1
-oqlid: Enumeration/ApplicationTypes/EnumerationGroup/Unions
+oqlid: io.omniql.core.v1/Enumeration/ApplicationTypes/EnumerationGroup/Unions
 spec:
   meta:
     application: io.omniql.core.v1

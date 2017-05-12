@@ -1,10 +1,11 @@
 api: io.omniql.core.v1
-oqlid: Union/UnionItem
+oqlid: io.omniql.core.v1/Union/UnionItem
 spec:
   meta:
     application: io.omniql.core.v1
     name: UnionItems
-  types:
+    kind: Union
+  type:
     UnionResource:
       items:
       - Resource/Interface

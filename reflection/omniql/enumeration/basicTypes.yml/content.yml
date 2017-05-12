@@ -1,5 +1,5 @@
 api: io.omniql.core.v1
-oqlid: Enumeration/BasicTypes
+oqlid: io.omniql.core.v1/Enumeration/BasicTypes
 spec:
   meta:
     application: io.omniql.core.v1

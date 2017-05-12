@@ -1,9 +1,10 @@
 api: io.omniql.core.v1
-oqlid: Table/Metadata
+oqlid: io.omniql.core.v1/Table/Metadata
 spec:
   meta:
     application: io.omniql.core.v1
     name: Metadata
+    kind: Table
     documentation:
       short: documentation type
   fields:

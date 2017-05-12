@@ -1,9 +1,10 @@
 api: io.omniql.core.v1
-oqlid: Resource/Resource
+oqlid: io.omniql.core.v1/Resource/Resource
 spec:
   meta:
     application: io.omniql.core.v1
     name: Resource
+    kind: Resource
     groups:
     - UnionTypes
     documentation:

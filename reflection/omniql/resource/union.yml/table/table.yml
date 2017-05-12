@@ -1,9 +1,10 @@
 api: io.omniql.core.v1
-oqlid: Resource/Union/Table/Table
+oqlid: io.omniql.core.v1/Resource/Union/Table/Table
 spec:
   meta:
     application: io.omniql.core.v1
     parent: Resource/Union
+    kind: Table
     name: Table
   fields:
   - name: items

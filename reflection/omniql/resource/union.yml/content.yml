@@ -1,12 +1,13 @@
 api: io.omniql.core.v1
-oqlid: Resource/Union
+oqlid: io.omniql.core.v1/Resource/Union
 spec:
   meta:
     application: io.omniql.core.v1
     name: Union
+    kind: Resource
   fields:
   - name: meta
     type: Table/Metadata
     required: true
-  - name: types
+  - name: type
     type: Union/UnionItems
