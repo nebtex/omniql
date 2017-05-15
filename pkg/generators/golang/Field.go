@@ -1,12 +1,12 @@
-package generators
+package golang
 
 import (
 	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 	"io"
 	"text/template"
 	"strings"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1BasicTypes"
 	"fmt"
+	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1BasicTypes"
 )
 
 type FieldTemplateFunctions interface {
@@ -40,30 +40,31 @@ func NewFieldGenerator(fm FieldTemplateFunctions) (fg *FieldGenerator, err error
 		}
 	}
 
-
 	// create templates
 	wmtTmpl, err := template.New("WriterMethodInterface").Funcs(funcMap).Parse(`{{.MutatePrefix}}{{.FieldName .}}({{.FieldType .}}) err`)
 	if err != nil {
 		return
 	}
 
-
 	fg = &FieldGenerator{}
 	fg.readerMethodTemplate = rmtTmpl
 	return fg, nil
 }
 
-func (fg *FieldGenerator) ReaderMethodInterface(fr corev1.FieldReader, wr io.Writer) (err error) {
+
+func (fg *FieldGenerator) ReaderMethodInterface(fr corev1.FieldReader, wr io.Writer, ew corev1.ErrorWriter) (err error) {
 	types := strings.Split(fr.Type(), "/")
-	if len(types)==1{
+	if len(types) == 1 {
 		//Is a basic type
 		fieldType := corev1BasicTypes.None.FromString(types[0])
-		if fieldType == corev1BasicTypes.None{
-			//Todo: better errors
-			err = fmt.Errorf("Invalid BasicType %s", fieldType.String())
+		if fieldType == corev1BasicTypes.None {
+			err = ew.Field().FromReader(fr, func(o corev1.FieldErrorOptions) {
+				o.UserMessage("Invalid type")
+			})
 			return
 		}
-		if fieldType.IsScalar(){
+
+		if fieldType.IsScalar() {
 			//TODO: template map
 			// create templates
 			rmtTmpl, err := template.New("ReaderMethodInterface").Funcs(fg.funcMap).Parse(`{{.FieldName .}}() {{.FieldType .}}`)
@@ -73,22 +74,20 @@ func (fg *FieldGenerator) ReaderMethodInterface(fr corev1.FieldReader, wr io.Wri
 			err = fg.readerMethodTemplate.Execute(wr, fr)
 			return
 		}
-		if fieldType == corev1BasicTypes.Vector{
+		if fieldType == corev1BasicTypes.Vector {
 			rmtTmpl, err := template.New("ReaderMethodInterface").Funcs(fg.funcMap).Parse(`{{.FieldName .}}() {{.FieldType .}}`)
 
 		}
-		if fieldType == corev1BasicTypes.String{
+		if fieldType == corev1BasicTypes.String {
 
 			rmtTmpl, err := template.New("ReaderMethodInterface").Funcs(fg.funcMap).Parse(`{{.FieldName .}}() {{.FieldType .}}`)
-
 
 		}
 	}
 
-
-
 	return
 }
+
 func (fg *FieldGenerator) WriterMethodInterface(fr corev1.FieldReader, wr io.Writer) (err error) {
 	err = fg.writerMethodTemplate.Execute(wr, fr)
 	return

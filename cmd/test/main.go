@@ -62,19 +62,13 @@ func main() {
 
 
 	//make tables
-	for _, v := range app.Tables {
-		err := v.ToFlatBuffer(buf)
-		if err!=nil{
-			panic(err)
-		}
-	}
-	//make resource
 	for _, v := range app.Resources {
-		err := v.ToFlatBuffer(buf)
+		err := v.ToStreamInterface(buf)
 		if err!=nil{
 			panic(err)
 		}
 	}
+
 
 	fmt.Println(buf.String())
 	//make unions

@@ -11,7 +11,6 @@ import (
 	"strings"
 	"fmt"
 	"io"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 )
 
 var OM map[string]*Meta
@@ -48,69 +47,8 @@ type TableSpec struct {
 	Fields []*Field `json:"fields"`
 }
 
-type ResourceGenerator interface {
-	ReaderInterfaces(*TableSpec, wr io.Writer ) error
-	WriterInterfaces(*TableSpec, wr io.Writer) error
-	Native(*TableSpec, wr io.Writer) error
-	ReaderImplementation(*TableSpec, io.Writer) error
-	WriterImplementation(*TableSpec, io.Writer) error
-}
 
 
-type TableGenerator interface {
-	ReaderInterfaces(*TableSpec, wr io.Writer ) error
-	WriterInterfaces(*TableSpec, wr io.Writer) error
-	Native(*TableSpec, wr io.Writer) error
-	ReaderImplementation(*TableSpec, io.Writer) error
-	WriterImplementation(*TableSpec, io.Writer) error
-}
-
-type FieldGenerator interface {
-	ReaderMethodInterface(corev1.FieldReader, io.Writer) error
-	WriterMethodInterface(corev1.FieldReader,io.Writer) error
-	NativeProperty(corev1.FieldReader, io.Writer) error
-	ReaderMethodImplementation(corev1.FieldReader, io.Writer) error
-	WriterMethodImplementation(corev1.FieldReader, io.Writer) error
-}
-
-
-type Generator interface {
-	Table(t *TableSpec, wr io.Writer) TableGenerator
-}
-
-type GoGenerator struct {
-}
-
-type GoTableGenerator struct {
-	table *TableSpec
-}
-
-func NewTableGenerator() {
-	tmpl, err := template.New("table").Funcs(funcMap).Parse(`
-type {{ tableName .Meta }} {
-{{range .Fields}}    {{fieldName .Name}}:{{toFbsSchema .}};
-{{end}}}
-`)
-}
-
-func (gt *GoTableGenerator) ReaderInterfaces() {
-	for _, field := gt.table.Fields {
-
-
-	}
-}
-
-func (gg *GoGenerator) Table(t *TableSpec, wr io.Writer) (*GoTableGenerator) {
-	//generate interfaces
-	err = gg.TableInterfaces(t, wr)
-	if err != nil {
-		return
-	}
-	//generate native
-	//generate reader
-	//generate writer
-
-}
 
 func (t *TableSpec) ToFlatBuffer(wr io.Writer) (error) {
 	funcMap := template.FuncMap{
@@ -163,6 +101,71 @@ func (t *TableSpec) ToFlatBuffer(wr io.Writer) (error) {
 table {{ tableName .Meta }} {
 {{range .Fields}}    {{fieldName .Name}}:{{toFbsSchema .}};
 {{end}}}
+`)
+	err = tmpl.Execute(wr, t)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (t *TableSpec) ToStreamInterface(wr io.Writer) (error) {
+	funcMap := template.FuncMap{
+		"tableName": func(meta *Meta) string {
+
+			if meta.Parent == "" {
+				return meta.Name
+			}
+			types := strings.Split(meta.Parent, "/")
+			return types[1] + meta.Name
+		},
+		"fieldName": func(str string) string {
+
+			return strings.Title(str)
+		},
+		"toStreamSchema": func(field *Field) string {
+
+			if strings.Contains(field.Type, "/") {
+				types := strings.Split(field.Type, "/")
+				if len(types) == 2 {
+					return fmt.Sprintf("(%s, error)", types[1])
+				}
+
+				panic("Schema[Table] not found: " + field.Type)
+			}
+			switch field.Type {
+			case "Integer":
+				return "int"
+			case "String":
+				return "string"
+			case "Boolean":
+				return "bool"
+			case "Vector":
+				types := strings.Split(field.Items, "/")
+				if len(types) == 1 {
+					return fmt.Sprintf("Vector%s", strings.Title(types[0]))
+				}
+				if len(types) == 2 {
+					return fmt.Sprintf("(Vector%sStreamReader, error)", types[1])
+
+				}
+
+				panic("Vector[table] not found: " + field.Items)
+
+			default:
+				panic("Schema[table] not found: " + field.Type)
+			}
+		},
+	}
+
+	tmpl, err := template.New("table").Funcs(funcMap).Parse(`
+type  {{ tableName .Meta }}StreamReader interface{
+{{range .Fields}}    {{fieldName .Name}}() {{toStreamSchema .}}
+{{end}}}
+
+}
 `)
 	err = tmpl.Execute(wr, t)
 
@@ -239,6 +242,75 @@ table {{ tableName .Meta }} {
 
 	return nil
 }
+
+func (t *ResourceSpec) ToStreamInterface(wr io.Writer) (error) {
+	funcMap := template.FuncMap{
+		"tableName": func(meta *Meta) string {
+
+			if meta.Parent == "" {
+				return meta.Name
+			}
+			types := strings.Split(meta.Parent, "/")
+			return types[1] + meta.Name
+		},
+		"fieldName": func(str string) string {
+
+			return strings.Title(str)
+		},
+		"toStreamSchema": func(field *Field) string {
+
+			if strings.Contains(field.Type, "/") {
+				types := strings.Split(field.Type, "/")
+				if len(types) == 2 {
+					return fmt.Sprintf("(%s, error)", types[1])
+				}
+				if len(types) == 4 {
+					return ""
+				}
+
+				panic("Schema[Table] not found: " + field.Type)
+			}
+			switch field.Type {
+			case "Integer":
+				return "int"
+			case "String":
+				return "string"
+			case "Boolean":
+				return "bool"
+			case "Vector":
+				types := strings.Split(field.Items, "/")
+				if len(types) == 1 {
+					return fmt.Sprintf("Vector%s", strings.Title(types[0]))
+				}
+				if len(types) == 2 {
+					return fmt.Sprintf("(Vector%sStreamReader, error)", types[1])
+
+				}
+
+				panic("Vector[table] not found: " + field.Items)
+
+			default:
+				panic("Schema[table] not found: " + field.Type)
+			}
+		},
+	}
+
+	tmpl, err := template.New("table").Funcs(funcMap).Parse(`
+type  {{ tableName .Meta }}StreamReader interface{
+{{range .Fields}}    {{fieldName .Name}}() {{toStreamSchema .}}
+{{end}}}
+
+
+`)
+	err = tmpl.Execute(wr, t)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 
 type UnionResource struct {
 	Items []string `json:"Items"`
