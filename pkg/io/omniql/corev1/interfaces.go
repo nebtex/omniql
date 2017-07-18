@@ -1,10 +1,16 @@
 package corev1
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1BasicTypes"
+//import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1BasicTypes"
+
+type TableReader interface {
+	RID() ResourceIDReader
+	Meta() MetadataReader
+	Fields() VectorFieldReader
+}
 
 type DocumentationReader interface {
-	Short() string
-	Long() string
+	Short() (string)
+	Long() (string)
 }
 
 type OqlIDValueReader interface {
@@ -21,40 +27,39 @@ type MetadataReader interface {
 	Application() string
 	Name() string
 	Kind() string
-	Parent() OqlIDReader
+	Parent() string
 	Documentation() DocumentationReader
 }
 
 type ResourceReader interface {
-	OqlID() OqlIDReader
+	OqlID() ResourceIDReader
 	Fields() VectorFieldReader
 	Meta() MetadataReader
 }
 
-type OqlIDReader interface {
-	Type() int
-	ID() int64
-	Name() string
-	Local() bool
-	Value() OqlIDValueReader
-	Parent() OqlIDReader
+type ResourceIDReader interface {
+	Application() string
+	Type() string
+	ID() string
+	IsLocal() bool
+	Parent() ResourceIDReader
 }
 
 type FieldReader interface {
-	OqlID() OqlIDReader
+	RID() ResourceIDReader
 	Name() string
 	Type() string
 	Items() string
+	Default() string
 	Documentation() DocumentationReader
 	Required() bool
 }
 
 type GroupReader interface {
-	OqlID() OqlIDReader
+	OqlID() ResourceIDReader
 	Name() string
 	Documentation() DocumentationReader
 }
-
 
 type EnumerationItemReader interface {
 	Name() string
@@ -80,7 +85,7 @@ type FieldErrorOptions interface {
 }
 
 type EnumerationGroupReader interface {
-	OqlID() OqlIDReader
+	OqlID() ResourceIDReader
 	Name() string
 	Documentation() DocumentationReader
 }
@@ -97,23 +102,25 @@ type ErrorWriter interface {
 	Field() FieldErrorReaderConstructor
 }
 
+/*
 type EnumerationReader interface {
 	OqlID() OqlIDReader
 	Meta() MetadataReader
 	Kind() corev1BasicTypes.Scalars
-}
+}*/
 
 type Supplier interface {
 }
 
 type OmniQLResource interface {
-	OqlID() OqlIDReader
+	OqlID() ResourceIDReader
 }
 type VectorEnumerationGroupReader interface {
 	Len() int32
 	Get(i int32) EnumerationGroupReader
 }
 
+/*
 type UnTypedNodeApex interface {
 	// 1.*
 	MatchAny() UnTypedTypeApex
@@ -158,7 +165,7 @@ type UnTypedTypeApex interface {
 	// 1.>
 	Forward()
 	ResourceNode()
-	EnumerationGroupApex() EnumerationGroupNodeApex
+	4EnumerationGroupApex() EnumerationGroupNodeApex
 }
 
 type EnumerationGroupTypeApex interface {
@@ -222,3 +229,4 @@ type Result interface {
 type SyncQueryResult interface {
 	FieldSubscripntion(func(ChangeTreeReader, FieldReader, queryError error) error)
 }
+*/

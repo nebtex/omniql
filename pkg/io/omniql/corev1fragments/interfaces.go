@@ -1,0 +1,6 @@
+
+func FragmentRecorder(){
+	FragmentWriter.
+
+
+}

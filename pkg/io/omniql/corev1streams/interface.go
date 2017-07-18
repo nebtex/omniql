@@ -48,6 +48,8 @@ type UnionTableStreamReader interface {
 	Items() (VectorTableStreamReader, error)
 }
 
+
+
 type DocumentationStreamReader interface {
 	Short() string
 	Long() string
@@ -104,22 +106,47 @@ type UnionStreamReader interface {
 	Type() (MetadataStreamReader, error)
 }
 
-type FieldChunkStreamObserver func(FragmentProgressReader, ChangeTreeReader, Unsubscribe func() error, fr corev1.FieldReader, queryError error) error
+type FieldChunksSubscriber func(fpr FragmentProgressReader, ctg ChangeTreeReader, fr corev1.FieldReader, c Closer)
+
+type ChunkCloser interface {
+	Close() error
+	CloseWithError(err error) error
+}
+
+type ReaderBlocker interface {
+	Wait() error
+}
+
+type ReaderCloserAndBlocker interface {
+	Closer
+	ReaderBlocker
+}
 
 //when all the subscription are closed the ObserveFieldChunkStream will advice the api about
-type NodeFieldChunkStreamReader interface {
-	ObserveFieldChunkStream(FieldChunkStreamObserver)
+type NodeFieldChunksObserver interface {
+	Observe(ObverseFragment, FieldChunksSubscriber, ...ErroHandlers) ReaderCloserAndBlocker
+	ReaderCloserAndBlocker
+}
+
+//when all the subscription are closed the ObserveFieldChunkStream will advice the api about
+type NodeFieldChunksReader interface {
+	Field() NodeFieldChunksObserver
 }
 
 type NodeFieldResultStreamReader interface {
 	FieldStreamResultSet() (fs []FieldStreamReader, requested bool, err error)
 }
 
-type EnumerationItemChunkStreamObserver func(FragmentProgressReader, ChangeTreeReader, Unsubscribe func() error, fr corev1.EnumerationItemReader, queryError error) error
+type EnumerationItemChunkSubscriber func(FragmentProgressReader, ChangeTreeReader, Unsubscribe func() error, fr corev1.EnumerationItemReader, queryError error) error
+
+type NodeEnumerationItemObserver interface {
+	Observe(EnumerationItemChunkSubscriber)
+	ReaderCloserAndBlocker
+}
 
 //when all the subscription are closed the ObserveFieldChunkStream will advice the api about
-type NodeEnumerationItemChunkStreamReader interface {
-	ObserveEnumerationItemChunkStream(EnumerationItemChunkStreamObserver)
+type NodeEnumerationItemChunksReader interface {
+	EnumerationItem() NodeEnumerationItemObserver
 }
 
 type NodeEnumerationItemStreamReader interface {
@@ -131,6 +158,7 @@ type EnumerationGroupChunkStreamObserver func(FragmentProgressReader, ChangeTree
 //when all the subscription are closed the ObserveFieldChunkStream will notify the api about
 type NodeEnumerationGroupChunkStreamReader interface {
 	ObserveEnumerationGroupChunkStream(EnumerationGroupChunkStreamObserver)
+	StreamReaderCloserAndBlocker
 }
 
 type NodeEnumerationGroupStreamReader interface {
@@ -138,39 +166,53 @@ type NodeEnumerationGroupStreamReader interface {
 }
 
 type NodeResultChunkStreamReader interface {
-	NodeFieldResultStreamReader
-	NodeEnumerationItemChunkStreamReader
-	NodeEnumerationGroupStreamReader
+	NodeFieldChunksReader
+	NodeEnumerationItemChunksReader
+	StreamReaderCloserAndBlocker
 }
 
-type ResultChunkStreamReader interface {
+type ResultSetChunksReader interface {
 	NodeResultChunkStreamReader
+	ReaderCloserAndBlocker
 }
 
-
-type ResultSetChunkSubscriber interface {
-	ObserveChunks() ResultChunkStreamReader
+type QuerySetRequestChunksConsumer interface {
+	ConsumeChunks() ResultSetChunksReader
 }
 
-type QuerySetRequestCUnitSubscriber interface {
-	ObserveUnits() ResultChunkStreamReader
+type QuerySetRequestUnitConsumer interface {
+	ConsumeUnits() ResultSetChunksReader
 }
 
-type QuerySetRequestConsumer interface {
-	Consume() ResultChunkStreamReader
+type QuerySetRequestStreamConsumer interface {
+	ConsumeStream() ResultSetChunksReader
+}
+
+type QuerySetRequestClassicConsumer interface {
+	ConsumeAll() ResultSetChunksReader
 }
 
 type QuerySetRequest interface {
-	ResultSetChunkSubscriber
-	QuerySetRequestCUnitSubscriber
-	QuerySetRequestConsumer
+	QuerySetRequestChunksConsumer
+	QuerySetRequestUnitConsumer
+	QuerySetRequestStreamConsumer
+	QuerySetRequestClassicConsumer
 }
 
+var QuerySet QuerySetRequest
+
+func init() {
+	QuerySet.ConsumeChunks().EnumerationItem().Observe(corev1framents.EnumerationItemWriter(
+		ApexFromID().
+	))
+}
+
+/*
 type QueryWriter interface {
 	StartNodeEnumerationItem(NodeEnumearionItemApex) NodeEnumerationQueryWriter
 	Execute() (QuerySetRequest, error)
 }
-
+*//*
 type NodeEnumerationQueryWriter interface {
 	End() QueryWriter
-}
+}*/

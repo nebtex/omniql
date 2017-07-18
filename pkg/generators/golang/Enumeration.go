@@ -47,7 +47,8 @@ Query.Execute(func(QeuryResult, err:=dxd){
 
 func generateGroups(am corev1.ApexMaker, er corev1.EnumerationReader, lw generators.LibraryWriter, ew corev1.ErrorWriter) (err error) {
 	apex := am.FromID(er.OqlID())
-	groups := apex.EnumerationGroupApex().MatchAny().QuerySet().Result()
+	groups := apex.EnumerationGroupApex().MatchAny()
+
 
 	for v:=nil; v==nil{
 		v =: er.Items().Next()

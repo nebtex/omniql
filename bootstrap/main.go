@@ -1,4 +1,4 @@
-package schema
+package main
 
 import (
 	"io/ioutil"
@@ -11,6 +11,8 @@ import (
 	"strings"
 	"fmt"
 	"io"
+	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
+	"github.com/nebtex/omnibuff/pkg/generators/golang/hybrids_generator"
 )
 
 var OM map[string]*Meta
@@ -40,15 +42,13 @@ type Field struct {
 	Items         string `json:"items"`
 	Documentation *Documentation `json:"documentation"`
 	Required      bool `json:"required"`
+	Default       string `json:"default"`
 }
 
 type TableSpec struct {
 	Meta   *Meta `json:"meta"`
-	Fields []*Field `json:"fields"`
+	Fields []*corev1Native.Field `json:"fields"`
 }
-
-
-
 
 func (t *TableSpec) ToFlatBuffer(wr io.Writer) (error) {
 	funcMap := template.FuncMap{
@@ -312,7 +312,6 @@ May be greater than the caccessoruntouchedurrent vector
 	return nil
 }
 
-
 type UnionResource struct {
 	Items []string `json:"Items"`
 }
@@ -324,7 +323,7 @@ type UnionSpec struct {
 
 type ResourceSpec struct {
 	Meta   *Meta `json:"meta"`
-	Fields []*Field `json:"fields"`
+	Fields []*corev1Native.Field `json:"fields"`
 }
 
 type YamlFile struct {
@@ -383,4 +382,48 @@ func Load(path string) (app *Application, err error) {
 
 	return app, nil
 
+}
+func CheckPanic(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+func main() {
+	app, _ := Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")
+	baseDir := "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/corev1Hybrids/"
+
+	for _, table := range app.Tables {
+		trg := hybrids_generator.NewTableReaderGenerator()
+		//create file
+		f, err := os.Create(baseDir + table.Meta.Name + ".go")
+		CheckPanic(err)
+		trg.Generate(f)
+		f.Write([]byte(`package corev1Hybrids
+
+import "github.com/nebtex/hybrids/golang/hybrids"
+
+`))
+
+		tmpl, err := template.New("").Parse(`
+type {{.Meta.Name}}Reader struct {
+	resource *hybrids.ResourceReader
+}`)
+		CheckPanic(err)
+		err = tmpl.Execute(f, table)
+
+		//write struct with hybrids
+		//write fields
+		for _, f := range table.Fields {
+			field := corev1Native.NewFieldReader(f)
+			fmt.Println(field.Name(), table.Meta.Name, field.Type())
+
+			if field.Type() == "String" {
+
+			}
+
+		}
+		//close
+		f.Close()
+	}
 }

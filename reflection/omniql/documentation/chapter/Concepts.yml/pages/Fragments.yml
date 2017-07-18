@@ -1,0 +1,26 @@
+api: io.omniql.omnibuff.v0Experimental
+oqlid: io.omniql.omnibuff.v1/Book/Concepts/Chapter/Fragments/Page/Basic
+spec:
+  meta:
+    application:  io.omniql.omnibuff.v1
+    parent: Book/Concepts/Chapter/Fragments
+    name: Basic
+    kind: Page
+  content:|
+
+    Fragments in omniql are some of the most powerfull tools for compose queries and consume them
+
+    how does frameng works
+
+    First thanks to the strong and stricly typed nature of omnibuf and many of its restrictions, is posible to represent each result of any query one tree,
+    even before the query is execute, fragments exploit this feature, giving to the programer the abability to tell to backend which  part of that tree they want it return
+
+    example
+
+    ```omniqlExamples.FragmentRecord(io.omniql.examples.houseMarketv1)
+    GetCheapHauses(limit:10).SetFragment(
+
+    )
+
+    ```
+    # typed fragments
