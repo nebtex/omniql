@@ -14,8 +14,14 @@ spec:
   - name: name
     type: String
     required: true
+  - name: kind
+    type: String
+    required: true
+  - name: parent
+    type: String
   - name: documentation
     type: Table/Documentation
-  - name: groups
-    type: Vector
-    items: String
+  - name: locked
+    type: Boolean
+    documentation:
+      short: if a resource has this flag, it means that it can't be modified for an user

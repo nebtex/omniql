@@ -39,9 +39,9 @@ func NewIDReader(ID []byte, isLocal bool) corev1.ResourceIDReader {
 	}
 	var idObj *IDReader
 	app := result[0]
-	for i := 1; i < len(result); i++ {
+	for i := 1; i < len(result); i=i+2 {
 		idObj = &IDReader{id: string(result[i+1]),
-			_type:            string(result[i+1]),
+			_type:            string(result[i]),
 			parent:           idObj,
 			application:      string(app),
 			isLocal:          isLocal}

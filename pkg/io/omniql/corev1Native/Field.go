@@ -74,7 +74,12 @@ type VectorFieldReader struct {
 }
 
 func (vf *VectorFieldReader) Len() int32 {
+	if vf.nativeFields != nil {
+
+		return int32(len(vf.nativeFields))
+	}
 	return int32(len(vf.fields))
+
 }
 
 func (vf *VectorFieldReader) Get(i int32) (item corev1.FieldReader, err error) {
