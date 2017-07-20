@@ -6,7 +6,7 @@ spec:
     name: Metadata
     kind: Table
     documentation:
-      short: documentation type
+      short: meta data
   fields:
   - name: application
     type: String

@@ -14,6 +14,7 @@ import (
 	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
 	"github.com/nebtex/omnibuff/pkg/generators/golang/hybrids_generator"
 	"go.uber.org/zap"
+	"github.com/nebtex/omnibuff/pkg/utils"
 )
 
 var OM map[string]*Meta
@@ -335,7 +336,7 @@ type YamlFile struct {
 
 type Application struct {
 	Name      string `json:"name"`
-	Resources []*ResourceSpec `json:"resources"`
+	Resources []*corev1Native.Resource `json:"resources"`
 	Tables    []*corev1Native.Table `json:"tables"`
 	Unions    []*UnionSpec `json:"tables"`
 }
@@ -367,7 +368,7 @@ func Load(path string) (app *Application, err error) {
 			app.Tables = append(app.Tables, table)
 
 		case "Resource":
-			resource := &ResourceSpec{}
+			resource := &corev1Native.Resource{}
 			err = mapstructure.Decode(yf.Spec, resource)
 			if err != nil {
 				return errors.Wrap(err, path)
@@ -400,9 +401,9 @@ func main() {
 
 	for _, table := range app.Tables {
 
-		trg := hybrids_generator.NewTableReaderGenerator(corev1Native.NewTableReader(table), logger)
+		trg := hybrids_generator.NewTableReaderGenerator(corev1Native.NewTableReader(table), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
 		//create file
-		f, err := os.Create(baseDir + table.Meta.Name + ".go")
+		f, err := os.Create(baseDir + utils.TableName(corev1Native.NewTableReader(table)) + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package corev1Hybrids\n"))
 		CheckPanic(err)
@@ -422,6 +423,21 @@ func main() {
 
 		}
 		//close
+		f.Close()
+	}
+
+	for _, resource := range app.Resources {
+
+		trg := hybrids_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
+		//create file
+		f, err := os.Create(baseDir + resource.Meta.Name + ".go")
+		CheckPanic(err)
+		_, err = f.Write([]byte("package corev1Hybrids\n"))
+		CheckPanic(err)
+
+		err = trg.Generate(f)
+		CheckPanic(err)
+
 		f.Close()
 	}
 }

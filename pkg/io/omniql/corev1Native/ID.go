@@ -28,7 +28,7 @@ func (i *IDReader) Parent() corev1.ResourceIDReader {
 	return i.parent
 }
 
-func (i *IDReader) Type() string {
+func (i *IDReader) Kind() string {
 	return i._type
 }
 

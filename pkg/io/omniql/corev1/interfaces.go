@@ -32,14 +32,15 @@ type MetadataReader interface {
 }
 
 type ResourceReader interface {
-	OqlID() ResourceIDReader
-	Fields() VectorFieldReader
+	RID() ResourceIDReader
 	Meta() MetadataReader
+
+	Fields() VectorFieldReader
 }
 
 type ResourceIDReader interface {
 	Application() string
-	Type() string
+	Kind() string
 	ID() string
 	IsLocal() bool
 	Parent() ResourceIDReader
