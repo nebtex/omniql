@@ -8,7 +8,6 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 //FieldReader field type
 type FieldReader struct {
     _table hybrids.TableReader
-	_resource hybrids.ResourceReader
     documentation corev1.DocumentationReader
 }
 
@@ -40,9 +39,63 @@ func (f *FieldReader) Default() (value string) {
 	return
 }
 
-func NewFieldReader(r hybrids.ResourceReader) corev1.FieldReader{
+func NewFieldReader(t hybrids.TableReader) corev1.FieldReader{
 	if t==nil{
 		return nil
 	}
-	return &FieldReader{_table:r.RootTable(), _resource:r}
+	return &FieldReader{_table:t}
+}
+type VectorFieldReader struct {
+    _vectorHybrid    hybrids.VectorTableReader
+    _vectorAllocated [] corev1.FieldReader
+}
+
+func (vf *VectorFieldReader) Len() (size int) {
+
+    if vf._vectorAllocated != nil {
+        size = len(vf._vectorAllocated)
+        return
+    }
+
+    if vf._vectorHybrid != nil {
+        size = vf._vectorHybrid.Len()
+        return
+    }
+
+    return
+}
+
+func (vf *VectorFieldReader) Get(i int) (item corev1.FieldReader, err error) {
+    var table hybrids.TableReader
+
+    if vf._vectorAllocated != nil {
+        if i < 0 {
+            err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vf._vectorAllocated)}
+            return
+        }
+
+        if i > len(vf._vectorAllocated)-1 {
+            err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vf._vectorAllocated)}
+            return
+        }
+
+        item = vf._vectorAllocated[i]
+        return
+    }
+
+    if vf._vectorHybrid != nil {
+        table, err = vf._vectorHybrid.Get(i)
+        item = NewEnumerationReader(table)
+        return
+    }
+
+    err = &hybrids.VectorInvalidIndexError{Index: i, Len: 0}
+    return
+}
+
+func NewVectorFieldReader(v hybrids.VectorTableReader) corev1.VectorFieldReader {
+    if v == nil {
+        return nil
+    }
+    return &VectorFieldReader{_vectorHybrid: v}
 }

@@ -51,3 +51,57 @@ func NewMetadataReader(t hybrids.TableReader) corev1.MetadataReader{
 	}
 	return &MetadataReader{_table:t}
 }
+type VectorMetadataReader struct {
+    _vectorHybrid    hybrids.VectorTableReader
+    _vectorAllocated [] corev1.MetadataReader
+}
+
+func (vm *VectorMetadataReader) Len() (size int) {
+
+    if vm._vectorAllocated != nil {
+        size = len(vm._vectorAllocated)
+        return
+    }
+
+    if vm._vectorHybrid != nil {
+        size = vm._vectorHybrid.Len()
+        return
+    }
+
+    return
+}
+
+func (vm *VectorMetadataReader) Get(i int) (item corev1.MetadataReader, err error) {
+    var table hybrids.TableReader
+
+    if vm._vectorAllocated != nil {
+        if i < 0 {
+            err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vm._vectorAllocated)}
+            return
+        }
+
+        if i > len(vm._vectorAllocated)-1 {
+            err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vm._vectorAllocated)}
+            return
+        }
+
+        item = vm._vectorAllocated[i]
+        return
+    }
+
+    if vm._vectorHybrid != nil {
+        table, err = vm._vectorHybrid.Get(i)
+        item = NewEnumerationReader(table)
+        return
+    }
+
+    err = &hybrids.VectorInvalidIndexError{Index: i, Len: 0}
+    return
+}
+
+func NewVectorMetadataReader(v hybrids.VectorTableReader) corev1.VectorMetadataReader {
+    if v == nil {
+        return nil
+    }
+    return &VectorMetadataReader{_vectorHybrid: v}
+}

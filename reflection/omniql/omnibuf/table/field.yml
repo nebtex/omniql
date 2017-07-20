@@ -1,10 +1,10 @@
 api: io.omniql.core.v1
-oqlid: io.omniql.core.v1/Resource/Field
+oqlid: io.omniql.core.v1/Table/Field
 spec:
   meta:
     application: io.omniql.core.v1
     name: Field
-    kind: Resource
+    kind: Table
     documentation:
       short: field type
   fields:

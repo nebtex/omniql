@@ -1,0 +1,19 @@
+api: io.omniql.core.v1
+oqlid: io.omniql.core.v1/Resource/Enumeration/Table/Group
+spec:
+  meta:
+    application: io.omniql.core.v1
+    name: Group
+    kind: Table
+    parent: Resource/Enumeration
+    documentation:
+      short: allow to group enumerations
+  fields:
+  - name: name
+    type: String
+  - name: documentation
+    type: Table/Documentation
+  - name: items
+    type: Vector
+    items: String
+

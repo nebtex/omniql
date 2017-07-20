@@ -126,9 +126,53 @@ func (t *TableReaderGenerator) EndStruct() (err error) {
 	return
 }
 
-func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
+func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
 	var i int32
 	var field corev1.FieldReader
+
+	//create Accessors
+	for i = 0; i < t.table.Fields().Len(); i++ {
+		field, err = t.table.Fields().Get(i)
+		if err != nil {
+			t.zap.Error(err.Error())
+			return
+		}
+		switch field.Type() {
+		case "String":
+			err = t.StringAccessor(field, uint16(i))
+			if err != nil {
+				return
+			}
+		default:
+			pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Type()), false)
+			if pid != nil {
+				if pid.Kind() == "Table" {
+					err = t.TableAccessor(field, offset+uint16(i), pid.ID())
+					if err != nil {
+						return
+					}
+
+				}
+			}
+
+		}
+	}
+	return
+}
+
+func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
+	_, err = t.definitionsBuffer.WriteTo(wr)
+	if err != nil {
+		return err
+	}
+	_, err = t.functionsBuffer.WriteTo(wr)
+	if err != nil {
+		return err
+	}
+	return
+}
+
+func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 
 	//add imports
 	wr.Write([]byte(`
@@ -142,61 +186,37 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 		return err
 	}
 
-	//create Accessors
-	for i = 0; i < t.table.Fields().Len(); i++ {
-		field, err = t.table.Fields().Get(i)
-		if err != nil {
-			t.zap.Error(err.Error())
-			return
-		}
-		switch field.Type() {
-		case "String":
-			err = t.StringAccessor(field, uint16(i))
-			if err != nil {
-				return err
-			}
-		default:
-			pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Type()), false)
-			if pid != nil {
-				if pid.Kind() == "Table" {
-					err = t.TableAccessor(field, uint16(i), pid.ID())
-					if err != nil {
-						return err
-					}
-
-				}
-			}
-
-		}
+	err = t.CreateAccessors(0)
+	if err != nil {
+		return err
 	}
+
+	err = t.CreateAllocator()
+	if err != nil {
+		return err
+	}
+
+	err = t.CreateVector()
+	if err != nil {
+		return err
+	}
+
 	err = t.EndStruct()
 	if err != nil {
 		return err
 	}
 
-
-	_, err = t.definitionsBuffer.WriteTo(wr)
+	err = t.FlushBuffers(wr)
 	if err != nil {
 		return err
 	}
 
-
-	err= t.CreateAllocator()
-	if err != nil {
-		return err
-	}
-
-	_, err = t.functionsBuffer.WriteTo(wr)
-	if err != nil {
-		return err
-	}
 	t.zap.Info(fmt.Sprintf("Table %s Created successfully", utils.TableName(t.table)))
 	return
 }
 
 //Todo:
 //default
-//table reader
 //vector table reader
 //resource
 func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
@@ -209,13 +229,11 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (v
 }
 `)
 	if err != nil {
-		t.zap.Error("StringAccessor: template definition error", zap.String("err", err.Error()))
 		return
 	}
 
 	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{"Table": t.table, "Field": freader, "FieldNumber": fn})
 	if err != nil {
-		t.zap.Error("StringAccessor: template render error", zap.String("err", err.Error()))
 		return
 	}
 
@@ -243,7 +261,6 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{
 }
 `)
 	if err != nil {
-		t.zap.Error("TableAccessor: template definition error", zap.String("err", err.Error()))
 		return
 	}
 
@@ -254,12 +271,86 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{
 		"PackageName":                                                    t.interfacePackageShort,
 	})
 	if err != nil {
-		t.zap.Error("TableAccessor: template render error", zap.String("err", err.Error()))
 		return
 	}
 
 	return
 
+}
+
+func (t *TableReaderGenerator) CreateVector() (err error) {
+
+	tmpl, err := template.New("TableReaderGenerator::GenerateVector").
+		Funcs(t.funcMap).Parse(`
+type Vector{{TableName .Table}}Reader struct {
+    _vectorHybrid    hybrids.VectorTableReader
+    _vectorAllocated [] {{.PackageName}}.{{TableName .Table}}Reader
+}
+
+func (v{{ShortName}} *Vector{{TableName .Table}}Reader) Len() (size int) {
+
+    if v{{ShortName}}._vectorAllocated != nil {
+        size = len(v{{ShortName}}._vectorAllocated)
+        return
+    }
+
+    if v{{ShortName}}._vectorHybrid != nil {
+        size = v{{ShortName}}._vectorHybrid.Len()
+        return
+    }
+
+    return
+}
+
+func (v{{ShortName}} *Vector{{TableName .Table}}Reader) Get(i int) (item {{.PackageName}}.{{TableName .Table}}Reader, err error) {
+    var table hybrids.TableReader
+
+    if v{{ShortName}}._vectorAllocated != nil {
+        if i < 0 {
+            err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName}}._vectorAllocated)}
+            return
+        }
+
+        if i > len(v{{ShortName}}._vectorAllocated)-1 {
+            err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName}}._vectorAllocated)}
+            return
+        }
+
+        item = v{{ShortName}}._vectorAllocated[i]
+        return
+    }
+
+    if v{{ShortName}}._vectorHybrid != nil {
+        table, err = v{{ShortName}}._vectorHybrid.Get(i)
+        item = NewEnumerationReader(table)
+        return
+    }
+
+    err = &hybrids.VectorInvalidIndexError{Index: i, Len: 0}
+    return
+}
+
+func NewVector{{TableName .Table}}Reader(v hybrids.VectorTableReader) {{.PackageName}}.Vector{{TableName .Table}}Reader {
+    if v == nil {
+        return nil
+    }
+    return &Vector{{TableName .Table}}Reader{_vectorHybrid: v}
+}
+`)
+
+	if err != nil {
+		return
+	}
+
+	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{
+		"Table":       t.table,
+		"PackageName": t.interfacePackageShort,
+	})
+	if err != nil {
+		return
+	}
+
+	return
 }
 
 //vectorscalar

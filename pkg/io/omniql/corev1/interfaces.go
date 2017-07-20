@@ -64,7 +64,7 @@ type GroupReader interface {
 
 type EnumerationItemReader interface {
 	Name() string
-	Groups() VectorEnumerationGroupReader
+	Documentation() DocumentationReader
 }
 type FieldErrorReader interface {
 	Error() string

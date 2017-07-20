@@ -3,41 +3,21 @@ oqlid: io.omniql.core.v1/Enumeration/BasicTypes
 spec:
   meta:
     application: io.omniql.core.v1
+    kind: Enumeration
     name: BasicTypes
-  kind: Byte
+  kind: Integer8
   items:
-  - name: byte
-    groups:
-    - scalars
-  - name: unsignedByte
-    groups:
-    - scalars
+  - name: integer8
+  - name: unsignedInteger8
   - name: boolean
-    groups:
-    - scalars
   - name: short
-    groups:
-    - scalars
   - name: unsignedShort
-    groups:
-    - scalars
   - name: integer
-    groups:
-    - scalars
   - name: unsignedInteger
-    groups:
-    - scalars
   - name: float
-    groups:
-    - scalars
   - name: long
-    groups:
-    - scalars
   - name: unsignedLong
-    groups:
-    - scalars
   - name: double
-    groups:
-    - scalars
   - name: vector
   - name: string
+  - name: bytes
