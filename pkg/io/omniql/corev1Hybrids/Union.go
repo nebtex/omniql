@@ -10,7 +10,7 @@ type UnionReader struct {
     _table hybrids.TableReader
     _resource hybrids.ResourceReader
     _rid corev1.ResourceIDReader
-    meta corev1.MetadataReader
+    meta *MetadataReader
 }
 
 //RID get resource id
@@ -36,7 +36,7 @@ func NewUnionReader(t hybrids.TableReader) corev1.UnionReader{
 }
 type VectorUnionReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.UnionReader
+    _vectorAllocated [] *UnionReader
 }
 
 func (vu *VectorUnionReader) Len() (size int) {

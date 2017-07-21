@@ -18,7 +18,7 @@ func NewUnionResourceReader(t hybrids.TableReader) corev1.UnionResourceReader{
 }
 type VectorUnionResourceReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.UnionResourceReader
+    _vectorAllocated [] *UnionResourceReader
 }
 
 func (vr *VectorUnionResourceReader) Len() (size int) {

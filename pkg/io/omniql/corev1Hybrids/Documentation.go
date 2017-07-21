@@ -30,7 +30,7 @@ func NewDocumentationReader(t hybrids.TableReader) corev1.DocumentationReader{
 }
 type VectorDocumentationReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.DocumentationReader
+    _vectorAllocated [] *DocumentationReader
 }
 
 func (vd *VectorDocumentationReader) Len() (size int) {

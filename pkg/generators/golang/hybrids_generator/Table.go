@@ -133,21 +133,40 @@ func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
 	//create Accessors
 	for i = 0; i < t.table.Fields().Len(); i++ {
 		field, err = t.table.Fields().Get(i)
+		fieldNumber := offset + uint16(i)
 		if err != nil {
 			t.zap.Error(err.Error())
 			return
 		}
 		switch field.Type() {
 		case "String":
-			err = t.StringAccessor(field, uint16(i))
+			err = t.StringAccessor(field, fieldNumber)
 			if err != nil {
 				return
+			}
+		case "Vector":
+			switch field.Items() {
+			case "String":
+				err = t.VectorStringAccessor(field, fieldNumber)
+				if err != nil {
+					return
+				}
+			default:
+				pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Items()), false)
+				if pid != nil {
+					if pid.Kind() == "Table" {
+						err = t.VectorTableAccessor(field, fieldNumber, utils.TableNameFromID(pid))
+						if err != nil {
+							return
+						}
+					}
+				}
 			}
 		default:
 			pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Type()), false)
 			if pid != nil {
 				if pid.Kind() == "Table" {
-					err = t.TableAccessor(field, offset+uint16(i), pid.ID())
+					err = t.TableAccessor(field, fieldNumber, pid.ID())
 					if err != nil {
 						return
 					}
@@ -240,10 +259,65 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (v
 	return
 
 }
+func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
+	tmpl, err := template.New("StringAccessor").
+		Funcs(t.funcMap).Parse(`
+{{GoDoc .Field.Name .Field.Documentation}}
+func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() hybrids.VectorStringReader {
+    return {{ShortName}}._table.VectorString({{.FieldNumber}})
+}
+`)
+	if err != nil {
+		return
+	}
+
+	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{"Table": t.table, "Field": freader, "FieldNumber": fn})
+	if err != nil {
+		return
+	}
+
+	return
+
+}
+
+func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, fn uint16, tableName string) (err error) {
+	err = t.StructAddField(strings.ToLower(freader.Name()), "*Vector"+tableName+"Reader")
+	if err != nil {
+		return err
+	}
+
+		tmpl, err := template.New("StringAccessor").
+			Funcs(t.funcMap).Parse(`
+{{GoDoc .Field.Name .Field.Documentation}}
+func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{.PackageName}}.{{.TypeTableName}}Reader {
+
+	if {{ShortName}}.{{ToLower .Field.Name}} != nil {
+		return {{ShortName}}.{{ToLower .Field.Name}}
+	}
+
+	return New{{.TypeTableName}}Reader({{ShortName}}._table.VectorTable({{.FieldNumber}}))
+}
+	`)
+		if err != nil {
+			return
+		}
+
+		err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{"Table": t.table,
+			"Field":                                                          freader,
+			"FieldNumber":                                                    fn,
+			"TypeTableName":                                                  "Vector"+tableName,
+			"PackageName":                                                    t.interfacePackageShort,
+		})
+		if err != nil {
+			return
+		}
+
+	return
+}
 
 func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint16, tableName string) (err error) {
 
-	err = t.StructAddField(strings.ToLower(freader.Name()), t.interfacePackageShort+"."+tableName+"Reader")
+	err = t.StructAddField(strings.ToLower(freader.Name()), "*"+tableName+"Reader")
 	if err != nil {
 		return err
 	}
@@ -284,7 +358,7 @@ func (t *TableReaderGenerator) CreateVector() (err error) {
 		Funcs(t.funcMap).Parse(`
 type Vector{{TableName .Table}}Reader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] {{.PackageName}}.{{TableName .Table}}Reader
+    _vectorAllocated [] *{{TableName .Table}}Reader
 }
 
 func (v{{ShortName}} *Vector{{TableName .Table}}Reader) Len() (size int) {

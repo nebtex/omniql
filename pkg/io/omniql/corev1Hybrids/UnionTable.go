@@ -18,7 +18,7 @@ func NewUnionTableReader(t hybrids.TableReader) corev1.UnionTableReader{
 }
 type VectorUnionTableReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.UnionTableReader
+    _vectorAllocated [] *UnionTableReader
 }
 
 func (vt *VectorUnionTableReader) Len() (size int) {

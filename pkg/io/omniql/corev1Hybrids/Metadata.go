@@ -8,7 +8,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 //MetadataReader meta data
 type MetadataReader struct {
     _table hybrids.TableReader
-    documentation corev1.DocumentationReader
+    documentation *DocumentationReader
 }
 
 //Application ...
@@ -53,7 +53,7 @@ func NewMetadataReader(t hybrids.TableReader) corev1.MetadataReader{
 }
 type VectorMetadataReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.MetadataReader
+    _vectorAllocated [] *MetadataReader
 }
 
 func (vm *VectorMetadataReader) Len() (size int) {

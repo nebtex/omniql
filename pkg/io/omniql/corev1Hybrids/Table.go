@@ -10,7 +10,7 @@ type TableReader struct {
     _table hybrids.TableReader
     _resource hybrids.ResourceReader
     _rid corev1.ResourceIDReader
-    meta corev1.MetadataReader
+    meta *MetadataReader
 }
 
 //RID get resource id
@@ -36,7 +36,7 @@ func NewTableReader(t hybrids.TableReader) corev1.TableReader{
 }
 type VectorTableReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.TableReader
+    _vectorAllocated [] *TableReader
 }
 
 func (vt *VectorTableReader) Len() (size int) {

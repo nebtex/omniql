@@ -8,7 +8,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 //FieldReader field type
 type FieldReader struct {
     _table hybrids.TableReader
-    documentation corev1.DocumentationReader
+    documentation *DocumentationReader
 }
 
 //Name ...
@@ -47,7 +47,7 @@ func NewFieldReader(t hybrids.TableReader) corev1.FieldReader{
 }
 type VectorFieldReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.FieldReader
+    _vectorAllocated [] *FieldReader
 }
 
 func (vf *VectorFieldReader) Len() (size int) {

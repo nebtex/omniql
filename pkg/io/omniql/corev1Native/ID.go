@@ -25,7 +25,10 @@ func (i *IDReader) IsLocal() bool {
 }
 
 func (i *IDReader) Parent() corev1.ResourceIDReader {
-	return i.parent
+	if i.parent!=nil{
+		return i.parent
+	}
+	return nil
 }
 
 func (i *IDReader) Kind() string {
@@ -37,7 +40,7 @@ func NewIDReader(ID []byte, isLocal bool) corev1.ResourceIDReader {
 	if len(result) < 3 || len(result)%2 == 0 {
 		return nil
 	}
-	var idObj *IDReader
+	var idObj *IDReader = nil
 	app := result[0]
 	for i := 1; i < len(result); i=i+2 {
 		idObj = &IDReader{id: string(result[i+1]),

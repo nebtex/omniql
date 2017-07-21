@@ -8,7 +8,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 //EnumerationItemReader ...
 type EnumerationItemReader struct {
     _table hybrids.TableReader
-    documentation corev1.DocumentationReader
+    documentation *DocumentationReader
 }
 
 //Name ...
@@ -35,7 +35,7 @@ func NewEnumerationItemReader(t hybrids.TableReader) corev1.EnumerationItemReade
 }
 type VectorEnumerationItemReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.EnumerationItemReader
+    _vectorAllocated [] *EnumerationItemReader
 }
 
 func (vi *VectorEnumerationItemReader) Len() (size int) {

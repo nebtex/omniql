@@ -8,7 +8,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 //EnumerationGroupReader allow to group enumerations
 type EnumerationGroupReader struct {
     _table hybrids.TableReader
-    documentation corev1.DocumentationReader
+    documentation *DocumentationReader
 }
 
 //Name ...
@@ -27,6 +27,11 @@ func (g *EnumerationGroupReader) Documentation() corev1.DocumentationReader {
 	return NewDocumentationReader(g._table.Table(1))
 }
 
+//Items ...
+func (g *EnumerationGroupReader) Items() hybrids.VectorStringReader {
+    return g._table.VectorString(2)
+}
+
 func NewEnumerationGroupReader(t hybrids.TableReader) corev1.EnumerationGroupReader{
 	if t==nil{
 		return nil
@@ -35,7 +40,7 @@ func NewEnumerationGroupReader(t hybrids.TableReader) corev1.EnumerationGroupRea
 }
 type VectorEnumerationGroupReader struct {
     _vectorHybrid    hybrids.VectorTableReader
-    _vectorAllocated [] corev1.EnumerationGroupReader
+    _vectorAllocated [] *EnumerationGroupReader
 }
 
 func (vg *VectorEnumerationGroupReader) Len() (size int) {
