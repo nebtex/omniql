@@ -15,6 +15,7 @@ import (
 	"github.com/nebtex/omnibuff/pkg/generators/golang/hybrids_generator"
 	"go.uber.org/zap"
 	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omnibuff/pkg/generators/golang/interface_generator"
 )
 
 var OM map[string]*Meta
@@ -391,13 +392,7 @@ func CheckPanic(err error) {
 	}
 }
 
-func main() {
-	app, _ := Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")
-	baseDir := "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/corev1Hybrids/"
-	logger, _ := zap.NewProduction()
-	defer logger.Sync()
-	undo := zap.RedirectStdLog(logger)
-	defer undo()
+func WriteHybrids(app *Application, baseDir string, logger *zap.Logger) {
 
 	for _, table := range app.Tables {
 
@@ -440,4 +435,65 @@ func main() {
 
 		f.Close()
 	}
+}
+
+
+func WriteInterface(app *Application, baseDir string, logger *zap.Logger) {
+
+	for _, table := range app.Tables {
+
+		trg := interface_generator.NewTableReaderGenerator(corev1Native.NewTableReader(table), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
+		//create file
+		f, err := os.Create(baseDir + utils.TableName(corev1Native.NewTableReader(table)) + ".go")
+		CheckPanic(err)
+		_, err = f.Write([]byte("package corev1Hybrids\n"))
+		CheckPanic(err)
+
+		err = trg.Generate(f)
+		CheckPanic(err)
+
+		//write struct with hybrids
+		//write fields
+		for _, f := range table.Fields {
+			field := corev1Native.NewFieldReader(f)
+			fmt.Println(field.Name(), table.Meta.Name, field.Type())
+
+			if field.Type() == "String" {
+
+			}
+
+		}
+		//close
+		f.Close()
+	}
+
+	for _, resource := range app.Resources {
+
+		trg := interface_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
+		//create file
+		f, err := os.Create(baseDir + resource.Meta.Name + ".go")
+		CheckPanic(err)
+		_, err = f.Write([]byte("package corev1Hybrids\n"))
+		CheckPanic(err)
+
+		err = trg.Generate(f)
+		CheckPanic(err)
+
+		f.Close()
+	}
+}
+func main() {
+	app, _ := Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")
+	baseDir := "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/corev1Hybrids/"
+
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+	undo := zap.RedirectStdLog(logger)
+	defer undo()
+
+	WriteHybrids(app, baseDir, logger)
+
+	baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1/"
+	WriteInterface(app, baseDir, logger)
+
 }

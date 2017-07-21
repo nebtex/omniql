@@ -11,4 +11,4 @@ spec:
     required: true
   - name: fields
     type: Vector
-    items: Resource/Field
+    items: Table/Field

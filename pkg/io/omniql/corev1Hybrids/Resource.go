@@ -11,6 +11,7 @@ type ResourceReader struct {
     _resource hybrids.ResourceReader
     _rid corev1.ResourceIDReader
     meta *MetadataReader
+    fields *VectorFieldReader
 }
 
 //RID get resource id
@@ -28,6 +29,16 @@ func (r *ResourceReader) Meta() corev1.MetadataReader {
 	return NewMetadataReader(r._table.Table(1))
 }
 
+//Fields ...
+func (r *ResourceReader) Fields() corev1.VectorFieldReader {
+
+	if r.fields != nil {
+		return r.fields
+	}
+
+	return NewVectorFieldReader(r._table.VectorTable(2))
+}
+	
 func NewResourceReader(t hybrids.TableReader) corev1.ResourceReader{
 	if t==nil{
 		return nil
