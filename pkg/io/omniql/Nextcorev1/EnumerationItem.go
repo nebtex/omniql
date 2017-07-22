@@ -1,4 +1,4 @@
-package corev1Hybrids
+package Nextcorev1
 
 
 
@@ -9,7 +9,7 @@ type EnumerationItemReader interface {
     Name() string
 
     //Documentation ...
-    Documentation() DocumentationReader
+    Documentation() (DocumentationReader, error)
 
 }
 

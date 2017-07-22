@@ -1,4 +1,4 @@
-package corev1Hybrids
+package Nextcorev1
 
 
 
@@ -18,7 +18,7 @@ type MetadataReader interface {
     Parent() string
 
     //Documentation ...
-    Documentation() DocumentationReader
+    Documentation() (DocumentationReader, error)
 
 }
 

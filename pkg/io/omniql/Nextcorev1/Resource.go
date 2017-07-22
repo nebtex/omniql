@@ -1,4 +1,4 @@
-package corev1Hybrids
+package Nextcorev1
 
 
 
@@ -9,7 +9,7 @@ type ResourceReader interface {
     RID() ResourceIDReader
 
     //Meta ...
-    Meta() MetadataReader
+    Meta() (MetadataReader, error)
 
     //Fields ...
     Fields() VectorFieldReader

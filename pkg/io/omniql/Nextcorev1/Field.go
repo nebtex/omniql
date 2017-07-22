@@ -1,4 +1,4 @@
-package corev1Hybrids
+package Nextcorev1
 
 
 
@@ -12,7 +12,7 @@ type FieldReader interface {
     Type() string
 
     //Documentation ...
-    Documentation() DocumentationReader
+    Documentation() (DocumentationReader, error)
 
     //Default String representation of the default value
     Default() string

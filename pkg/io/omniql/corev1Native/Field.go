@@ -3,7 +3,7 @@ package corev1Native
 import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 
 type Field struct {
-	RID           []byte  `json:"rid"`
+	RID           []byte `json:"rid"`
 	Name          string `json:"name"`
 	Type          string `json:"type"`
 	Items         string `json:"items"`

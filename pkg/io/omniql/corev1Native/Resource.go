@@ -3,9 +3,9 @@ package corev1Native
 import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 
 type Resource struct {
-	RID    []byte  `json:"rid"`
+	RID    []byte    `json:"rid"`
 	Meta   *Metadata `json:"meta"`
-	Fields []*Field `json:"fields"`
+	Fields []*Field  `json:"fields"`
 }
 
 type ResourceReader struct {

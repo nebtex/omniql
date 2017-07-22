@@ -260,7 +260,7 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint
 	tmpl, err := template.New("StringAccessor").
 		Funcs(t.funcMap).Parse(`
     {{GoDoc .Field.Name .Field.Documentation}}
-    {{Capitalize .Field.Name}}() {{.TypeTableName}}Reader
+    {{Capitalize .Field.Name}}() ({{.TypeTableName}}Reader, error)
 `)
 	if err != nil {
 		return
@@ -270,7 +270,6 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint
 		"Field":                                                          freader,
 		"FieldNumber":                                                    fn,
 		"TypeTableName":                                                  tableName,
-		"PackageName":                                                    t.interfacePackageShort,
 	})
 	if err != nil {
 		return
