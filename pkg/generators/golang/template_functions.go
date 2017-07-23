@@ -23,6 +23,9 @@ func ScalarToGolangType(str string) (value string) {
 	if str == "Integer8"{
 		value =  "int8"
 	}
+	if str == "UnsignedShort"{
+		value =  "uint16"
+	}
 	return
 }
 

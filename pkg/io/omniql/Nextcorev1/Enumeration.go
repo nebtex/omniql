@@ -11,6 +11,9 @@ type EnumerationReader interface {
     //Meta ...
     Meta() (MetadataReader, error)
 
+    //Kind ...
+    Kind() BasicType
+
     //Items ...
     Items() VectorEnumerationItemReader
 

@@ -171,13 +171,60 @@ func ({{ShortName .Enumeration.Meta.Name}} {{.Enumeration.Meta.Name}}) IsValid()
 {{RenderGroupValidators .Enumeration}}
 
 //{{.Enumeration.Meta.Name}}FromString convert a string to its {{.Enumeration.Meta.Name}} representation
-func {{.Enumeration.Meta.Name}}FromString(str string) (value {{.Enumeration.Meta.Name}}) {
+func FromStringTo{{.Enumeration.Meta.Name}}(str string) (value {{.Enumeration.Meta.Name}}) {
     var ok bool
     value, ok = {{ToSnakeCase .Enumeration.Meta.Name}}_reverse_map[str]
     if !ok{
         value = {{.Enumeration.Meta.Name}}None
 	}
 	return
+}
+
+//Vector{{.Enumeration.Meta.Name}} ...
+type Vector{{.Enumeration.Meta.Name}} interface {
+
+	// Returns the current size of this vector
+	Len() int
+
+	// Get the item in the position i, if i < Len(),
+	// if item does not exist should return the default value for the underlying data type
+	// when i > Len() should return an VectorInvalidIndexError
+	Get(i int) ({{.Enumeration.Meta.Name}}, error)
+}
+
+type vector_{{ToSnakeCase .Enumeration.Meta.Name}} struct {
+	_vector []{{.Enumeration.Meta.Name}}
+}
+
+//Len Returns the current size of this vector
+func (v{{ShortName .Enumeration.Meta.Name}} *vector_{{ToSnakeCase .Enumeration.Meta.Name}}) Len() (size int) {
+	size = len(v{{ShortName .Enumeration.Meta.Name}}._vector)
+	return
+}
+
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
+func (v{{ShortName .Enumeration.Meta.Name}} *vector_{{ToSnakeCase .Enumeration.Meta.Name}}) Get(i int) (item {{.Enumeration.Meta.Name}}, err error) {
+
+	if i < 0 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName .Enumeration.Meta.Name}}._vector)}
+		return
+	}
+
+	if i > len(v{{ShortName .Enumeration.Meta.Name}}._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName .Enumeration.Meta.Name}}._vector)}
+		return
+	}
+
+	item = v{{ShortName .Enumeration.Meta.Name}}._vector[i]
+	return
+
+}
+
+//NewVector{{.Enumeration.Meta.Name}} ...
+func NewVector{{.Enumeration.Meta.Name}}(v []{{.Enumeration.Meta.Name}}) Vector{{.Enumeration.Meta.Name}} {
+	return &vector_{{ToSnakeCase .Enumeration.Meta.Name}}{_vector: v}
 }
 `)
 	if err != nil {

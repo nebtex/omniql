@@ -83,7 +83,7 @@ func (vg *VectorEnumerationGroupReader) Get(i int) (item corev1.EnumerationGroup
 
 func NewVectorEnumerationGroupReader(v []*EnumerationGroup) (obj *VectorEnumerationGroupReader) {
 	if v == nil {
-		return nil
+		return &VectorEnumerationGroupReader{}
 	}
 
 	obj = &VectorEnumerationGroupReader{}

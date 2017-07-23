@@ -10,7 +10,7 @@ spec:
     type: Table/Metadata
     required: true
   - name: kind
-    type: Enumeration/BasicTypes/Group/Scalars
+    type: Enumeration/BasicType/EnumerationGroup/Scalars
   - name: items
     type: Vector
     items: Resource/Enumeration/Table/Item

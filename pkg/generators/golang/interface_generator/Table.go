@@ -99,21 +99,21 @@ func (t *TableReaderGenerator) CreateAccessors() (err error) {
 	//create Accessors
 	for i = 0; i < t.table.Fields().Len(); i++ {
 		field, err = t.table.Fields().Get(i)
-		fieldNumber :=  uint16(i)
+		fieldNumber := uint16(i)
 		if err != nil {
 			t.zap.Error(err.Error())
 			return
 		}
 		switch field.Type() {
 		case "String":
-			err = t.StringAccessor(field, fieldNumber)
+			err = t.StringAccessor(field)
 			if err != nil {
 				return
 			}
 		case "Vector":
 			switch field.Items() {
 			case "String":
-				err = t.VectorStringAccessor(field, fieldNumber)
+				err = t.VectorStringAccessor(field)
 				if err != nil {
 					return
 				}
@@ -132,7 +132,14 @@ func (t *TableReaderGenerator) CreateAccessors() (err error) {
 			pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Type()), false)
 			if pid != nil {
 				if pid.Kind() == "Table" {
-					err = t.TableAccessor(field, fieldNumber, pid.ID())
+					err = t.TableAccessor(field, pid.ID())
+					if err != nil {
+						return
+					}
+				}
+				if pid.Kind() == "EnumerationGroup" {
+					err = t.EnumerationAccessor(field, pid.Parent().ID())
+
 					if err != nil {
 						return
 					}
@@ -173,7 +180,6 @@ func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 		return err
 	}
 
-
 	err = t.CreateVector()
 	if err != nil {
 		return err
@@ -196,7 +202,7 @@ func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 //Todo:
 //default
 //resource
-func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
+func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader) (err error) {
 	tmpl, err := template.New("StringAccessor").
 		Funcs(t.funcMap).Parse(`
     {{GoDoc .Field.Name .Field.Documentation}}
@@ -206,14 +212,14 @@ func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader, fn uin
 		return
 	}
 
-	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table, "Field": freader, "FieldNumber": fn})
+	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table, "Field": freader})
 	if err != nil {
 		return
 	}
 	return
 }
 
-func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
+func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader) (err error) {
 	tmpl, err := template.New("StringAccessor").
 		Funcs(t.funcMap).Parse(`
     {{GoDoc .Field.Name .Field.Documentation}}
@@ -223,7 +229,7 @@ func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader, 
 		return
 	}
 
-	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table, "Field": freader, "FieldNumber": fn})
+	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table, "Field": freader})
 	if err != nil {
 		return
 	}
@@ -243,10 +249,10 @@ func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, f
 	}
 
 	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table,
-		"Field":                                                          freader,
-		"FieldNumber":                                                    fn,
-		"TypeTableName":                                                  "Vector" + tableName,
-		"PackageName":                                                    t.interfacePackageShort,
+		"Field":                                                            freader,
+		"FieldNumber":                                                      fn,
+		"TypeTableName":                                                    "Vector" + tableName,
+		"PackageName":                                                      t.interfacePackageShort,
 	})
 	if err != nil {
 		return
@@ -255,7 +261,7 @@ func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, f
 	return
 }
 
-func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint16, tableName string) (err error) {
+func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, tableName string) (err error) {
 
 	tmpl, err := template.New("StringAccessor").
 		Funcs(t.funcMap).Parse(`
@@ -267,9 +273,31 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint
 	}
 
 	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table,
-		"Field":                                                          freader,
-		"FieldNumber":                                                    fn,
-		"TypeTableName":                                                  tableName,
+		"Field":                                                            freader,
+		"TypeTableName":                                                    tableName,
+	})
+	if err != nil {
+		return
+	}
+
+	return
+
+}
+
+func (t *TableReaderGenerator) EnumerationAccessor(freader corev1.FieldReader, enumName string) (err error) {
+
+	tmpl, err := template.New("TableReaderGenerator::Interface::EnumerationAccessor").
+		Funcs(t.funcMap).Parse(`
+    {{GoDoc .Field.Name .Field.Documentation}}
+    {{Capitalize .Field.Name}}() {{.EnumerationName}}
+`)
+	if err != nil {
+		return
+	}
+
+	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table,
+		"Field":                                                            freader,
+		"EnumerationName":                                                  enumName,
 	})
 	if err != nil {
 		return
@@ -293,7 +321,7 @@ type Vector{{TableName .Table}}Reader interface {
 	}
 
 	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{
-		"Table":       t.table,
+		"Table": t.table,
 	})
 	if err != nil {
 		return

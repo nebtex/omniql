@@ -111,11 +111,58 @@ func (bt BasicType) IsScalar() (result bool) {
 }
 
 //BasicTypeFromString convert a string to its BasicType representation
-func BasicTypeFromString(str string) (value BasicType) {
+func FromStringToBasicType(str string) (value BasicType) {
     var ok bool
     value, ok = basic_type_reverse_map[str]
     if !ok{
         value = BasicTypeNone
 	}
 	return
+}
+
+//VectorBasicType ...
+type VectorBasicType interface {
+
+	// Returns the current size of this vector
+	Len() int
+
+	// Get the item in the position i, if i < Len(),
+	// if item does not exist should return the default value for the underlying data type
+	// when i > Len() should return an VectorInvalidIndexError
+	Get(i int) (BasicType, error)
+}
+
+type vector_basic_type struct {
+	_vector []BasicType
+}
+
+//Len Returns the current size of this vector
+func (vbt *vector_basic_type) Len() (size int) {
+	size = len(vbt._vector)
+	return
+}
+
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
+func (vbt *vector_basic_type) Get(i int) (item BasicType, err error) {
+
+	if i < 0 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vbt._vector)}
+		return
+	}
+
+	if i > len(vbt._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vbt._vector)}
+		return
+	}
+
+	item = vbt._vector[i]
+	return
+
+}
+
+//NewVectorBasicType ...
+func NewVectorBasicType(v []BasicType) VectorBasicType {
+	return &vector_basic_type{_vector: v}
 }

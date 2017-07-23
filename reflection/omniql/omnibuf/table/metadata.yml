@@ -15,7 +15,7 @@ spec:
     type: String
     required: true
   - name: kind
-    type: String
+    type: Enumeration/ApplicationType/EnumerationGroup/Resource
     required: true
   - name: parent
     type: String

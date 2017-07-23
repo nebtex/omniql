@@ -1,9 +1,7 @@
 package Nextcorev1Native
 
 import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
-)
+	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
 
 
 
