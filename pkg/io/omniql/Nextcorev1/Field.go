@@ -2,7 +2,7 @@ package Nextcorev1
 
 
 
-//FieldReader field type
+//FieldReader ...
 type FieldReader interface {
 
     //Name ...

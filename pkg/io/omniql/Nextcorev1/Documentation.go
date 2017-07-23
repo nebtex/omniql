@@ -2,7 +2,7 @@ package Nextcorev1
 
 
 
-//DocumentationReader documentation type
+//DocumentationReader ...
 type DocumentationReader interface {
 
     //Short ...

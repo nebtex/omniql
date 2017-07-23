@@ -1,8 +1,0 @@
-api: io.omniql.core.v1
-oqlid: io.omniql.core.v1/Enumeration/ApplicationTypes/EnumerationGroup/Tables
-spec:
-  meta:
-    application: io.omniql.core.v1
-    name: Tables
-  documentation:
-    short: the application Tables

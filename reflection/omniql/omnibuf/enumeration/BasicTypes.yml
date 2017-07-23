@@ -1,0 +1,37 @@
+api: io.omniql.core.v1
+oqlid: io.omniql.core.v1/Enumeration/BasicTypes
+spec:
+  meta:
+    application: io.omniql.core.v1
+    kind: Enumeration
+    name: BasicType
+  kind: Integer8
+  items:
+  - name: Integer8
+  - name: UnsignedInteger8
+  - name: Boolean
+  - name: Short
+  - name: UnsignedShort
+  - name: Integer
+  - name: UnsignedInteger
+  - name: Float
+  - name: Long
+  - name: UnsignedLong
+  - name: Double
+  - name: Vector
+  - name: String
+  - name: Bytes
+  groups:
+  - name: Scalar
+    items:
+    - Integer8
+    - UnsignedInteger8
+    - Boolean
+    - Short
+    - UnsignedShort
+    - Integer
+    - UnsignedInteger
+    - Float
+    - Long
+    - UnsignedLong
+    - Double

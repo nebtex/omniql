@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//EnumerationGroupReader allow to group enumerations
+//EnumerationGroupReader ...
 type EnumerationGroupReader struct {
     _table hybrids.TableReader
     documentation *DocumentationReader

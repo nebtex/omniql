@@ -7,14 +7,14 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//Documentation documentation type
+//Documentation ...
 type Documentation struct {
 
     Short string `json:"short"`
     Long string `json:"long"`
 }
 
-//DocumentationReader documentation type
+//DocumentationReader ...
 type DocumentationReader struct {
     _documentation *Documentation
 }

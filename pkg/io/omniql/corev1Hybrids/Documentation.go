@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//DocumentationReader documentation type
+//DocumentationReader ...
 type DocumentationReader struct {
     _table hybrids.TableReader
 }

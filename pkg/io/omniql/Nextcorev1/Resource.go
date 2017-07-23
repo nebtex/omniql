@@ -2,7 +2,7 @@ package Nextcorev1
 
 
 
-//ResourceReader Resource type
+//ResourceReader ...
 type ResourceReader interface {
 
     //RID get resource id

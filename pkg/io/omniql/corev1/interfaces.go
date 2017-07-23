@@ -1,5 +1,7 @@
 package corev1
 
+import "github.com/nebtex/hybrids/golang/hybrids"
+
 //import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1BasicTypes"
 
 type TableReader interface {
@@ -86,9 +88,22 @@ type FieldErrorOptions interface {
 }
 
 type EnumerationGroupReader interface {
-	OqlID() ResourceIDReader
+	Items() hybrids.VectorStringReader
 	Name() string
 	Documentation() DocumentationReader
+}
+
+type EnumerationReader interface {
+	RID() ResourceIDReader
+	Meta() MetadataReader
+	Kind() string
+	Items() VectorEnumerationItemReader
+	Groups() VectorEnumerationGroupReader
+}
+
+type VectorEnumerationItemReader interface {
+	Len() int
+	Get(i int) (EnumerationItemReader, error)
 }
 type FieldErrorReaderOptionsSetter func(FieldErrorOptions)
 
@@ -117,8 +132,8 @@ type OmniQLResource interface {
 	OqlID() ResourceIDReader
 }
 type VectorEnumerationGroupReader interface {
-	Len() int32
-	Get(i int32) EnumerationGroupReader
+	Len() int
+	Get(i int) (EnumerationGroupReader, error)
 }
 
 /*

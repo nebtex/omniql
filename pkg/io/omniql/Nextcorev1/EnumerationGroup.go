@@ -2,7 +2,7 @@ package Nextcorev1
 
 
 
-//EnumerationGroupReader allow to group enumerations
+//EnumerationGroupReader ...
 type EnumerationGroupReader interface {
 
     //Name ...

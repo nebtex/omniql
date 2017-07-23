@@ -1,4 +1,4 @@
-package corev1Hybrids
+package Nextcorev1
 
 type ResourceIDReader interface {
 	Application() string

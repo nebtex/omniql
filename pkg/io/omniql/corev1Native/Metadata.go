@@ -1,6 +1,8 @@
 package corev1Native
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+import (
+	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+)
 
 type Metadata struct {
 	Application   string `json:"application"`
@@ -13,7 +15,7 @@ type Metadata struct {
 
 type MetadataReader struct {
 	meta *Metadata
-	doc  corev1.DocumentationReader
+	doc  *DocumentationReader
 }
 
 func (m *MetadataReader) Application() string {
@@ -33,5 +35,14 @@ func (m *MetadataReader) Documentation() corev1.DocumentationReader {
 	if m.doc != nil {
 		return m.doc
 	}
-	return NewDocumentationReader(m.meta.Documentation)
+	return nil
+}
+
+func NewMetadataReader(m *Metadata) *MetadataReader {
+	if m == nil {
+		return nil
+	}
+	mr := &MetadataReader{meta: m, doc: NewDocumentationReader(m.Documentation)}
+	return mr
+
 }

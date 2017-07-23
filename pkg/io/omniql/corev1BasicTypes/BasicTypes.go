@@ -1,43 +1,29 @@
 package corev1BasicTypes
-
+//Doc
 type BasicTypes byte
-type Scalars byte
 
 const (
-	//None ghjgkjgggg
-	//hjhk jnknlnlknl kjjjjlkkn jkjkj
-	//kklkkokoko jllklkjljljjljljjlkjljlkjllll
-	None            BasicTypes = 1
-	Byte            BasicTypes = 2
-	UnsignedByte    BasicTypes = 3
-	Boolean         BasicTypes = 4
-	//Short
-	//UnsignedShort
-	//Integer
-	//UnsignedInteger
-	//Float
-	//Long
-	//UnsignedLong
-	//Double
-	//Vector
-	//String
+	//Dodc
+	BasicTypesNone            BasicTypes = iota
+	BasicTypesByte
+	BasicTypesUnsignedByte
+	BasicTypesBoolean
+	BasicTypesShort
+	BasicTypesUnsignedShort
+	BasicTypesInteger
+	BasicTypesUnsignedInteger
+	BasicTypesFloat
+	BasicTypesLong
+	BasicTypesUnsignedLong
+	BasicTypesDouble
+	BasicTypesVector
+	BasicTypesString
 )
 
 
-const (
-	ScalarNone            Scalars = iota
-	ScalarByte
-	ScalarUnsignedByte
-	ScalarBoolean
-	ScalarShort
-	ScalarUnsignedShort
-	ScalarInteger
-	ScalarUnsignedInteger
-	ScalarFloat
-	ScalarLong
-	ScalarUnsignedLong
-	ScalarDouble
-)
+func init(){
+	init maps
+}
 
 //stringer
 func (e BasicTypes) String() (value string) {
@@ -88,7 +74,7 @@ func (e BasicTypes) IsScalar() (result bool) {
 	return
 }
 
-func (e enumType) FromString(str string) (value enumType) {
+func BasicTypesFromString(str string) (value BasicTypes) {
 	value = None
 
 	switch str {
@@ -117,12 +103,4 @@ func (e enumType) FromString(str string) (value enumType) {
 
 	}
 	return
-}
-
-func (e enumType) FromStrings(s []string) ([]enumType) {
-	value := make([]enumType, len(s))
-	for i := 0; i < len(s); i++ {
-		value[i] = None.FromString(s[i])
-	}
-	return value
 }

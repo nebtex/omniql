@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//Metadata meta data
+//Metadata ...
 type Metadata struct {
 
     Application string `json:"application"`
@@ -15,7 +15,7 @@ type Metadata struct {
     Documentation *Documentation `json:"documentation"`
 }
 
-//MetadataReader meta data
+//MetadataReader ...
 type MetadataReader struct {
     _metadata *Metadata
     documentation *DocumentationReader

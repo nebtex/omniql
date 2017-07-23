@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//FieldReader field type
+//FieldReader ...
 type FieldReader struct {
     _table hybrids.TableReader
     documentation *DocumentationReader

@@ -1,80 +1,48 @@
 package main
 
 import (
-	"github.com/nebtex/omnibuff/pkg/schema"
 	"fmt"
-	"bytes"
-	"github.com/google/flatbuffers/go"
 )
 
-type MetaReader interface {
-	Name() string
-	Application() string
-}
-type MetaWriter interface {
-	Name() string
-	Application() string
-	SetApplication(s string)
-	SetName(s string) string
+type l interface {
+	p() string
+	j() int
 }
 
-type ResourceReader interface {
-	Meta() MetaReader
-	Fields() string
+type w interface {
+	p() string
+	j() int
 }
 
-type ResourceWriter interface {
-	Meta() MetaWriter
-	SetMeta(m MetaWriter)
-	Fields() string
-	SetFields(s string)
-
+type h interface {
+	w() w
 }
 
-func beta(r MetaWriter){
-
-}
-func lala(r ResourceWriter){
-	beta(r.Meta())
-	fmt.Println(r)
+func aa(h h) {
+	fmt.Println(h.w().p())
 }
 
-type ResourceAsMutable struct {
-	l map[ResourceWriter]MetaWriter
-
-
+type ll struct {
 }
 
-type NodeValue struct {
-	Children map[int64]NodeType
-	offset flatbuffers.UOffsetT
+func (l *ll) p() string {
+	return ""
 }
 
-type NodeType struct {
-	Children map[int64]NodeValue
-
+func (l *ll) j() int {
+	return 0
 }
 
-func main() {
-	app, err := schema.Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql")
-	fmt.Println(err)
-	buf := bytes.NewBufferString("namespace io.omniql.core.v1.fbs;\nunion UnionItems { Interface, Table, Resource }\n")
+type hh struct {
+	l *ll
+}
 
+func (h *hh) w() l {
+	return h.l
+}
 
-	//make tables
-	for _, v := range app.Resources {
-		err := v.ToStreamInterface(buf)
-		if err!=nil{
-			panic(err)
-		}
-	}
-
-
-	fmt.Println(buf.String())
-	//make unions
-
-	//make resource
-
-	//make root
+func init() {
+	kk := hh{}
+	aa(kk)
 
 }

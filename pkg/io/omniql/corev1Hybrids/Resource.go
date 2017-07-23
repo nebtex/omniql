@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//ResourceReader Resource type
+//ResourceReader ...
 type ResourceReader struct {
     _table hybrids.TableReader
     _resource hybrids.ResourceReader

@@ -35,7 +35,7 @@ func (i *IDReader) Kind() string {
 	return i._type
 }
 
-func NewIDReader(ID []byte, isLocal bool) corev1.ResourceIDReader {
+func NewIDReader(ID []byte, isLocal bool) *IDReader {
 	result := bytes.Split(ID, []byte("/"))
 	if len(result) < 3 || len(result)%2 == 0 {
 		return nil

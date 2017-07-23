@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//EnumerationGroup allow to group enumerations
+//EnumerationGroup ...
 type EnumerationGroup struct {
 
     Name string `json:"name"`
@@ -13,7 +13,7 @@ type EnumerationGroup struct {
     Items []string `json:"items"`
 }
 
-//EnumerationGroupReader allow to group enumerations
+//EnumerationGroupReader ...
 type EnumerationGroupReader struct {
     _enumerationgroup *EnumerationGroup
     documentation *DocumentationReader

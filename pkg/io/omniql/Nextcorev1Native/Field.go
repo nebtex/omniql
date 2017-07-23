@@ -1,13 +1,11 @@
 package Nextcorev1Native
 
 import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
-)
+	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
 
 
 
-//Field field type
+//Field ...
 type Field struct {
 
     Name string `json:"name"`
@@ -16,7 +14,7 @@ type Field struct {
     Default string `json:"default"`
 }
 
-//FieldReader field type
+//FieldReader ...
 type FieldReader struct {
     _field *Field
     documentation *DocumentationReader

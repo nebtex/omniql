@@ -5,7 +5,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 
-//Resource Resource type
+//Resource ...
 type Resource struct {
 
     RID []byte `json:"rid"`
@@ -13,7 +13,7 @@ type Resource struct {
     Fields []*Field `json:"fields"`
 }
 
-//ResourceReader Resource type
+//ResourceReader ...
 type ResourceReader struct {
     _resource *Resource
     meta *MetadataReader

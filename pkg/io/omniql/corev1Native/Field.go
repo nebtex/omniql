@@ -14,8 +14,8 @@ type Field struct {
 
 type FieldReader struct {
 	field         *Field
-	rid           corev1.ResourceIDReader
-	documentation corev1.DocumentationReader
+	rid           *IDReader
+	documentation *DocumentationReader
 }
 
 func (fr *FieldReader) Name() (value string) {
@@ -51,7 +51,7 @@ func (fr *FieldReader) Documentation() corev1.DocumentationReader {
 	if fr.documentation != nil {
 		return fr.documentation
 	}
-	return NewDocumentationReader(fr.field.Documentation)
+	return nil
 }
 
 func (fr *FieldReader) Required() (value bool) {
@@ -61,11 +61,11 @@ func (fr *FieldReader) Required() (value bool) {
 }
 
 func NewFieldReader(f *Field) corev1.FieldReader {
-	return &FieldReader{field: f, rid: NewIDReader(f.RID, true)}
-}
-
-func NewDeepFieldReader(f *Field) corev1.FieldReader {
-	return &FieldReader{field: f, rid: NewIDReader(f.RID, true), documentation: NewDeepDocumentationReader(f.Documentation)}
+	return &FieldReader{
+		field:         f,
+		rid:           NewIDReader(f.RID, true),
+		documentation: NewDocumentationReader(f.Documentation),
+	}
 }
 
 type VectorFieldReader struct {

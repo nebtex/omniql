@@ -337,10 +337,11 @@ type YamlFile struct {
 }
 
 type Application struct {
-	Name      string `json:"name"`
-	Resources []*corev1Native.Resource `json:"resources"`
-	Tables    []*corev1Native.Table `json:"tables"`
-	Unions    []*UnionSpec `json:"tables"`
+	Name         string `json:"name"`
+	Resources    []*corev1Native.Resource `json:"resources"`
+	Tables       []*corev1Native.Table `json:"tables"`
+	Unions       []*UnionSpec `json:"tables"`
+	Enumerations []*corev1Native.Enumeration  `json:"enumerations"`
 }
 
 func Load(path string) (app *Application, err error) {
@@ -376,6 +377,14 @@ func Load(path string) (app *Application, err error) {
 				return errors.Wrap(err, path)
 			}
 			app.Resources = append(app.Resources, resource)
+
+		case "Enumeration":
+			enum := &corev1Native.Enumeration{}
+			err = mapstructure.Decode(yf.Spec, enum)
+			if err != nil {
+				return errors.Wrap(err, path)
+			}
+			app.Enumerations = append(app.Enumerations, enum)
 		}
 		return nil
 
@@ -483,7 +492,7 @@ func WriteNative(app *Application, baseDir string, packageName string, logger *z
 	}
 }
 
-func WriteInterface(app *Application, baseDir string, packageName string,  logger *zap.Logger) {
+func WriteInterface(app *Application, baseDir string, packageName string, logger *zap.Logger) {
 
 	for _, table := range app.Tables {
 
@@ -497,17 +506,6 @@ func WriteInterface(app *Application, baseDir string, packageName string,  logge
 		err = trg.Generate(f)
 		CheckPanic(err)
 
-		//write struct with hybrids
-		//write fields
-		for _, f := range table.Fields {
-			field := corev1Native.NewFieldReader(f)
-			fmt.Println(field.Name(), table.Meta.Name, field.Type())
-
-			if field.Type() == "String" {
-
-			}
-
-		}
 		//close
 		f.Close()
 	}
@@ -517,6 +515,21 @@ func WriteInterface(app *Application, baseDir string, packageName string,  logge
 		trg := interface_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
 		//create file
 		f, err := os.Create(baseDir + resource.Meta.Name + ".go")
+		CheckPanic(err)
+		_, err = f.Write([]byte("package " + packageName + "\n"))
+		CheckPanic(err)
+
+		err = trg.Generate(f)
+		CheckPanic(err)
+
+		f.Close()
+	}
+
+	for _, enumeration := range app.Enumerations {
+
+		trg := interface_generator.NewEnumerationGenerator(corev1Native.NewEnumerationReader(enumeration), logger)
+		//create file
+		f, err := os.Create(baseDir + enumeration.Meta.Name + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package " + packageName + "\n"))
 		CheckPanic(err)

@@ -23,7 +23,7 @@ func (d *DocumentationReader) Long() (value string) {
 	return
 }
 
-func NewDocumentationReader(d *Documentation) corev1.DocumentationReader {
+func NewDocumentationReader(d *Documentation) *DocumentationReader {
 	if d == nil {
 		return nil
 	}
