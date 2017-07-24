@@ -16,7 +16,14 @@ type ResourceReader interface {
 
 }
 
+//VectorResourceReader ...
 type VectorResourceReader interface {
-     Len() int
-     Get(i int) (item ResourceReader, err error)
+
+    // Returns the current size of this vector
+    Len() int
+
+    //Get the item in the position i, if i < Len(),
+    //if item does not exist should return the default value for the underlying data type
+    //when i > Len() should return an VectorInvalidIndexError
+    Get(i int) (item ResourceReader, err error)
 }

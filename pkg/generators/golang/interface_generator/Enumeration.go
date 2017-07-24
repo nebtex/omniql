@@ -15,6 +15,8 @@ import (
 type EnumerationGenerator struct {
 	enum    corev1.EnumerationReader
 	zap     *zap.Logger
+	imports *golang.Imports
+	hybridsInterfacePackage string
 	funcMap map[string]interface{}
 }
 
@@ -131,10 +133,16 @@ func NewEnumerationGenerator(enum corev1.EnumerationReader, logger *zap.Logger) 
 		"RenderGroupValidators":      RenderGroupValidators,
 
 	}
+	t.hybridsInterfacePackage = "github.com/nebtex/hybrids/golang/hybrids"
+
+	t.imports = golang.NewImports()
+
 	return t
 }
 
 func (e *EnumerationGenerator) Generate(wr io.Writer) (err error) {
+	e.imports.AddImport(e.hybridsInterfacePackage)
+	e.imports.Write(wr)
 	tmpl, err := template.New("EnumerationGenerator").Funcs(golang.DefaultTemplateFunctions).
 		Funcs(e.funcMap).Parse(`
 {{GoDoc .Enumeration.Meta.Name .Enumeration.Meta.Documentation}}

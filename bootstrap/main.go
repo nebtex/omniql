@@ -19,7 +19,7 @@ import (
 
 type YamlFile struct {
 	Api   string `json:"api"`
-	OqlID string `json:"oqlid"`
+	RID string `json:"rid"`
 	Spec  interface{} `json:"spec"`
 }
 
@@ -47,7 +47,7 @@ func Load(path string) (app *Application, err error) {
 		}
 		yf := &YamlFile{}
 		yaml.Unmarshal(data, yf)
-		types := strings.Split(yf.OqlID, "/")
+		types := strings.Split(yf.RID, "/")
 		switch types[len(types)-2] {
 		case "Table":
 			table := &corev1Native.Table{}

@@ -10,17 +10,20 @@ import (
 	"strings"
 	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
 	"bytes"
+	"github.com/nebtex/omnibuff/pkg/generators/golang"
 )
 
 type TableReaderGenerator struct {
-	table                 corev1.TableReader
-	interfacePackage      string
-	interfacePackageShort string
-	zap                   *zap.Logger
-	funcMap               map[string]interface{}
-	packagesBuffer        *bytes.Buffer
-	definitionsBuffer     *bytes.Buffer
-	functionsBuffer       *bytes.Buffer
+	imports                 *golang.Imports
+	table                   corev1.TableReader
+	interfacePackage        string
+	interfacePackageShort   string
+	zap                     *zap.Logger
+	funcMap                 map[string]interface{}
+	packagesBuffer          *bytes.Buffer
+	definitionsBuffer       *bytes.Buffer
+	functionsBuffer         *bytes.Buffer
+	hybridsInterfacePackage string
 }
 
 func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Logger) *TableReaderGenerator {
@@ -60,6 +63,8 @@ func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Lo
 	t.interfacePackage = ip
 	items := strings.Split(ip, "/")
 	t.interfacePackageShort = items[len(items)-1]
+	t.imports = golang.NewImports()
+	t.hybridsInterfacePackage = "github.com/nebtex/hybrids/golang/hybrids"
 	return t
 }
 
@@ -153,6 +158,10 @@ func (t *TableReaderGenerator) CreateAccessors() (err error) {
 }
 
 func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
+	err = t.imports.Write(wr)
+	if err != nil {
+		return err
+	}
 	_, err = t.definitionsBuffer.WriteTo(wr)
 	if err != nil {
 		return err
@@ -220,6 +229,8 @@ func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader) (err e
 }
 
 func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader) (err error) {
+	t.imports.AddImport(t.hybridsInterfacePackage)
+
 	tmpl, err := template.New("StringAccessor").
 		Funcs(t.funcMap).Parse(`
     {{GoDoc .Field.Name .Field.Documentation}}
@@ -311,9 +322,16 @@ func (t *TableReaderGenerator) CreateVector() (err error) {
 
 	tmpl, err := template.New("TableReaderGenerator::GenerateVector").
 		Funcs(t.funcMap).Parse(`
+//Vector{{TableName .Table}}Reader ...
 type Vector{{TableName .Table}}Reader interface {
-     Len() int
-     Get(i int) (item {{TableName .Table}}Reader, err error)
+
+    // Returns the current size of this vector
+    Len() int
+
+    //Get the item in the position i, if i < Len(),
+    //if item does not exist should return the default value for the underlying data type
+    //when i > Len() should return an VectorInvalidIndexError
+    Get(i int) (item {{TableName .Table}}Reader, err error)
 }
 `)
 	if err != nil {
