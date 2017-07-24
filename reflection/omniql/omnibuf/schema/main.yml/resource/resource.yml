@@ -1,8 +1,8 @@
-api: io.omniql.core.v1
-oqlid: io.omniql.core.v1/Resource/Resource
+api: io.almagest.omniql.v1
+rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Resource/Resource
 spec:
   meta:
-    application: io.omniql.core.v1
+    application: io.almagest.omniql.v1
     name: Resource
     kind: Resource
     documentation:

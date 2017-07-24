@@ -1,8 +1,8 @@
-api: io.omniql.core.v1
-oqlid: io.omniql.core.v1/Table/Metadata
+api: io.almagest.omniql.v1
+rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Table/Metadata
 spec:
   meta:
-    application: io.omniql.core.v1
+    application: io.almagest.omniql.v1
     name: Metadata
     kind: Table
     documentation:

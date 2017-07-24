@@ -6,20 +6,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42073251-b563-4837-9566-5f32c75a4804" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bootstrap/basic.go" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/content.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/content.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration/BasicTypes.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/BasicTypes.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/content.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/content.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/table/group.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/group.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/table/item.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/item.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/resource.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/resource.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/table.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/table.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/union.yml/content.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/content.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/union.yml/table/resource.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/resource.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/union.yml/table/table.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/table.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/table/documentation.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/documentation.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/table/field.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/field.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/table/metadata.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/metadata.yml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/union/unionItem.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/union/unionItem.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/GOPATH__omnibuff_.xml" afterPath="$PROJECT_DIR$/.idea/libraries/GOPATH__omnibuff_.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/main.go" afterPath="$PROJECT_DIR$/bootstrap/main.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go" afterPath="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Table.go" afterPath="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Table.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/generators/golang/template_functions.go" afterPath="$PROJECT_DIR$/pkg/generators/golang/template_functions.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/BasicType.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/BasicType.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Enumeration.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Enumeration.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Documentation.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Documentation.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Enumeration.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Enumeration.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/corev1Native/EnumerationGroup.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/corev1Native/EnumerationGroup.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/content.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/content.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reflection/omniql/omnibuf/table/metadata.yml" afterPath="$PROJECT_DIR$/reflection/omniql/omnibuf/table/metadata.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,104 +49,102 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Metadata.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go">
+      <file leaf-file-name="content.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/content.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="16">
+              <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Resource.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Resource.go">
+      <file leaf-file-name="documentation.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/documentation.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="16">
+              <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ResourceID.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/ResourceID.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Table.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Table.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Union.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Union.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnionResource.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionResource.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UnionTable.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionTable.go">
+      <file leaf-file-name="field.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/field.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="64">
-              <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
+              <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApplicationType.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/ApplicationType.go">
+      <file leaf-file-name="resource.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/resource.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-445">
-              <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+            <state relative-caret-position="16">
+              <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Field.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Field.go">
+      <file leaf-file-name="content.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/content.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+            <state relative-caret-position="16">
+              <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Enumeration.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go">
+      <file leaf-file-name="item.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/item.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2613">
-              <caret line="224" column="37" lean-forward="false" selection-start-line="224" selection-start-column="37" selection-end-line="224" selection-end-column="37" />
-              <folding>
-                <element signature="e#29#253#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="16">
+              <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="group.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/group.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="16">
+              <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BasicTypes.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/BasicTypes.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ApplicationType.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/ApplicationType.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="384">
+              <caret line="24" column="11" lean-forward="true" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="table.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/table.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="7" column="15" lean-forward="true" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -175,6 +176,10 @@
       <find>Nextcorev1</find>
       <find>ScalarToGolangType</find>
       <find>print</find>
+      <find>io.almagest.omniql.v1</find>
+      <find>io.omniql.core.v1</find>
+      <find>io.omniql.core.v1</find>
+      <find>oqlid</find>
     </findStrings>
     <replaceStrings>
       <replace>documentation</replace>
@@ -185,12 +190,16 @@
       <replace />
       <replace>Scalars</replace>
       <replace>name</replace>
+      <replace>io.almagest.omniql.v1</replace>
+      <replace>rid</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/examples/omniql/AdminService</dir>
       <dir>$PROJECT_DIR$/examples/omniql</dir>
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/reflection</dir>
+      <dir>$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml</dir>
+      <dir>$PROJECT_DIR$/reflection/omniql/omnibuf/schema</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -199,26 +208,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Field.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Resource.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Table.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Union.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionResource.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionTable.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Resource.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/EnumerationItem.go" />
-        <option value="$PROJECT_DIR$/pkg/generators/golang/native_generator/Resource.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/EnumerationGroup.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/UnionResource.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/UnionTable.go" />
-        <option value="$PROJECT_DIR$/pkg/generators/golang/native_generator/Table.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Documentation.go" />
-        <option value="$PROJECT_DIR$/../hybrids/golang/hybrids/native/Strings.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/EnumerationItem.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/ID.go" />
-        <option value="$PROJECT_DIR$/../hybrids/golang/hybrids/Table.go" />
-        <option value="$PROJECT_DIR$/../hybrids/golang/hybrids/Union.go" />
         <option value="$PROJECT_DIR$/../hybrids/golang/hybrids/Resource.go" />
         <option value="$PROJECT_DIR$/../hybrids/golang/hybrids/Root.go" />
         <option value="$PROJECT_DIR$/../hybrids/golang/hybrids/Structs.go" />
@@ -249,7 +238,27 @@
         <option value="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go" />
         <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration/ApplicationType.yml" />
         <option value="$PROJECT_DIR$/bootstrap/main.go" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/union/unionItem.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/table/field.yml" />
         <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/table/metadata.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/table/documentation.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schemas/main.yml/content.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/documentation.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/field.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/metadata.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/content.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/content.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/union/unionItem.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/table.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/resource.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/content.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/resource.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/table.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/content.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/item.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/group.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/BasicTypes.yml" />
+        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/ApplicationType.yml" />
       </list>
     </option>
   </component>
@@ -284,7 +293,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -364,10 +373,6 @@
               <option name="myItemId" value="omnibuf" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="union" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -391,59 +396,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="table" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omnibuff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omnibuff" />
+              <option name="myItemId" value="schema" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="reflection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omniql" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omnibuf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resource" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omnibuff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omnibuff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reflection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omniql" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="omnibuf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="enumeration" />
+              <option name="myItemId" value="main.yml" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -705,7 +662,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -718,19 +675,19 @@
     <property name="GO_FMT" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration" />
-      <recent name="$PROJECT_DIR$/pkg/generators/golang/interface_generator" />
-      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/table" />
-      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml" />
-      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/union.yml" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration" />
       <recent name="$PROJECT_DIR$/pkg/io/omniql/corev1Native" />
       <recent name="$PROJECT_DIR$/pkg/generators/golang/native_generator" />
       <recent name="$PROJECT_DIR$/pkg/generators/golang/interface_generator" />
       <recent name="$PROJECT_DIR$/pkg/generators/golang" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/schemas/main" />
+      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/schema" />
+      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration" />
+      <recent name="$PROJECT_DIR$/pkg/generators/golang/interface_generator" />
+      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/table" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -850,14 +807,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="30" width="1680" height="1020" extended-state="6" />
+    <frame x="0" y="30" width="1680" height="1020" extended-state="0" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2264382" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22949816" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23430493" sideWeight="0.50238097" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10089686" sideWeight="0.4904762" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21412556" sideWeight="0.49761903" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21412556" sideWeight="0.49761903" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295964" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -915,19 +872,16 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Table.go</url>
-          <properties />
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go</url>
           <line>2</line>
-          <properties />
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/UnionResource.go</url>
           <line>2</line>
-          <properties />
           <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
@@ -936,123 +890,18 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/go/src/text/template/funcs.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="64" column="5" lean-forward="false" selection-start-line="64" selection-start-column="5" selection-end-line="64" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/corev1Hybrids/Documentation.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-766">
-          <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding>
-            <element signature="e#23#129#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/go/src/bytes/buffer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="401" column="17" lean-forward="false" selection-start-line="401" selection-start-column="17" selection-end-line="401" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/corev1Hybrids/Field.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/corev1Hybrids/Metadata.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-960">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Table.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-384">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmd/test/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="40" column="14" lean-forward="true" selection-start-line="40" selection-start-column="14" selection-end-line="40" selection-end-column="14" />
-          <folding>
-            <element signature="e#14#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Field.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/docs.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="17" />
-          <folding>
-            <element signature="e#16#128#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/utils/table.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pkg/utils/strings.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="11" column="15" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="16" />
-          <folding>
-            <element signature="e#15#46#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/table/item.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/BasicTypes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/BasicTypes.go" />
     <entry file="file://$PROJECT_DIR$/pkg/generators/golang/hybrids_generator/Table.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
           <caret line="108" column="14" lean-forward="false" selection-start-line="108" selection-start-column="9" selection-end-line="108" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1060,7 +909,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1068,18 +916,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding>
-            <element signature="e#26#132#0" expanded="true" />
-            <marker date="1500815021450" expanded="true" signature="131:132" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/resource/enumeration.yml/content.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="31" lean-forward="false" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1087,39 +923,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/table/documentation.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration/Enumeration.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="48" lean-forward="false" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration/Enumeration.yml" />
     <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Documentation.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/EnumerationItem.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,7 +938,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="64">
           <caret line="4" column="9" lean-forward="false" selection-start-line="4" selection-start-column="9" selection-end-line="4" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1135,18 +945,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
           <caret line="14" column="19" lean-forward="false" selection-start-line="14" selection-start-column="12" selection-end-line="14" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/basic.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/bootstrap/basic.go" />
     <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1161,7 +963,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
           <caret line="75" column="56" lean-forward="false" selection-start-line="75" selection-start-column="56" selection-end-line="75" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1169,15 +970,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="60" column="7" lean-forward="false" selection-start-line="60" selection-start-column="4" selection-end-line="60" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration/BasicTypes.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="11" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1185,7 +977,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="25" column="28" lean-forward="false" selection-start-line="25" selection-start-column="15" selection-end-line="25" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1193,9 +984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="98" column="17" lean-forward="true" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
-          <folding>
-            <element signature="e#16#65#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1213,7 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="643">
           <caret line="68" column="1" lean-forward="false" selection-start-line="68" selection-start-column="1" selection-end-line="68" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1221,9 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
           <caret line="53" column="72" lean-forward="false" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="72" />
-          <folding>
-            <element signature="e#22#83#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1231,7 +1015,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
           <caret line="85" column="16" lean-forward="false" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1240,24 +1023,8 @@
         <state relative-caret-position="229">
           <caret line="233" column="2" lean-forward="false" selection-start-line="233" selection-start-column="2" selection-end-line="233" selection-end-column="2" />
           <folding>
-            <element signature="e#14#498#0" expanded="true" />
+            <element signature="e#14#498#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration/ApplicationType.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="27" column="17" lean-forward="false" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/table/metadata.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="17" column="49" lean-forward="false" selection-start-line="17" selection-start-column="49" selection-end-line="17" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1265,18 +1032,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="59" column="18" lean-forward="true" selection-start-line="59" selection-start-column="18" selection-end-line="59" selection-end-column="18" />
-          <folding>
-            <marker date="1500815021458" expanded="false" signature="33:34" ph="..." />
-            <marker date="1500815021458" expanded="true" signature="1846:1894" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/BasicType.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1555">
-          <caret line="141" column="10" lean-forward="false" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1284,31 +1039,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/ApplicationType.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-445">
-          <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Resource.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1316,6 +1046,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1989">
+          <caret line="224" column="37" lean-forward="false" selection-start-line="224" selection-start-column="37" selection-end-line="224" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Field.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1328,18 +1072,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionTable.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionResource.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/BasicType.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2256">
+          <caret line="141" column="10" lean-forward="false" selection-start-line="141" selection-start-column="10" selection-end-line="141" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/ApplicationType.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1360">
+          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Resource.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1352,21 +1112,155 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Field.go">
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionTable.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="23" column="23" lean-forward="false" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        <state relative-caret-position="64">
+          <caret line="4" column="6" lean-forward="false" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go">
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2613">
-          <caret line="224" column="37" lean-forward="false" selection-start-line="224" selection-start-column="37" selection-end-line="224" selection-end-column="37" />
-          <folding>
-            <element signature="e#29#253#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="368">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/EnumerationItem.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/metadata.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="26" lean-forward="true" selection-start-line="0" selection-start-column="26" selection-end-line="0" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/content.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/content.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/union/unionItem.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="26" lean-forward="true" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/table.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="5" lean-forward="true" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/resource.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="11" lean-forward="true" selection-start-line="15" selection-start-column="11" selection-end-line="15" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/ApplicationType.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="24" column="11" lean-forward="true" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/enumeration/BasicTypes.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/group.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/table/item.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/enumeration.yml/content.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/resource.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/table/table.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" column="15" lean-forward="true" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/resource/union.yml/content.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/documentation.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="58" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/schema/main.yml/table/field.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" column="38" lean-forward="false" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

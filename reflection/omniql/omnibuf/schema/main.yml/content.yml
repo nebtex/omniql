@@ -1,0 +1,7 @@
+api: io.almagest.omniql.v1
+rid: Application/io.almagest.omniql/Version/v1/Schema/Main
+spec:
+  meta:
+    application: io.almagest.omniql.v1
+    name: Main
+    kind: Schema
