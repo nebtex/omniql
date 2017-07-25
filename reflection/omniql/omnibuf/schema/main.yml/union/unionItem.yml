@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Union/UnionItem
+rid: Application/io.almagest.omniql.*/Schema/Main/Union/UnionItem
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     name: UnionItems
     kind: Union
   type:

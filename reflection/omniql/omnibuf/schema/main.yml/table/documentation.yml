@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Table/Documentation
+rid: Application/io.almagest.omniql.*/Schema/Main/Table/Documentation
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     name: Documentation
     kind: Table
     documentation:

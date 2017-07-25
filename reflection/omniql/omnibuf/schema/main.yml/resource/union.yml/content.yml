@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Resource/Union
+rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Union
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     name: Union
     kind: Resource
   fields:

@@ -263,7 +263,7 @@ spec:
 	baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1/"
 	WriteInterface(app, baseDir, "Nextcorev1", logger)
 
-	//baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1Native/"
-	//WriteNative(app, baseDir, "Nextcorev1Native", logger)
+	baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1Native/"
+	WriteNative(app, baseDir, "Nextcorev1Native", logger)
 
 }

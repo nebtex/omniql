@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Resource/Resource
+rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Resource
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     name: Resource
     kind: Resource
     documentation:

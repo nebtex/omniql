@@ -1,9 +1,4 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1
+rid: Application/io.almagest.omniql.*
 spec:
-  meta:
-    application: io.almagest.omniql.v1
-    name: v1
-    kind: Version
-  resourceID:
-    kind: String
+  resourceIdType: String

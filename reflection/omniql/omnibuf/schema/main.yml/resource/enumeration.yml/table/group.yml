@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Resource/Enumeration/Table/Group
+rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Enumeration/Table/Group
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     name: Group
     kind: Table
     parent: Resource/Enumeration

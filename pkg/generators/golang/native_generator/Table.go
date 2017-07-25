@@ -12,8 +12,6 @@ import (
 	"bytes"
 )
 
-//TODO: create table struct generator
-//TODO: create smart import function
 //TODO: create initializators
 type TableReaderGenerator struct {
 	table                 corev1.TableReader
@@ -109,30 +107,9 @@ func (t *TableReaderGenerator) ShortName() string {
 func (t *TableReaderGenerator) Table() corev1.TableReader {
 	return t.table
 }
+
 func (t *TableReaderGenerator) StartStruct() (err error) {
-	tmpl, err := template.New("TableReaderGenerator").Funcs(t.funcMap).Parse(`
-{{GoDoc (print (TableName .)) .Meta.Documentation}}
-type {{TableName .}} struct {
-`)
-	if err != nil {
-		return
-	}
-	err = tmpl.Execute(t.structBuffer, t.Table())
-	return
-}
-
-func (t *TableReaderGenerator) StructAddField(fn string, ft string) (err error) {
-	_, err = t.structBuffer.Write([]byte("\n    " + fn + " " + ft + fmt.Sprintf(" `json:\"%s\"`", strings.ToLower(fn))))
-	return
-}
-
-func (t *TableReaderGenerator) EndStruct() (err error) {
-	_, err = t.structBuffer.Write([]byte("\n" + "}\n"))
-	return
-}
-
-func (t *TableReaderGenerator) StartImplementation() (err error) {
-	tmpl, err := template.New("TableReaderGenerator::Native::StartImplementation").Funcs(t.funcMap).Parse(`
+	tmpl, err := template.New("TableReaderGenerator::Native::StartStruct").Funcs(t.funcMap).Parse(`
 {{GoDoc (print (TableName .) "Reader") .Meta.Documentation}}
 type {{TableName .}}Reader struct {
     _{{ToLower (TableName .)}} *{{TableName .}}`)
@@ -143,12 +120,12 @@ type {{TableName .}}Reader struct {
 	return
 }
 
-func (t *TableReaderGenerator) ImplementationAddField(fn string, ft string) (err error) {
+func (t *TableReaderGenerator) StructAddField(fn string, ft string) (err error) {
 	_, err = t.implementationBuffer.Write([]byte("\n    " + fn + " " + ft))
 	return
 }
 
-func (t *TableReaderGenerator) EndImplementation() (err error) {
+func (t *TableReaderGenerator) EndStruct() (err error) {
 	_, err = t.implementationBuffer.Write([]byte("\n" + "}\n"))
 	return
 }
@@ -231,11 +208,13 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 
 
 `))
-	err = t.StartStruct()
+	gt := NewGoTypeGenerator(t.table, t.zap)
+	err = gt.Generate(wr)
 	if err != nil {
 		return err
 	}
-	err = t.StartImplementation()
+
+	err = t.StartStruct()
 	if err != nil {
 		return err
 	}
@@ -259,10 +238,6 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 	if err != nil {
 		return err
 	}
-	err = t.EndImplementation()
-	if err != nil {
-		return err
-	}
 	err = t.FlushBuffers(wr)
 	if err != nil {
 		return err
@@ -277,10 +252,6 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 //vector table reader
 //resource
 func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
-	err = t.StructAddField(strings.Title(freader.Name()), "string")
-	if err != nil {
-		return
-	}
 
 	tmpl, err := template.New("StringAccessor").
 		Funcs(t.funcMap).Parse(`
@@ -303,11 +274,8 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (v
 
 }
 func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
-	err = t.StructAddField(strings.Title(freader.Name()), "[]string")
-	if err != nil {
-		return
-	}
-	err = t.ImplementationAddField(strings.ToLower(freader.Name()), "*native.VectorStringReader")
+
+	err = t.StructAddField(strings.ToLower(freader.Name()), "*native.VectorStringReader")
 	if err != nil {
 		return
 	}
@@ -335,12 +303,8 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() hy
 }
 
 func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, fn uint16, tableName string) (err error) {
-	err = t.StructAddField(strings.Title(freader.Name()), "[]*"+tableName)
-	if err != nil {
-		return err
-	}
 
-	err = t.ImplementationAddField(strings.ToLower(freader.Name()), "*Vector"+tableName+"Reader")
+	err = t.StructAddField(strings.ToLower(freader.Name()), "*Vector"+tableName+"Reader")
 	if err != nil {
 		return
 	}
@@ -376,12 +340,7 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{
 
 func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint16, tableName string) (err error) {
 
-	err = t.StructAddField(strings.Title(freader.Name()), "*"+tableName)
-	if err != nil {
-		return err
-	}
-
-	err = t.ImplementationAddField(strings.ToLower(freader.Name()), "*"+tableName+"Reader")
+	err = t.StructAddField(strings.ToLower(freader.Name()), "*"+tableName+"Reader")
 	if err != nil {
 		return err
 	}

@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Resource/Table
+rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Table
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     name: Table
     kind: Resource
   fields:

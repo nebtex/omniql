@@ -1,9 +1,6 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
+import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 
 //Union ...
 type Union struct {
@@ -15,7 +12,12 @@ type Union struct {
 //UnionReader ...
 type UnionReader struct {
     _union *Union
+//UnionReader ...
+type UnionReader struct {
+    _union *Union
     meta *MetadataReader
+}
+
 }
 
 //RID get resource id

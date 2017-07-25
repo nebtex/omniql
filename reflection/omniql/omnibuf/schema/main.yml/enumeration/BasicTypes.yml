@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Enumeration/BasicTypes
+rid: Application/io.almagest.omniql.*/Schema/Main/Enumeration/BasicTypes
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     kind: Enumeration
     name: BasicType
   kind: Integer8

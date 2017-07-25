@@ -1,9 +1,6 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
+import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 
 //Enumeration ...
 type Enumeration struct {
@@ -17,9 +14,14 @@ type Enumeration struct {
 //EnumerationReader ...
 type EnumerationReader struct {
     _enumeration *Enumeration
+//EnumerationReader ...
+type EnumerationReader struct {
+    _enumeration *Enumeration
     meta *MetadataReader
     items *VectorEnumerationItemReader
     groups *VectorEnumerationGroupReader
+}
+
 }
 
 //RID get resource id

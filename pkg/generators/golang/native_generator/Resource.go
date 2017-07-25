@@ -25,28 +25,30 @@ func NewResourceReaderGenerator(resource corev1.ResourceReader, ip string, logge
 	return
 }
 func (r *ResourceReaderGenerator) Generate(wr io.Writer) (err error) {
+	gt := NewGoTypeGenerator(r.resource, r.zap)
+	err = gt.StructAddField("RID", "[]byte")
+	if err != nil {
+		return err
+	}
+
+	err = gt.Generate(wr)
+	if err != nil {
+		return err
+	}
+
 	//add imports
-	wr.Write([]byte(`
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
-`))
 	err = r.trg.StartStruct()
 	if err != nil {
 		return err
 	}
 
-	err = r.trg.StartImplementation()
+	err = r.trg.StartStruct()
 	if err != nil {
 		return err
 	}
 
 
-	err = r.trg.StructAddField("RID", "[]byte")
-	if err != nil {
-		return err
-	}
+
 
 	err = r.CreateRIDAccessor()
 	if err != nil {
@@ -72,7 +74,7 @@ import ("github.com/nebtex/hybrids/golang/hybrids"
 		return err
 	}
 
-	err = r.trg.EndImplementation()
+	err = r.trg.EndStruct()
 	if err != nil {
 		return err
 	}

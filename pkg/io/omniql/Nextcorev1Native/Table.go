@@ -1,9 +1,6 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
+import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 
 //Table ...
 type Table struct {
@@ -16,8 +13,13 @@ type Table struct {
 //TableReader ...
 type TableReader struct {
     _table *Table
+//TableReader ...
+type TableReader struct {
+    _table *Table
     meta *MetadataReader
     fields *VectorFieldReader
+}
+
 }
 
 //RID get resource id

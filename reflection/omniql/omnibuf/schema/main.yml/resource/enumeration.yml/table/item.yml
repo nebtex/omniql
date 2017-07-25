@@ -1,8 +1,8 @@
 api: io.almagest.omniql.v1
-rid: Application/io.almagest.omniql/Version/v1/Schema/Main/Resource/Enumeration/Table/Item
+rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Enumeration/Table/Item
 spec:
   meta:
-    application: io.almagest.omniql.v1
+    application: io.almagest.omniql.*
     parent: Resource/Enumeration
     name: Item
     kind: Table

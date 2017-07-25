@@ -1,24 +1,22 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
+import (
+	"github.com/nebtex/hybrids/golang/hybrids"
+	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
 
 //Metadata ...
 type Metadata struct {
-
-    Application string `json:"application"`
-    Name string `json:"name"`
-    Kind string `json:"kind"`
-    Parent string `json:"parent"`
-    Documentation *Documentation `json:"documentation"`
+	Application   string `json:"application"`
+	Name          string `json:"name"`
+	Parent        string `json:"parent"`
+	Documentation *Documentation `json:"documentation"`
 }
 
 //MetadataReader ...
 type MetadataReader struct {
-    _metadata *Metadata
-    documentation *DocumentationReader
+	_metadata     *Metadata
+	documentation *DocumentationReader
 }
 
 //Application ...
@@ -30,12 +28,6 @@ func (m *MetadataReader) Application() (value string) {
 //Name ...
 func (m *MetadataReader) Name() (value string) {
 	value = m._metadata.Name
-	return
-}
-
-//Kind ...
-func (m *MetadataReader) Kind() (value string) {
-	value = m._metadata.Kind
 	return
 }
 
@@ -55,20 +47,20 @@ func (m *MetadataReader) Documentation() Nextcorev1.DocumentationReader {
 	return nil
 }
 
-func NewMetadataReader(t hybrids.TableReader) Nextcorev1.MetadataReader{
-	if t==nil{
+func NewMetadataReader(t hybrids.TableReader) Nextcorev1.MetadataReader {
+	if t == nil {
 		return nil
 	}
-	return &MetadataReader{_table:t}
+	return &MetadataReader{_table: t}
 }
 
 type VectorMetadataReader struct {
-    _vector  []*MetadataReader
+	_vector []*MetadataReader
 }
 
 func (vm *VectorMetadataReader) Len() (size int) {
-    size = len(vm._vector)
-    return
+	size = len(vm._vector)
+	return
 }
 
 func (vm *VectorMetadataReader) Get(i int) (item Nextcorev1.MetadataReader, err error) {
@@ -86,12 +78,11 @@ func (vm *VectorMetadataReader) Get(i int) (item Nextcorev1.MetadataReader, err 
 	item = vm._vector[i]
 	return
 
-
 }
 
 func NewVectorMetadataReader(v hybrids.VectorTableReader) Nextcorev1.VectorMetadataReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorMetadataReader{_vectorHybrid: v}
+	if v == nil {
+		return nil
+	}
+	return &VectorMetadataReader{_vectorHybrid: v}
 }

@@ -1,0 +1,16 @@
+api: io.almagest.omniql.v1
+rid: Application/io.almagest.omniql.*/Schema/Main/Table/ResourceID
+spec:
+  meta:
+    application: io.almagest.omniql.*
+    name: ResourceID
+    kind: Table
+  fields:
+  - name: application
+    type: String
+  - name: kind
+    type: Enumeration/ApplicationType/EnumerationGroup/Resource
+  - name: ID
+    type: String
+  - name: parent
+    type: Table/ResourceID
