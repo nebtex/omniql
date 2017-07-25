@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //DocumentationReader ...
 type DocumentationReader interface {
 

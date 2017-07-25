@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //EnumerationItemReader ...
 type EnumerationItemReader interface {
 

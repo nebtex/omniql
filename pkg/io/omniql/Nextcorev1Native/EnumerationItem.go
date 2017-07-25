@@ -1,7 +1,5 @@
 package Nextcorev1Native
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
-
 //EnumerationItem ...
 type EnumerationItem struct {
 

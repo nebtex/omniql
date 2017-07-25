@@ -13,11 +13,11 @@ import (
 )
 
 type EnumerationGenerator struct {
-	enum    corev1.EnumerationReader
-	zap     *zap.Logger
-	imports *golang.Imports
+	enum                    corev1.EnumerationReader
+	zap                     *zap.Logger
+	imports                 *golang.Imports
 	hybridsInterfacePackage string
-	funcMap map[string]interface{}
+	funcMap                 map[string]interface{}
 }
 
 func RenderEnumItems(e corev1.EnumerationReader) (value string, err error) {
@@ -142,6 +142,8 @@ func NewEnumerationGenerator(enum corev1.EnumerationReader, logger *zap.Logger) 
 
 func (e *EnumerationGenerator) Generate(wr io.Writer) (err error) {
 	e.imports.AddImport(e.hybridsInterfacePackage)
+	e.imports.AddImport("strings")
+
 	e.imports.Write(wr)
 	tmpl, err := template.New("EnumerationGenerator").Funcs(golang.DefaultTemplateFunctions).
 		Funcs(e.funcMap).Parse(`
@@ -181,7 +183,7 @@ func ({{ShortName .Enumeration.Metadata.Name}} {{.Enumeration.Metadata.Name}}) I
 //{{.Enumeration.Metadata.Name}}FromString convert a string to its {{.Enumeration.Metadata.Name}} representation
 func FromStringTo{{.Enumeration.Metadata.Name}}(str string) (value {{.Enumeration.Metadata.Name}}) {
     var ok bool
-    value, ok = {{ToSnakeCase .Enumeration.Metadata.Name}}_reverse_map[str]
+    value, ok = {{ToSnakeCase .Enumeration.Metadata.Name}}_reverse_map[strings.Title(strings.TrimSpace(str))]
     if !ok{
         value = {{.Enumeration.Metadata.Name}}None
 	}

@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //MetadataReader ...
 type MetadataReader interface {
 

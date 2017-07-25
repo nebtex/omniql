@@ -1,6 +1,7 @@
 package Nextcorev1
 import(
     "github.com/nebtex/hybrids/golang/hybrids"
+    "strings"
 )
 //ApplicationType ...
 type ApplicationType uint16
@@ -96,7 +97,7 @@ func (at ApplicationType) IsResource() (result bool) {
 //ApplicationTypeFromString convert a string to its ApplicationType representation
 func FromStringToApplicationType(str string) (value ApplicationType) {
     var ok bool
-    value, ok = application_type_reverse_map[str]
+    value, ok = application_type_reverse_map[strings.Title(strings.TrimSpace(str))]
     if !ok{
         value = ApplicationTypeNone
 	}

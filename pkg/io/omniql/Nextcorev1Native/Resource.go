@@ -8,6 +8,13 @@ type Resource struct {
     Fields []*Field `json:"fields"`
 }
 
+//Resource ...
+type Resource struct {
+
+    Metadata *Metadata `json:"metadata"`
+    Fields []*Field `json:"fields"`
+}
+
 //ResourceReader ...
 type ResourceReader struct {
     _resource *Resource

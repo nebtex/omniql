@@ -17,7 +17,7 @@ type GoTypeGenerator struct {
 	table        corev1.TableReader
 	zap          *zap.Logger
 	structBuffer *bytes.Buffer
-	fields [][]string
+	fields       [][]string
 }
 
 func NewGoTypeGenerator(table corev1.TableReader, logger *zap.Logger) *GoTypeGenerator {
@@ -65,7 +65,7 @@ func (g *GoTypeGenerator) Generate(wr io.Writer) (err error) {
 	if err != nil {
 		return err
 	}
-	for _,field:=range g.fields {
+	for _, field := range g.fields {
 		_, err = g.structBuffer.Write([]byte("\n    " + field[0] + " " + field[1] + fmt.Sprintf(" `json:\"%s\"`", strings.ToLower(field[0]))))
 		if err != nil {
 			return err
@@ -131,6 +131,18 @@ func (t *GoTypeGenerator) CreateAccessors() (err error) {
 					}
 
 				}
+				if pid.Kind() == "EnumerationGroup" {
+					err = t.EnumerationAccessor(field, 0, pid.Parent().ID(), pid.ID())
+					if err != nil {
+						return
+					}
+				}
+				if pid.Kind() == "Enumeration" {
+					err = t.EnumerationAccessor(field, 0, pid.ID(), "")
+					if err != nil {
+						return
+					}
+				}
 			}
 
 		}
@@ -139,6 +151,11 @@ func (t *GoTypeGenerator) CreateAccessors() (err error) {
 }
 
 func (t *GoTypeGenerator) StringAccessor(freader corev1.FieldReader) (err error) {
+	err = t.StructAddField(strings.Title(freader.Name()), "string")
+	return
+}
+
+func (t *GoTypeGenerator) EnumerationAccessor(freader corev1.FieldReader, fn uint16, enumeration string, enumerationGroup string) (err error) {
 	err = t.StructAddField(strings.Title(freader.Name()), "string")
 	return
 }

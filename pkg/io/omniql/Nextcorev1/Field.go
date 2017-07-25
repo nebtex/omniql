@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //FieldReader ...
 type FieldReader interface {
 

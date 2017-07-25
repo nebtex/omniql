@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //UnionTableReader ...
 type UnionTableReader interface {
 

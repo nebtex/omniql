@@ -1,6 +1,4 @@
 package Nextcorev1
-
-
 import(
     "github.com/nebtex/hybrids/golang/hybrids"
 )

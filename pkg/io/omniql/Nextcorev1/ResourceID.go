@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //ResourceIDReader ...
 type ResourceIDReader interface {
 

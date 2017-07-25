@@ -1,12 +1,22 @@
 package Nextcorev1Native
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-
 //Enumeration ...
 type Enumeration struct {
 
     RID []byte `json:"rid"`
     Metadata *Metadata `json:"metadata"`
+    Kind string `json:"kind"`
+    Items []*EnumerationItem `json:"items"`
+    Groups []*EnumerationGroup `json:"groups"`
+}
+import(
+    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+)
+//Enumeration ...
+type Enumeration struct {
+
+    Metadata *Metadata `json:"metadata"`
+    Kind string `json:"kind"`
     Items []*EnumerationItem `json:"items"`
     Groups []*EnumerationGroup `json:"groups"`
 }
@@ -32,6 +42,17 @@ func (e *EnumerationReader) Metadata() corev1.MetadataReader {
 	}
 
 	return nil
+}
+
+//Kind ...
+func (e *EnumerationReader) Kind() (value corev1.BasicType) {
+	value = corev1.FromStringToBasicType(e._enumeration.Kind)
+
+	if !value.IsScalars(){
+		value = corev1.BasicTypeNone
+	}
+
+	return
 }
 
 //Items ...

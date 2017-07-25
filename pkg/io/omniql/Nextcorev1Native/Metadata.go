@@ -1,12 +1,13 @@
 package Nextcorev1Native
-
-import "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
-
+import(
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
 //Metadata ...
 type Metadata struct {
 
     Application string `json:"application"`
     Name string `json:"name"`
+    Kind string `json:"kind"`
     Parent string `json:"parent"`
     Documentation *Documentation `json:"documentation"`
 }
@@ -26,6 +27,17 @@ func (m *MetadataReader) Application() (value string) {
 //Name ...
 func (m *MetadataReader) Name() (value string) {
 	value = m._metadata.Name
+	return
+}
+
+//Kind ...
+func (m *MetadataReader) Kind() (value Nextcorev1.ApplicationType) {
+	value = Nextcorev1.FromStringToApplicationType(m._metadata.Kind)
+
+	if !value.IsResource(){
+		value = Nextcorev1.ApplicationTypeNone
+	}
+
 	return
 }
 

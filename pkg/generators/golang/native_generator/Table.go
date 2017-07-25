@@ -24,6 +24,7 @@ type TableReaderGenerator struct {
 	structBuffer          *bytes.Buffer
 	implementationBuffer  *bytes.Buffer
 	functionsBuffer       *bytes.Buffer
+	imports               *golang.Imports
 }
 
 func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Logger) *TableReaderGenerator {
@@ -64,6 +65,8 @@ func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Lo
 	t.interfacePackage = ip
 	items := strings.Split(ip, "/")
 	t.interfacePackageShort = items[len(items)-1]
+	t.imports = golang.NewImports()
+
 	return t
 }
 
@@ -178,6 +181,18 @@ func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
 					}
 
 				}
+				if pid.Kind() == "EnumerationGroup" {
+					err = t.EnumerationAccessor(field, fieldNumber, pid.Parent().ID(), pid.ID())
+					if err != nil {
+						return
+					}
+				}
+				if pid.Kind() == "Enumeration" {
+					err = t.EnumerationAccessor(field, fieldNumber, pid.ID(), "")
+					if err != nil {
+						return
+					}
+				}
 			}
 
 		}
@@ -186,6 +201,17 @@ func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
 }
 
 func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
+	err = t.imports.Write(wr)
+	if err != nil {
+		return err
+	}
+
+	gt := NewGoTypeGenerator(t.table, t.zap)
+	err = gt.Generate(wr)
+	if err != nil {
+		return err
+	}
+
 	_, err = t.structBuffer.WriteTo(wr)
 	if err != nil {
 		return err
@@ -202,12 +228,6 @@ func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
 }
 
 func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
-
-	gt := NewGoTypeGenerator(t.table, t.zap)
-	err = gt.Generate(wr)
-	if err != nil {
-		return err
-	}
 
 	err = t.StartStruct()
 	if err != nil {
@@ -244,7 +264,6 @@ func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 
 //Todo:
 //default
-//vector table reader
 //resource
 func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
 
@@ -268,6 +287,43 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (v
 	return
 
 }
+
+func (t *TableReaderGenerator) EnumerationAccessor(freader corev1.FieldReader, fn uint16, enumeration string, enumerationGroup string) (err error) {
+	t.imports.AddImport(t.interfacePackage)
+
+	tmpl, err := template.New("TableReaderGenerator::Native::Enumeration").
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
+{{GoDoc .Field.Name .Field.Documentation}}
+func ({{ShortName .Table.Metadata.Name}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (value {{.PackageName}}.{{.Enumeration}}) {
+	value = {{.PackageName}}.FromStringTo{{.Enumeration}}({{ShortName .Table.Metadata.Name}}._{{ToSnakeCase (TableName .Table)}}.{{Capitalize .Field.Name}})
+
+	{{if .EnumerationGroup}}if !value.Is{{.EnumerationGroup}}(){
+		value = {{.PackageName}}.{{.Enumeration}}None
+	}{{else}}if !value.IsValid(){
+		value = {{.PackageName}}.{{.Enumeration}}None
+	}{{end}}
+
+	return
+}
+`)
+	if err != nil {
+		return
+	}
+
+	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{
+		"Table":            t.table,
+		"Field":            freader,
+		"FieldNumber":      fn,
+		"Enumeration":      enumeration,
+		"EnumerationGroup": enumerationGroup,
+		"PackageName":      t.interfacePackageShort})
+	if err != nil {
+		return
+	}
+
+	return
+}
+
 func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
 
 	err = t.StructAddField(strings.ToLower(freader.Name()), "*native.VectorStringReader")

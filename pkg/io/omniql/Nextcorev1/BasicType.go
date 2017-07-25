@@ -1,6 +1,7 @@
 package Nextcorev1
 import(
     "github.com/nebtex/hybrids/golang/hybrids"
+    "strings"
 )
 //BasicType ...
 type BasicType int8
@@ -115,7 +116,7 @@ func (bt BasicType) IsScalar() (result bool) {
 //BasicTypeFromString convert a string to its BasicType representation
 func FromStringToBasicType(str string) (value BasicType) {
     var ok bool
-    value, ok = basic_type_reverse_map[str]
+    value, ok = basic_type_reverse_map[strings.Title(strings.TrimSpace(str))]
     if !ok{
         value = BasicTypeNone
 	}

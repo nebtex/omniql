@@ -1,7 +1,5 @@
 package Nextcorev1
 
-
-
 //UnionResourceReader ...
 type UnionResourceReader interface {
 

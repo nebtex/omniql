@@ -8,6 +8,13 @@ type Table struct {
     Fields []*Field `json:"fields"`
 }
 
+//Table ...
+type Table struct {
+
+    Metadata *Metadata `json:"metadata"`
+    Fields []*Field `json:"fields"`
+}
+
 //TableReader ...
 type TableReader struct {
     _table *Table

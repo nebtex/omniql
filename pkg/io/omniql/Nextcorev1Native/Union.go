@@ -7,6 +7,12 @@ type Union struct {
     Metadata *Metadata `json:"metadata"`
 }
 
+//Union ...
+type Union struct {
+
+    Metadata *Metadata `json:"metadata"`
+}
+
 //UnionReader ...
 type UnionReader struct {
     _union *Union

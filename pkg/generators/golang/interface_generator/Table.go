@@ -175,10 +175,6 @@ func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
 
 func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 
-	//add imports
-	wr.Write([]byte(`
-
-`))
 	err = t.StartInterface()
 	if err != nil {
 		return err
