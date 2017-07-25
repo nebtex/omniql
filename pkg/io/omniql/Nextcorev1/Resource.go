@@ -8,8 +8,8 @@ type ResourceReader interface {
     //RID get resource id
     RID() ResourceIDReader
 
-    //Meta ...
-    Meta() (MetadataReader, error)
+    //Metadata ...
+    Metadata() (MetadataReader, error)
 
     //Fields ...
     Fields() VectorFieldReader

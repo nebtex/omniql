@@ -1,7 +1,7 @@
 api: io.almagest.omniql.v1
 rid: Application/io.almagest.omniql.*/Schema/Main/Table/Field
 spec:
-  meta:
+  metadata:
     application: io.almagest.omniql.*
     name: Field
     kind: Table

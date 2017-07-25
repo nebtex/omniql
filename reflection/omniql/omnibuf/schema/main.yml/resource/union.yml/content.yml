@@ -1,12 +1,12 @@
 api: io.almagest.omniql.v1
 rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Union
 spec:
-  meta:
+  metadata:
     application: io.almagest.omniql.*
     name: Union
     kind: Resource
   fields:
-  - name: meta
+  - name: metadata
     type: Table/Metadata
     required: true
   - name: type

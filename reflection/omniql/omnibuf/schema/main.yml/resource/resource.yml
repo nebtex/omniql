@@ -1,14 +1,14 @@
 api: io.almagest.omniql.v1
 rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Resource
 spec:
-  meta:
+  metadata:
     application: io.almagest.omniql.*
     name: Resource
     kind: Resource
     documentation:
       short: Resource type
   fields:
-  - name: meta
+  - name: metadata
     type: Table/Metadata
     required: true
   - name: fields

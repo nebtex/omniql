@@ -4,13 +4,13 @@ import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 
 type Table struct {
 	RID    []byte  `json:"rid"`
-	Meta   *Metadata `json:"meta"`
+	Metadata   *Metadata `json:"meta"`
 	Fields []*Field `json:"fields"`
 }
 
 type TableReader struct {
 	table *Table
-	meta  corev1.MetadataReader
+	metadata  corev1.MetadataReader
 	doc   corev1.DocumentationReader
 }
 
@@ -18,8 +18,8 @@ func (t *TableReader) RID() corev1.ResourceIDReader {
 	return NewIDReader(t.table.RID, true)
 }
 
-func (t *TableReader) Meta() corev1.MetadataReader {
-	return &MetadataReader{meta: t.table.Meta}
+func (t *TableReader) Metadata() corev1.MetadataReader {
+	return &MetadataReader{metadata: t.table.Metadata}
 
 }
 

@@ -6,7 +6,7 @@ import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
 type Enumeration struct {
 
     RID []byte `json:"rid"`
-    Meta *Metadata `json:"meta"`
+    Metadata *Metadata `json:"metadata"`
     Items []*EnumerationItem `json:"items"`
     Groups []*EnumerationGroup `json:"groups"`
 }
@@ -14,14 +14,9 @@ type Enumeration struct {
 //EnumerationReader ...
 type EnumerationReader struct {
     _enumeration *Enumeration
-//EnumerationReader ...
-type EnumerationReader struct {
-    _enumeration *Enumeration
-    meta *MetadataReader
+    metadata *MetadataReader
     items *VectorEnumerationItemReader
     groups *VectorEnumerationGroupReader
-}
-
 }
 
 //RID get resource id
@@ -29,11 +24,11 @@ func (e *EnumerationReader) RID() corev1.ResourceIDReader {
 	return e._rid
 }
 
-//Meta ...
-func (e *EnumerationReader) Meta() corev1.MetadataReader {
+//Metadata ...
+func (e *EnumerationReader) Metadata() corev1.MetadataReader {
 
-	if e.meta != nil {
-		return e.meta
+	if e.metadata != nil {
+		return e.metadata
 	}
 
 	return nil
@@ -59,11 +54,12 @@ func (e *EnumerationReader) Groups() corev1.VectorEnumerationGroupReader {
 	return nil
 }
 	
-func NewEnumerationReader(t hybrids.TableReader) corev1.EnumerationReader{
-	if t==nil{
-		return nil
+//NewEnumerationReader ...
+func NewEnumerationReader(e *EnumerationReader) corev1.EnumerationReader{
+	if e!=nil{
+		return &EnumerationReader{_enumeration:e}
 	}
-	return &EnumerationReader{_table:t}
+	return nil
 }
 
 type VectorEnumerationReader struct {
@@ -92,6 +88,7 @@ func (ve *VectorEnumerationReader) Get(i int) (item corev1.EnumerationReader, er
 
 
 }
+
 
 func NewVectorEnumerationReader(v hybrids.VectorTableReader) corev1.VectorEnumerationReader {
     if v == nil {

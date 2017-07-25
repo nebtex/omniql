@@ -6,18 +6,18 @@ import (
 
 //Enumeration ...
 type Enumeration struct {
-	RID    []byte `json:"rid"`
-	Meta   *Metadata `json:"meta"`
-	Kind   string `json:"kind"`
-	Items  []*EnumerationItem `json:"items"`
-	Groups []*EnumerationGroup `json:"groups"`
+	RID      []byte `json:"rid"`
+	Metadata *Metadata `json:"meta"`
+	Kind     string `json:"kind"`
+	Items    []*EnumerationItem `json:"items"`
+	Groups   []*EnumerationGroup `json:"groups"`
 }
 
 //EnumerationReader ...
 type EnumerationReader struct {
 	_enumeration *Enumeration
 	_rid         *IDReader
-	meta         *MetadataReader
+	metadata     *MetadataReader
 	items        *VectorEnumerationItemReader
 	groups       *VectorEnumerationGroupReader
 }
@@ -27,11 +27,11 @@ func (e *EnumerationReader) RID() corev1.ResourceIDReader {
 	return e._rid
 }
 
-//Meta ...
-func (e *EnumerationReader) Meta() corev1.MetadataReader {
+//Metadata ...
+func (e *EnumerationReader) Metadata() corev1.MetadataReader {
 
-	if e.meta != nil {
-		return e.meta
+	if e.metadata != nil {
+		return e.metadata
 	}
 
 	return nil
@@ -67,7 +67,7 @@ func NewEnumerationReader(e *Enumeration) *EnumerationReader {
 	return &EnumerationReader{
 		_enumeration: e,
 		_rid:         NewIDReader(e.RID, false),
-		meta:         NewMetadataReader(e.Meta),
+		metadata:     NewMetadataReader(e.Metadata),
 		items:        NewVectorEnumerationItemReader(e.Items),
 		groups:       NewVectorEnumerationGroupReader(e.Groups),
 

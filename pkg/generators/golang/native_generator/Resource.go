@@ -16,9 +16,9 @@ type ResourceReaderGenerator struct {
 }
 
 func NewResourceReaderGenerator(resource corev1.ResourceReader, ip string, logger *zap.Logger) (r *ResourceReaderGenerator) {
-	zap := logger.With(zap.String("ResourceName", resource.Meta().Name()),
+	zap := logger.With(zap.String("ResourceName", resource.Metadata().Name()),
 		zap.String("Type", "Reader implementation"),
-		zap.String("Application", resource.Meta().Application()),
+		zap.String("Application", resource.Metadata().Application()),
 	)
 	r = &ResourceReaderGenerator{zap: zap, resource: resource}
 	r.trg = NewTableReaderGenerator(resource, ip, zap)
@@ -42,12 +42,6 @@ func (r *ResourceReaderGenerator) Generate(wr io.Writer) (err error) {
 		return err
 	}
 
-	err = r.trg.StartStruct()
-	if err != nil {
-		return err
-	}
-
-
 
 
 	err = r.CreateRIDAccessor()
@@ -69,10 +63,7 @@ func (r *ResourceReaderGenerator) Generate(wr io.Writer) (err error) {
 	if err != nil {
 		return err
 	}
-	err = r.trg.EndStruct()
-	if err != nil {
-		return err
-	}
+
 
 	err = r.trg.EndStruct()
 	if err != nil {

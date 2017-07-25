@@ -28,9 +28,9 @@ type TableReaderGenerator struct {
 
 func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Logger) *TableReaderGenerator {
 	table = table
-	zap := logger.With(zap.String("TableName", table.Meta().Name()),
+	zap := logger.With(zap.String("TableName", table.Metadata().Name()),
 		zap.String("Type", "Reader Interface"),
-		zap.String("Application", table.Meta().Application()),
+		zap.String("Application", table.Metadata().Application()),
 	)
 
 	t := &TableReaderGenerator{table: table, zap: zap}
@@ -69,7 +69,7 @@ func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Lo
 }
 
 func (t *TableReaderGenerator) ShortName() string {
-	return strings.ToLower(string(t.table.Meta().Name()[0]))
+	return strings.ToLower(string(t.table.Metadata().Name()[0]))
 }
 
 func (t *TableReaderGenerator) Table() corev1.TableReader {
@@ -77,7 +77,7 @@ func (t *TableReaderGenerator) Table() corev1.TableReader {
 }
 func (t *TableReaderGenerator) StartInterface() (err error) {
 	tmpl, err := template.New("TableReaderGenerator").Funcs(t.funcMap).Parse(`
-{{GoDoc (print (TableName .) "Reader") .Meta.Documentation}}
+{{GoDoc (print (TableName .) "Reader") .Metadata.Documentation}}
 type {{TableName .}}Reader interface {
 `)
 	if err != nil {
@@ -123,7 +123,7 @@ func (t *TableReaderGenerator) CreateAccessors() (err error) {
 					return
 				}
 			default:
-				pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Items()), false)
+				pid := corev1Native.NewIDReader([]byte(t.table.Metadata().Application()+"/"+field.Items()), false)
 				if pid != nil {
 					if pid.Kind() == "Table" {
 						err = t.VectorTableAccessor(field, fieldNumber, utils.TableNameFromID(pid))
@@ -134,7 +134,7 @@ func (t *TableReaderGenerator) CreateAccessors() (err error) {
 				}
 			}
 		default:
-			pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Type()), false)
+			pid := corev1Native.NewIDReader([]byte(t.table.Metadata().Application()+"/"+field.Type()), false)
 			if pid != nil {
 				if pid.Kind() == "Table" {
 					err = t.TableAccessor(field, pid.ID())

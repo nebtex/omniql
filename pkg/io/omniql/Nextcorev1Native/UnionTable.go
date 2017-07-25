@@ -1,10 +1,5 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
-
 //UnionTable ...
 type UnionTable struct {
 
@@ -15,11 +10,12 @@ type UnionTableReader struct {
     _uniontable *UnionTable
 }
 
-func NewUnionTableReader(t hybrids.TableReader) Nextcorev1.UnionTableReader{
-	if t==nil{
-		return nil
+//NewUnionTableReader ...
+func NewUnionTableReader(t *UnionTableReader) Nextcorev1.UnionTableReader{
+	if t!=nil{
+		return &UnionTableReader{_table:t}
 	}
-	return &UnionTableReader{_table:t}
+	return nil
 }
 
 type VectorUnionTableReader struct {
@@ -48,6 +44,7 @@ func (vt *VectorUnionTableReader) Get(i int) (item Nextcorev1.UnionTableReader, 
 
 
 }
+
 
 func NewVectorUnionTableReader(v hybrids.VectorTableReader) Nextcorev1.VectorUnionTableReader {
     if v == nil {

@@ -1,10 +1,5 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
-
 //EnumerationGroup ...
 type EnumerationGroup struct {
 
@@ -44,11 +39,12 @@ func (g *EnumerationGroupReader) Items() hybrids.VectorStringReader {
 	return nil
 }
 
-func NewEnumerationGroupReader(t hybrids.TableReader) Nextcorev1.EnumerationGroupReader{
-	if t==nil{
-		return nil
+//NewEnumerationGroupReader ...
+func NewEnumerationGroupReader(g *EnumerationGroupReader) Nextcorev1.EnumerationGroupReader{
+	if g!=nil{
+		return &EnumerationGroupReader{_group:g}
 	}
-	return &EnumerationGroupReader{_table:t}
+	return nil
 }
 
 type VectorEnumerationGroupReader struct {
@@ -77,6 +73,7 @@ func (vg *VectorEnumerationGroupReader) Get(i int) (item Nextcorev1.EnumerationG
 
 
 }
+
 
 func NewVectorEnumerationGroupReader(v hybrids.VectorTableReader) Nextcorev1.VectorEnumerationGroupReader {
     if v == nil {

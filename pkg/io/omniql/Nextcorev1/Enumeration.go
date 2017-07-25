@@ -8,8 +8,8 @@ type EnumerationReader interface {
     //RID get resource id
     RID() ResourceIDReader
 
-    //Meta ...
-    Meta() (MetadataReader, error)
+    //Metadata ...
+    Metadata() (MetadataReader, error)
 
     //Kind ...
     Kind() BasicType

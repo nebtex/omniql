@@ -6,7 +6,7 @@ import "github.com/nebtex/hybrids/golang/hybrids"
 
 type TableReader interface {
 	RID() ResourceIDReader
-	Meta() MetadataReader
+	Metadata() MetadataReader
 	Fields() VectorFieldReader
 }
 
@@ -35,7 +35,7 @@ type MetadataReader interface {
 
 type ResourceReader interface {
 	RID() ResourceIDReader
-	Meta() MetadataReader
+	Metadata() MetadataReader
 
 	Fields() VectorFieldReader
 }
@@ -95,7 +95,7 @@ type EnumerationGroupReader interface {
 
 type EnumerationReader interface {
 	RID() ResourceIDReader
-	Meta() MetadataReader
+	Metadata() MetadataReader
 	Kind() string
 	Items() VectorEnumerationItemReader
 	Groups() VectorEnumerationGroupReader
@@ -121,7 +121,7 @@ type ErrorWriter interface {
 /*
 type EnumerationReader interface {
 	OqlID() OqlIDReader
-	Meta() MetadataReader
+	Metadata() MetadataReader
 	Kind() corev1BasicTypes.Scalars
 }*/
 

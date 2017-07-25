@@ -107,7 +107,7 @@ func WriteHybrids(app *Application, baseDir string, logger *zap.Logger) {
 		//write fields
 		for _, f := range table.Fields {
 			field := corev1Native.NewFieldReader(f)
-			fmt.Println(field.Name(), table.Meta.Name, field.Type())
+			fmt.Println(field.Name(), table.Metadata.Name, field.Type())
 
 			if field.Type() == "String" {
 
@@ -122,7 +122,7 @@ func WriteHybrids(app *Application, baseDir string, logger *zap.Logger) {
 
 		trg := hybrids_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
 		//create file
-		f, err := os.Create(baseDir + resource.Meta.Name + ".go")
+		f, err := os.Create(baseDir + resource.Metadata.Name + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package corev1Hybrids\n"))
 		CheckPanic(err)
@@ -152,7 +152,7 @@ func WriteNative(app *Application, baseDir string, packageName string, logger *z
 		//write fields
 		for _, f := range table.Fields {
 			field := corev1Native.NewFieldReader(f)
-			fmt.Println(field.Name(), table.Meta.Name, field.Type())
+			fmt.Println(field.Name(), table.Metadata.Name, field.Type())
 
 			if field.Type() == "String" {
 
@@ -167,7 +167,7 @@ func WriteNative(app *Application, baseDir string, packageName string, logger *z
 
 		trg := native_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
 		//create file
-		f, err := os.Create(baseDir + resource.Meta.Name + ".go")
+		f, err := os.Create(baseDir + resource.Metadata.Name + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package " + packageName + "\n"))
 		CheckPanic(err)
@@ -201,7 +201,7 @@ func WriteInterface(app *Application, baseDir string, packageName string, logger
 
 		trg := interface_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
 		//create file
-		f, err := os.Create(baseDir + resource.Meta.Name + ".go")
+		f, err := os.Create(baseDir + resource.Metadata.Name + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package " + packageName + "\n"))
 		CheckPanic(err)
@@ -216,7 +216,7 @@ func WriteInterface(app *Application, baseDir string, packageName string, logger
 
 		trg := interface_generator.NewEnumerationGenerator(corev1Native.NewEnumerationReader(enumeration), logger)
 		//create file
-		f, err := os.Create(baseDir + enumeration.Meta.Name + ".go")
+		f, err := os.Create(baseDir + enumeration.Metadata.Name + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package " + packageName + "\n"))
 		CheckPanic(err)

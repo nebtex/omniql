@@ -10,6 +10,7 @@ import (
 	"strings"
 	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
 	"bytes"
+	"github.com/nebtex/omnibuff/pkg/generators/golang"
 )
 
 //TODO: create initializators
@@ -27,9 +28,9 @@ type TableReaderGenerator struct {
 
 func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Logger) *TableReaderGenerator {
 	table = table
-	zap := logger.With(zap.String("TableName", table.Meta().Name()),
+	zap := logger.With(zap.String("TableName", table.Metadata().Name()),
 		zap.String("Type", "Reader implementation"),
-		zap.String("Application", table.Meta().Application()),
+		zap.String("Application", table.Metadata().Application()),
 	)
 
 	t := &TableReaderGenerator{table: table, zap: zap}
@@ -83,12 +84,13 @@ func (t *TableSpec) {{.Field.Name}}() (value {{ToNativeType .Field.Type}}, ok bo
 }
 func (t *TableReaderGenerator) CreateAllocator() (err error) {
 
-	tmpl, err := template.New("TableReaderGenerator::CreateAllocator").Funcs(t.funcMap).Parse(`
-func New{{TableName .Table}}Reader(t hybrids.TableReader) {{.PackageName}}.{{TableName .Table}}Reader{
-	if t==nil{
-		return nil
+	tmpl, err := template.New("TableReaderGenerator::CreateAllocator").Funcs(golang.DefaultTemplateFunctions).Parse(`
+//New{{TableName .Table}}Reader ...
+func New{{TableName .Table}}Reader({{ShortName .Table.Metadata.Name}} *{{TableName .Table}}Reader) {{.PackageName}}.{{TableName .Table}}Reader{
+	if {{ShortName .Table.Metadata.Name}}!=nil{
+		return &{{TableName .Table}}Reader{_{{ToLower .Table.Metadata.Name}}:{{ShortName .Table.Metadata.Name}}}
 	}
-	return &{{TableName .Table}}Reader{_table:t}
+	return nil
 }`)
 	if err != nil {
 		return
@@ -101,7 +103,7 @@ func New{{TableName .Table}}Reader(t hybrids.TableReader) {{.PackageName}}.{{Tab
 
 }
 func (t *TableReaderGenerator) ShortName() string {
-	return strings.ToLower(string(t.table.Meta().Name()[0]))
+	return strings.ToLower(string(t.table.Metadata().Name()[0]))
 }
 
 func (t *TableReaderGenerator) Table() corev1.TableReader {
@@ -110,7 +112,7 @@ func (t *TableReaderGenerator) Table() corev1.TableReader {
 
 func (t *TableReaderGenerator) StartStruct() (err error) {
 	tmpl, err := template.New("TableReaderGenerator::Native::StartStruct").Funcs(t.funcMap).Parse(`
-{{GoDoc (print (TableName .) "Reader") .Meta.Documentation}}
+{{GoDoc (print (TableName .) "Reader") .Metadata.Documentation}}
 type {{TableName .}}Reader struct {
     _{{ToLower (TableName .)}} *{{TableName .}}`)
 	if err != nil {
@@ -156,7 +158,7 @@ func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
 					return
 				}
 			default:
-				pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Items()), false)
+				pid := corev1Native.NewIDReader([]byte(t.table.Metadata().Application()+"/"+field.Items()), false)
 				if pid != nil {
 					if pid.Kind() == "Table" {
 						err = t.VectorTableAccessor(field, fieldNumber, utils.TableNameFromID(pid))
@@ -167,7 +169,7 @@ func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
 				}
 			}
 		default:
-			pid := corev1Native.NewIDReader([]byte(t.table.Meta().Application()+"/"+field.Type()), false)
+			pid := corev1Native.NewIDReader([]byte(t.table.Metadata().Application()+"/"+field.Type()), false)
 			if pid != nil {
 				if pid.Kind() == "Table" {
 					err = t.TableAccessor(field, fieldNumber, pid.ID())
@@ -201,13 +203,6 @@ func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
 
 func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 
-	//add imports
-	wr.Write([]byte(`
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
-`))
 	gt := NewGoTypeGenerator(t.table, t.zap)
 	err = gt.Generate(wr)
 	if err != nil {
@@ -345,7 +340,7 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint
 		return err
 	}
 
-	tmpl, err := template.New("StringAccessor").
+	tmpl, err := template.New("TableReaderGenerator::Native::TableAccessor").
 		Funcs(t.funcMap).Parse(`
 {{GoDoc .Field.Name .Field.Documentation}}
 func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{.PackageName}}.{{.TypeTableName}}Reader {
@@ -406,6 +401,7 @@ func (v{{ShortName}} *Vector{{TableName .Table}}Reader) Get(i int) (item {{.Pack
 
 
 }
+
 
 func NewVector{{TableName .Table}}Reader(v hybrids.VectorTableReader) {{.PackageName}}.Vector{{TableName .Table}}Reader {
     if v == nil {

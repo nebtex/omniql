@@ -1,9 +1,6 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
+import "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
 
 //Field ...
 type Field struct {
@@ -48,11 +45,12 @@ func (f *FieldReader) Default() (value string) {
 	return
 }
 
-func NewFieldReader(t hybrids.TableReader) Nextcorev1.FieldReader{
-	if t==nil{
-		return nil
+//NewFieldReader ...
+func NewFieldReader(f *FieldReader) Nextcorev1.FieldReader{
+	if f!=nil{
+		return &FieldReader{_field:f}
 	}
-	return &FieldReader{_table:t}
+	return nil
 }
 
 type VectorFieldReader struct {
@@ -81,6 +79,7 @@ func (vf *VectorFieldReader) Get(i int) (item Nextcorev1.FieldReader, err error)
 
 
 }
+
 
 func NewVectorFieldReader(v hybrids.VectorTableReader) Nextcorev1.VectorFieldReader {
     if v == nil {

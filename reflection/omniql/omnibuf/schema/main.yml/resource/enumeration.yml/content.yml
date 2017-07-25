@@ -1,12 +1,12 @@
 api: io.almagest.omniql.v1
 rid: Application/io.almagest.omniql.*/Schema/Main/Resource/Enumeration
 spec:
-  meta:
+  metadata:
     application: io.almagest.omniql.*
     name: Enumeration
     kind: Resource
   fields:
-  - name: meta
+  - name: metadata
     type: Table/Metadata
     required: true
   - name: kind

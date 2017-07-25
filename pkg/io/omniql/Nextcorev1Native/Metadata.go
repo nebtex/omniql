@@ -1,22 +1,20 @@
 package Nextcorev1Native
 
-import (
-	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
-)
+import "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
 
 //Metadata ...
 type Metadata struct {
-	Application   string `json:"application"`
-	Name          string `json:"name"`
-	Parent        string `json:"parent"`
-	Documentation *Documentation `json:"documentation"`
+
+    Application string `json:"application"`
+    Name string `json:"name"`
+    Parent string `json:"parent"`
+    Documentation *Documentation `json:"documentation"`
 }
 
 //MetadataReader ...
 type MetadataReader struct {
-	_metadata     *Metadata
-	documentation *DocumentationReader
+    _metadata *Metadata
+    documentation *DocumentationReader
 }
 
 //Application ...
@@ -47,20 +45,21 @@ func (m *MetadataReader) Documentation() Nextcorev1.DocumentationReader {
 	return nil
 }
 
-func NewMetadataReader(t hybrids.TableReader) Nextcorev1.MetadataReader {
-	if t == nil {
-		return nil
+//NewMetadataReader ...
+func NewMetadataReader(m *MetadataReader) Nextcorev1.MetadataReader{
+	if m!=nil{
+		return &MetadataReader{_metadata:m}
 	}
-	return &MetadataReader{_table: t}
+	return nil
 }
 
 type VectorMetadataReader struct {
-	_vector []*MetadataReader
+    _vector  []*MetadataReader
 }
 
 func (vm *VectorMetadataReader) Len() (size int) {
-	size = len(vm._vector)
-	return
+    size = len(vm._vector)
+    return
 }
 
 func (vm *VectorMetadataReader) Get(i int) (item Nextcorev1.MetadataReader, err error) {
@@ -78,11 +77,13 @@ func (vm *VectorMetadataReader) Get(i int) (item Nextcorev1.MetadataReader, err 
 	item = vm._vector[i]
 	return
 
+
 }
 
+
 func NewVectorMetadataReader(v hybrids.VectorTableReader) Nextcorev1.VectorMetadataReader {
-	if v == nil {
-		return nil
-	}
-	return &VectorMetadataReader{_vectorHybrid: v}
+    if v == nil {
+        return nil
+    }
+    return &VectorMetadataReader{_vectorHybrid: v}
 }

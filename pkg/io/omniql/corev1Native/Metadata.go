@@ -14,22 +14,22 @@ type Metadata struct {
 }
 
 type MetadataReader struct {
-	meta *Metadata
+	metadata *Metadata
 	doc  *DocumentationReader
 }
 
 func (m *MetadataReader) Application() string {
-	return m.meta.Application
+	return m.metadata.Application
 }
 func (m *MetadataReader) Name() string {
-	return m.meta.Name
+	return m.metadata.Name
 }
 func (m *MetadataReader) Kind() string {
-	return m.meta.Kind
+	return m.metadata.Kind
 }
 
 func (m *MetadataReader) Parent() string {
-	return m.meta.Parent
+	return m.metadata.Parent
 }
 func (m *MetadataReader) Documentation() corev1.DocumentationReader {
 	if m.doc != nil {
@@ -42,7 +42,7 @@ func NewMetadataReader(m *Metadata) *MetadataReader {
 	if m == nil {
 		return nil
 	}
-	mr := &MetadataReader{meta: m, doc: NewDocumentationReader(m.Documentation)}
+	mr := &MetadataReader{metadata: m, doc: NewDocumentationReader(m.Documentation)}
 	return mr
 
 }

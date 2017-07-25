@@ -7,12 +7,12 @@ import (
 
 //TableName return the full table name taken into account the parent
 func TableName(t corev1.TableReader) (value string) {
-	pid := corev1Native.NewIDReader([]byte(t.Meta().Application()+"/"+t.Meta().Parent()), false)
+	pid := corev1Native.NewIDReader([]byte(t.Metadata().Application()+"/"+t.Metadata().Parent()), false)
 	if pid != nil {
-		return pid.ID() + t.Meta().Name()
+		return pid.ID() + t.Metadata().Name()
 
 	}
-	return t.Meta().Name()
+	return t.Metadata().Name()
 }
 
 func TableNameFromID(pid corev1.ResourceIDReader) (value string) {

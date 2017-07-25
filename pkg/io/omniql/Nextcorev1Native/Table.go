@@ -1,25 +1,18 @@
 package Nextcorev1Native
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-
 //Table ...
 type Table struct {
 
     RID []byte `json:"rid"`
-    Meta *Metadata `json:"meta"`
+    Metadata *Metadata `json:"metadata"`
     Fields []*Field `json:"fields"`
 }
 
 //TableReader ...
 type TableReader struct {
     _table *Table
-//TableReader ...
-type TableReader struct {
-    _table *Table
-    meta *MetadataReader
+    metadata *MetadataReader
     fields *VectorFieldReader
-}
-
 }
 
 //RID get resource id
@@ -27,11 +20,11 @@ func (t *TableReader) RID() corev1.ResourceIDReader {
 	return t._rid
 }
 
-//Meta ...
-func (t *TableReader) Meta() corev1.MetadataReader {
+//Metadata ...
+func (t *TableReader) Metadata() corev1.MetadataReader {
 
-	if t.meta != nil {
-		return t.meta
+	if t.metadata != nil {
+		return t.metadata
 	}
 
 	return nil
@@ -47,11 +40,12 @@ func (t *TableReader) Fields() corev1.VectorFieldReader {
 	return nil
 }
 	
-func NewTableReader(t hybrids.TableReader) corev1.TableReader{
-	if t==nil{
-		return nil
+//NewTableReader ...
+func NewTableReader(t *TableReader) corev1.TableReader{
+	if t!=nil{
+		return &TableReader{_table:t}
 	}
-	return &TableReader{_table:t}
+	return nil
 }
 
 type VectorTableReader struct {
@@ -80,6 +74,7 @@ func (vt *VectorTableReader) Get(i int) (item corev1.TableReader, err error) {
 
 
 }
+
 
 func NewVectorTableReader(v hybrids.VectorTableReader) corev1.VectorTableReader {
     if v == nil {

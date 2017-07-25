@@ -1,7 +1,7 @@
 api: io.almagest.omniql.v1
 rid: Application/io.almagest.omniql.*/Schema/Main/Enumeration/BasicTypes
 spec:
-  meta:
+  metadata:
     application: io.almagest.omniql.*
     kind: Enumeration
     name: BasicType

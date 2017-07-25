@@ -1,10 +1,5 @@
 package Nextcorev1Native
 
-import ("github.com/nebtex/hybrids/golang/hybrids"
-	    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1")
-
-
-
 //Documentation ...
 type Documentation struct {
 
@@ -29,11 +24,12 @@ func (d *DocumentationReader) Long() (value string) {
 	return
 }
 
-func NewDocumentationReader(t hybrids.TableReader) Nextcorev1.DocumentationReader{
-	if t==nil{
-		return nil
+//NewDocumentationReader ...
+func NewDocumentationReader(d *DocumentationReader) Nextcorev1.DocumentationReader{
+	if d!=nil{
+		return &DocumentationReader{_documentation:d}
 	}
-	return &DocumentationReader{_table:t}
+	return nil
 }
 
 type VectorDocumentationReader struct {
@@ -62,6 +58,7 @@ func (vd *VectorDocumentationReader) Get(i int) (item Nextcorev1.DocumentationRe
 
 
 }
+
 
 func NewVectorDocumentationReader(v hybrids.VectorTableReader) Nextcorev1.VectorDocumentationReader {
     if v == nil {

@@ -1,23 +1,16 @@
 package Nextcorev1Native
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-
 //Union ...
 type Union struct {
 
     RID []byte `json:"rid"`
-    Meta *Metadata `json:"meta"`
+    Metadata *Metadata `json:"metadata"`
 }
 
 //UnionReader ...
 type UnionReader struct {
     _union *Union
-//UnionReader ...
-type UnionReader struct {
-    _union *Union
-    meta *MetadataReader
-}
-
+    metadata *MetadataReader
 }
 
 //RID get resource id
@@ -25,21 +18,22 @@ func (u *UnionReader) RID() corev1.ResourceIDReader {
 	return u._rid
 }
 
-//Meta ...
-func (u *UnionReader) Meta() corev1.MetadataReader {
+//Metadata ...
+func (u *UnionReader) Metadata() corev1.MetadataReader {
 
-	if u.meta != nil {
-		return u.meta
+	if u.metadata != nil {
+		return u.metadata
 	}
 
 	return nil
 }
 
-func NewUnionReader(t hybrids.TableReader) corev1.UnionReader{
-	if t==nil{
-		return nil
+//NewUnionReader ...
+func NewUnionReader(u *UnionReader) corev1.UnionReader{
+	if u!=nil{
+		return &UnionReader{_union:u}
 	}
-	return &UnionReader{_table:t}
+	return nil
 }
 
 type VectorUnionReader struct {
@@ -68,6 +62,7 @@ func (vu *VectorUnionReader) Get(i int) (item corev1.UnionReader, err error) {
 
 
 }
+
 
 func NewVectorUnionReader(v hybrids.VectorTableReader) corev1.VectorUnionReader {
     if v == nil {
