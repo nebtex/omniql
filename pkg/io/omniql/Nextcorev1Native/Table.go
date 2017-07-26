@@ -7,7 +7,10 @@ type Table struct {
     Metadata *Metadata `json:"metadata"`
     Fields []*Field `json:"fields"`
 }
-
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+)
 //Table ...
 type Table struct {
 
@@ -28,13 +31,13 @@ func (t *TableReader) RID() corev1.ResourceIDReader {
 }
 
 //Metadata ...
-func (t *TableReader) Metadata() corev1.MetadataReader {
+func (t *TableReader) Metadata() (mr corev1.MetadataReader, err error) {
 
 	if t.metadata != nil {
-		return t.metadata
+		mr  =  t.metadata
 	}
 
-	return nil
+	return
 }
 
 //Fields ...
@@ -48,22 +51,30 @@ func (t *TableReader) Fields() corev1.VectorFieldReader {
 }
 	
 //NewTableReader ...
-func NewTableReader(t *TableReader) corev1.TableReader{
+func NewTableReader(t *Table) *TableReader{
 	if t!=nil{
-		return &TableReader{_table:t}
+		return &TableReader{
+		                                   _table:t,
+metadata: NewMetadataReader(t.Metadata),
+		                                   }
 	}
 	return nil
 }
 
+//VectorTableReader ...
 type VectorTableReader struct {
     _vector  []*TableReader
 }
 
+//Len Returns the current size of this vector
 func (vt *VectorTableReader) Len() (size int) {
     size = len(vt._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (vt *VectorTableReader) Get(i int) (item corev1.TableReader, err error) {
 
 	if i < 0 {
@@ -82,10 +93,13 @@ func (vt *VectorTableReader) Get(i int) (item corev1.TableReader, err error) {
 
 }
 
+//NewVectorTableReader ...
+func NewVectorTableReader(vt []*Table) (vtr *VectorTableReader) {
+    vtr = &VectorTableReader{}
+	vtr._vector = make([]*TableReader, len(vt))
 
-func NewVectorTableReader(v hybrids.VectorTableReader) corev1.VectorTableReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorTableReader{_vectorHybrid: v}
+	for i := 0; i < len(vt); i++ {
+		vtr._vector[i] = NewTableReader(vt[i])
+	}
+	return
 }

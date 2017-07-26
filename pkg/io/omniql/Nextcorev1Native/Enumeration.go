@@ -11,6 +11,7 @@ type Enumeration struct {
 }
 import(
     "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+    "github.com/nebtex/hybrids/golang/hybrids"
 )
 //Enumeration ...
 type Enumeration struct {
@@ -35,13 +36,13 @@ func (e *EnumerationReader) RID() corev1.ResourceIDReader {
 }
 
 //Metadata ...
-func (e *EnumerationReader) Metadata() corev1.MetadataReader {
+func (e *EnumerationReader) Metadata() (mr corev1.MetadataReader, err error) {
 
 	if e.metadata != nil {
-		return e.metadata
+		mr  =  e.metadata
 	}
 
-	return nil
+	return
 }
 
 //Kind ...
@@ -76,22 +77,30 @@ func (e *EnumerationReader) Groups() corev1.VectorEnumerationGroupReader {
 }
 	
 //NewEnumerationReader ...
-func NewEnumerationReader(e *EnumerationReader) corev1.EnumerationReader{
+func NewEnumerationReader(e *Enumeration) *EnumerationReader{
 	if e!=nil{
-		return &EnumerationReader{_enumeration:e}
+		return &EnumerationReader{
+		                                   _enumeration:e,
+metadata: NewMetadataReader(e.Metadata),
+		                                   }
 	}
 	return nil
 }
 
+//VectorEnumerationReader ...
 type VectorEnumerationReader struct {
     _vector  []*EnumerationReader
 }
 
+//Len Returns the current size of this vector
 func (ve *VectorEnumerationReader) Len() (size int) {
     size = len(ve._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (ve *VectorEnumerationReader) Get(i int) (item corev1.EnumerationReader, err error) {
 
 	if i < 0 {
@@ -110,10 +119,13 @@ func (ve *VectorEnumerationReader) Get(i int) (item corev1.EnumerationReader, er
 
 }
 
+//NewVectorEnumerationReader ...
+func NewVectorEnumerationReader(ve []*Enumeration) (ver *VectorEnumerationReader) {
+    ver = &VectorEnumerationReader{}
+	ver._vector = make([]*EnumerationReader, len(ve))
 
-func NewVectorEnumerationReader(v hybrids.VectorTableReader) corev1.VectorEnumerationReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorEnumerationReader{_vectorHybrid: v}
+	for i := 0; i < len(ve); i++ {
+		ver._vector[i] = NewEnumerationReader(ve[i])
+	}
+	return
 }

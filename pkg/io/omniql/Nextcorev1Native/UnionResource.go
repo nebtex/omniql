@@ -1,54 +1,67 @@
 package Nextcorev1Native
 
+import (
+	"github.com/nebtex/hybrids/golang/hybrids"
+	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
+
 //UnionResource ...
 type UnionResource struct {
-
 }
 
 //UnionResourceReader ...
 type UnionResourceReader struct {
-    _unionresource *UnionResource
+	_unionresource *UnionResource
 }
 
 //NewUnionResourceReader ...
-func NewUnionResourceReader(r *UnionResourceReader) Nextcorev1.UnionResourceReader{
-	if r!=nil{
-		return &UnionResourceReader{_resource:r}
+func NewUnionResourceReader(ur *UnionResource) *UnionResourceReader {
+	if ur != nil {
+		return &UnionResourceReader{
+			_unionresource: ur,
+		}
 	}
 	return nil
 }
 
+//VectorUnionResourceReader ...
 type VectorUnionResourceReader struct {
-    _vector  []*UnionResourceReader
+	_vector []*UnionResourceReader
 }
 
-func (vr *VectorUnionResourceReader) Len() (size int) {
-    size = len(vr._vector)
-    return
+//Len Returns the current size of this vector
+func (vur *VectorUnionResourceReader) Len() (size int) {
+	size = len(vur._vector)
+	return
 }
 
-func (vr *VectorUnionResourceReader) Get(i int) (item Nextcorev1.UnionResourceReader, err error) {
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
+func (vur *VectorUnionResourceReader) Get(i int) (item Nextcorev1.UnionResourceReader, err error) {
 
 	if i < 0 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vr._vector)}
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vur._vector)}
 		return
 	}
 
-	if i > len(vr._vector)-1 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vr._vector)}
+	if i > len(vur._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vur._vector)}
 		return
 	}
 
-	item = vr._vector[i]
+	item = vur._vector[i]
 	return
-
 
 }
 
+//NewVectorUnionResourceReader ...
+func NewVectorUnionResourceReader(vur []*UnionResource) (vurr *VectorUnionResourceReader) {
+	vurr = &VectorUnionResourceReader{}
+	vurr._vector = make([]*UnionResourceReader, len(vur))
 
-func NewVectorUnionResourceReader(v hybrids.VectorTableReader) Nextcorev1.VectorUnionResourceReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorUnionResourceReader{_vectorHybrid: v}
+	for i := 0; i < len(vur); i++ {
+		vurr._vector[i] = NewUnionResourceReader(vur[i])
+	}
+	return
 }

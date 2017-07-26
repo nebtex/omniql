@@ -6,7 +6,10 @@ type Union struct {
     RID []byte `json:"rid"`
     Metadata *Metadata `json:"metadata"`
 }
-
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+)
 //Union ...
 type Union struct {
 
@@ -25,32 +28,40 @@ func (u *UnionReader) RID() corev1.ResourceIDReader {
 }
 
 //Metadata ...
-func (u *UnionReader) Metadata() corev1.MetadataReader {
+func (u *UnionReader) Metadata() (mr corev1.MetadataReader, err error) {
 
 	if u.metadata != nil {
-		return u.metadata
+		mr  =  u.metadata
 	}
 
-	return nil
+	return
 }
 
 //NewUnionReader ...
-func NewUnionReader(u *UnionReader) corev1.UnionReader{
+func NewUnionReader(u *Union) *UnionReader{
 	if u!=nil{
-		return &UnionReader{_union:u}
+		return &UnionReader{
+		                                   _union:u,
+metadata: NewMetadataReader(u.Metadata),
+		                                   }
 	}
 	return nil
 }
 
+//VectorUnionReader ...
 type VectorUnionReader struct {
     _vector  []*UnionReader
 }
 
+//Len Returns the current size of this vector
 func (vu *VectorUnionReader) Len() (size int) {
     size = len(vu._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (vu *VectorUnionReader) Get(i int) (item corev1.UnionReader, err error) {
 
 	if i < 0 {
@@ -69,10 +80,13 @@ func (vu *VectorUnionReader) Get(i int) (item corev1.UnionReader, err error) {
 
 }
 
+//NewVectorUnionReader ...
+func NewVectorUnionReader(vu []*Union) (vur *VectorUnionReader) {
+    vur = &VectorUnionReader{}
+	vur._vector = make([]*UnionReader, len(vu))
 
-func NewVectorUnionReader(v hybrids.VectorTableReader) corev1.VectorUnionReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorUnionReader{_vectorHybrid: v}
+	for i := 0; i < len(vu); i++ {
+		vur._vector[i] = NewUnionReader(vu[i])
+	}
+	return
 }

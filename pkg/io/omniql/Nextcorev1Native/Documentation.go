@@ -1,5 +1,8 @@
 package Nextcorev1Native
-
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
 //Documentation ...
 type Documentation struct {
 
@@ -25,22 +28,29 @@ func (d *DocumentationReader) Long() (value string) {
 }
 
 //NewDocumentationReader ...
-func NewDocumentationReader(d *DocumentationReader) Nextcorev1.DocumentationReader{
+func NewDocumentationReader(d *Documentation) *DocumentationReader{
 	if d!=nil{
-		return &DocumentationReader{_documentation:d}
+		return &DocumentationReader{
+		                                   _documentation:d,
+		                                   }
 	}
 	return nil
 }
 
+//VectorDocumentationReader ...
 type VectorDocumentationReader struct {
     _vector  []*DocumentationReader
 }
 
+//Len Returns the current size of this vector
 func (vd *VectorDocumentationReader) Len() (size int) {
     size = len(vd._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (vd *VectorDocumentationReader) Get(i int) (item Nextcorev1.DocumentationReader, err error) {
 
 	if i < 0 {
@@ -59,10 +69,13 @@ func (vd *VectorDocumentationReader) Get(i int) (item Nextcorev1.DocumentationRe
 
 }
 
+//NewVectorDocumentationReader ...
+func NewVectorDocumentationReader(vd []*Documentation) (vdr *VectorDocumentationReader) {
+    vdr = &VectorDocumentationReader{}
+	vdr._vector = make([]*DocumentationReader, len(vd))
 
-func NewVectorDocumentationReader(v hybrids.VectorTableReader) Nextcorev1.VectorDocumentationReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorDocumentationReader{_vectorHybrid: v}
+	for i := 0; i < len(vd); i++ {
+		vdr._vector[i] = NewDocumentationReader(vd[i])
+	}
+	return
 }

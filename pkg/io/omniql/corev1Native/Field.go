@@ -73,16 +73,16 @@ type VectorFieldReader struct {
 	fields       []corev1.FieldReader
 }
 
-func (vf *VectorFieldReader) Len() int32 {
+func (vf *VectorFieldReader) Len() int {
 	if vf.nativeFields != nil {
 
-		return int32(len(vf.nativeFields))
+		return int(len(vf.nativeFields))
 	}
-	return int32(len(vf.fields))
+	return int(len(vf.fields))
 
 }
 
-func (vf *VectorFieldReader) Get(i int32) (item corev1.FieldReader, err error) {
+func (vf *VectorFieldReader) Get(i int) (item corev1.FieldReader, err error) {
 	if vf.nativeFields != nil {
 		item = NewFieldReader(vf.nativeFields[i])
 		return

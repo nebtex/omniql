@@ -1,54 +1,67 @@
 package Nextcorev1Native
 
+import (
+	"github.com/nebtex/hybrids/golang/hybrids"
+	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
+
 //UnionTable ...
 type UnionTable struct {
-
 }
 
 //UnionTableReader ...
 type UnionTableReader struct {
-    _uniontable *UnionTable
+	_uniontable *UnionTable
 }
 
 //NewUnionTableReader ...
-func NewUnionTableReader(t *UnionTableReader) Nextcorev1.UnionTableReader{
-	if t!=nil{
-		return &UnionTableReader{_table:t}
+func NewUnionTableReader(ut *UnionTable) *UnionTableReader {
+	if ut != nil {
+		return &UnionTableReader{
+			_uniontable: ut,
+		}
 	}
 	return nil
 }
 
+//VectorUnionTableReader ...
 type VectorUnionTableReader struct {
-    _vector  []*UnionTableReader
+	_vector []*UnionTableReader
 }
 
-func (vt *VectorUnionTableReader) Len() (size int) {
-    size = len(vt._vector)
-    return
+//Len Returns the current size of this vector
+func (vut *VectorUnionTableReader) Len() (size int) {
+	size = len(vut._vector)
+	return
 }
 
-func (vt *VectorUnionTableReader) Get(i int) (item Nextcorev1.UnionTableReader, err error) {
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
+func (vut *VectorUnionTableReader) Get(i int) (item Nextcorev1.UnionTableReader, err error) {
 
 	if i < 0 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vt._vector)}
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vut._vector)}
 		return
 	}
 
-	if i > len(vt._vector)-1 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vt._vector)}
+	if i > len(vut._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vut._vector)}
 		return
 	}
 
-	item = vt._vector[i]
+	item = vut._vector[i]
 	return
-
 
 }
 
+//NewVectorUnionTableReader ...
+func NewVectorUnionTableReader(vut []*UnionTable) (vutr *VectorUnionTableReader) {
+	vutr = &VectorUnionTableReader{}
+	vutr._vector = make([]*UnionTableReader, len(vut))
 
-func NewVectorUnionTableReader(v hybrids.VectorTableReader) Nextcorev1.VectorUnionTableReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorUnionTableReader{_vectorHybrid: v}
+	for i := 0; i < len(vut); i++ {
+		vutr._vector[i] = NewUnionTableReader(vut[i])
+	}
+	return
 }

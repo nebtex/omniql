@@ -7,7 +7,10 @@ type Resource struct {
     Metadata *Metadata `json:"metadata"`
     Fields []*Field `json:"fields"`
 }
-
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+)
 //Resource ...
 type Resource struct {
 
@@ -28,13 +31,13 @@ func (r *ResourceReader) RID() corev1.ResourceIDReader {
 }
 
 //Metadata ...
-func (r *ResourceReader) Metadata() corev1.MetadataReader {
+func (r *ResourceReader) Metadata() (mr corev1.MetadataReader, err error) {
 
 	if r.metadata != nil {
-		return r.metadata
+		mr  =  r.metadata
 	}
 
-	return nil
+	return
 }
 
 //Fields ...
@@ -48,22 +51,30 @@ func (r *ResourceReader) Fields() corev1.VectorFieldReader {
 }
 	
 //NewResourceReader ...
-func NewResourceReader(r *ResourceReader) corev1.ResourceReader{
+func NewResourceReader(r *Resource) *ResourceReader{
 	if r!=nil{
-		return &ResourceReader{_resource:r}
+		return &ResourceReader{
+		                                   _resource:r,
+metadata: NewMetadataReader(r.Metadata),
+		                                   }
 	}
 	return nil
 }
 
+//VectorResourceReader ...
 type VectorResourceReader struct {
     _vector  []*ResourceReader
 }
 
+//Len Returns the current size of this vector
 func (vr *VectorResourceReader) Len() (size int) {
     size = len(vr._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (vr *VectorResourceReader) Get(i int) (item corev1.ResourceReader, err error) {
 
 	if i < 0 {
@@ -82,10 +93,13 @@ func (vr *VectorResourceReader) Get(i int) (item corev1.ResourceReader, err erro
 
 }
 
+//NewVectorResourceReader ...
+func NewVectorResourceReader(vr []*Resource) (vrr *VectorResourceReader) {
+    vrr = &VectorResourceReader{}
+	vrr._vector = make([]*ResourceReader, len(vr))
 
-func NewVectorResourceReader(v hybrids.VectorTableReader) corev1.VectorResourceReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorResourceReader{_vectorHybrid: v}
+	for i := 0; i < len(vr); i++ {
+		vrr._vector[i] = NewResourceReader(vr[i])
+	}
+	return
 }

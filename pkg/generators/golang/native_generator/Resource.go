@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"github.com/nebtex/omnibuff/pkg/utils"
 	"text/template"
+	"github.com/nebtex/omnibuff/pkg/generators/golang"
 )
 
 type ResourceReaderGenerator struct {
@@ -82,10 +83,10 @@ func (r *ResourceReaderGenerator) Generate(wr io.Writer) (err error) {
 
 func (r *ResourceReaderGenerator) CreateRIDAccessor() (err error) {
 	tmpl, err := template.New("ResourceReaderGenerator::CreateRIDAccessor").
-		Funcs(r.trg.funcMap).Parse(`
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
 //RID get resource id
-func ({{ShortName}} *{{TableName .Table}}Reader) RID() {{.PackageName}}.ResourceIDReader {
-	return {{ShortName}}._rid
+func ({{ShortName (TableName .Table)}} *{{TableName .Table}}Reader) RID() {{.PackageName}}.ResourceIDReader {
+	return {{ShortName (TableName .Table)}}._rid
 }
 `)
 	if err != nil {

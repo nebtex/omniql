@@ -98,11 +98,10 @@ func (t *TableReaderGenerator) EndInterface() (err error) {
 }
 
 func (t *TableReaderGenerator) CreateAccessors() (err error) {
-	var i int32
 	var field corev1.FieldReader
 
 	//create Accessors
-	for i = 0; i < t.table.Fields().Len(); i++ {
+	for i := 0; i < t.table.Fields().Len(); i++ {
 		field, err = t.table.Fields().Get(i)
 		fieldNumber := uint16(i)
 		if err != nil {

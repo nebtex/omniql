@@ -1,5 +1,8 @@
 package Nextcorev1Native
-
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
 //EnumerationGroup ...
 type EnumerationGroup struct {
 
@@ -16,68 +19,79 @@ type EnumerationGroupReader struct {
 }
 
 //Name ...
-func (g *EnumerationGroupReader) Name() (value string) {
-	value = g._enumerationgroup.Name
+func (eg *EnumerationGroupReader) Name() (value string) {
+	value = eg._enumerationgroup.Name
 	return
 }
 
 //Documentation ...
-func (g *EnumerationGroupReader) Documentation() Nextcorev1.DocumentationReader {
+func (eg *EnumerationGroupReader) Documentation() (dr Nextcorev1.DocumentationReader, err error) {
 
-	if g.documentation != nil {
-		return g.documentation
+	if eg.documentation != nil {
+		dr  =  eg.documentation
 	}
 
-	return nil
+	return
 }
 
 //Items ...
-func (g *EnumerationGroupReader) Items() hybrids.VectorStringReader {
-	if g.items != nil {
-		return g.items
+func (eg *EnumerationGroupReader) Items() hybrids.VectorStringReader {
+	if eg.items != nil {
+		return eg.items
 	}
 	return nil
 }
 
 //NewEnumerationGroupReader ...
-func NewEnumerationGroupReader(g *EnumerationGroupReader) Nextcorev1.EnumerationGroupReader{
-	if g!=nil{
-		return &EnumerationGroupReader{_group:g}
+func NewEnumerationGroupReader(eg *EnumerationGroup) *EnumerationGroupReader{
+	if eg!=nil{
+		return &EnumerationGroupReader{
+		                                   _enumerationgroup:eg,
+documentation: NewDocumentationReader(g.Documentation),
+		                                   }
 	}
 	return nil
 }
 
+//VectorEnumerationGroupReader ...
 type VectorEnumerationGroupReader struct {
     _vector  []*EnumerationGroupReader
 }
 
-func (vg *VectorEnumerationGroupReader) Len() (size int) {
-    size = len(vg._vector)
+//Len Returns the current size of this vector
+func (veg *VectorEnumerationGroupReader) Len() (size int) {
+    size = len(veg._vector)
     return
 }
 
-func (vg *VectorEnumerationGroupReader) Get(i int) (item Nextcorev1.EnumerationGroupReader, err error) {
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
+func (veg *VectorEnumerationGroupReader) Get(i int) (item Nextcorev1.EnumerationGroupReader, err error) {
 
 	if i < 0 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vg._vector)}
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(veg._vector)}
 		return
 	}
 
-	if i > len(vg._vector)-1 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vg._vector)}
+	if i > len(veg._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(veg._vector)}
 		return
 	}
 
-	item = vg._vector[i]
+	item = veg._vector[i]
 	return
 
 
 }
 
+//NewVectorEnumerationGroupReader ...
+func NewVectorEnumerationGroupReader(veg []*EnumerationGroup) (vegr *VectorEnumerationGroupReader) {
+    vegr = &VectorEnumerationGroupReader{}
+	vegr._vector = make([]*EnumerationGroupReader, len(veg))
 
-func NewVectorEnumerationGroupReader(v hybrids.VectorTableReader) Nextcorev1.VectorEnumerationGroupReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorEnumerationGroupReader{_vectorHybrid: v}
+	for i := 0; i < len(veg); i++ {
+		vegr._vector[i] = NewEnumerationGroupReader(veg[i])
+	}
+	return
 }

@@ -21,8 +21,8 @@ type OqlIDValueReader interface {
 }
 
 type VectorFieldReader interface {
-	Len() int32
-	Get(index int32) (FieldReader, error)
+	Len() int
+	Get(index int) (FieldReader, error)
 }
 
 type MetadataReader interface {

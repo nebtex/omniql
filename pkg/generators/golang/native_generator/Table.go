@@ -19,7 +19,6 @@ type TableReaderGenerator struct {
 	interfacePackage      string
 	interfacePackageShort string
 	zap                   *zap.Logger
-	funcMap               map[string]interface{}
 	packagesBuffer        *bytes.Buffer
 	structBuffer          *bytes.Buffer
 	implementationBuffer  *bytes.Buffer
@@ -35,30 +34,6 @@ func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Lo
 	)
 
 	t := &TableReaderGenerator{table: table, zap: zap}
-	t.funcMap = map[string]interface{}{
-		"TableName":      utils.TableName,
-		"GetPackageName": utils.GolangGetPackageName,
-		"ShortName":      t.ShortName,
-		"ToLower":        strings.ToLower,
-		"Capitalize":     strings.Title,
-		"GoDoc": func(name string, d corev1.DocumentationReader) (value string) {
-			if d != nil {
-				if d.Short() == "" && d.Long() == "" {
-					return "//" + strings.Title(name) + " ..."
-				}
-
-				if d.Short() != "" && d.Long() != "" {
-					return strings.Title(name) + " " + d.Short() + "\n" + d.Long()
-				}
-				if d.Short() != "" {
-					return utils.CommentGolang(strings.Title(name) + " " + d.Short())
-				}
-				if d.Long() != "" {
-					return utils.CommentGolang(strings.Title(name) + " " + d.Long())
-				}
-			}
-			return "//" + strings.Title(name) + " ..."
-		}}
 	t.functionsBuffer = bytes.NewBuffer(nil)
 	t.implementationBuffer = bytes.NewBuffer(nil)
 	t.structBuffer = bytes.NewBuffer(nil)
@@ -87,11 +62,35 @@ func (t *TableSpec) {{.Field.Name}}() (value {{ToNativeType .Field.Type}}, ok bo
 }
 func (t *TableReaderGenerator) CreateAllocator() (err error) {
 
-	tmpl, err := template.New("TableReaderGenerator::CreateAllocator").Funcs(golang.DefaultTemplateFunctions).Parse(`
+	tmpl, err := template.New("TableReaderGenerator::CreateAllocator").
+		Funcs(golang.DefaultTemplateFunctions).Funcs(map[string]interface{}{
+		"DeepInit": func(reader corev1.TableReader) (value string, err error) {
+			var field corev1.FieldReader
+			fields := reader.Fields()
+			for i := 0; i < fields.Len(); i++ {
+				field, err = fields.Get(i)
+				if err != nil {
+					return
+				}
+				pid := corev1Native.NewIDReader([]byte(t.table.Metadata().Application()+"/"+field.Type()), false)
+				if pid == nil {
+					continue
+				}
+				if pid.Kind() == "Table" {
+					value += fmt.Sprintf("\n%s: %s,", strings.ToLower(field.Name()), fmt.Sprintf("New%sReader(%s.%s)", utils.TableNameFromID(pid), golang.ShortName(reader.Metadata().Name()), strings.Title(field.Name())))
+
+				}
+
+			}
+			return
+		},
+	}).Parse(`
 //New{{TableName .Table}}Reader ...
-func New{{TableName .Table}}Reader({{ShortName .Table.Metadata.Name}} *{{TableName .Table}}Reader) {{.PackageName}}.{{TableName .Table}}Reader{
-	if {{ShortName .Table.Metadata.Name}}!=nil{
-		return &{{TableName .Table}}Reader{_{{ToLower .Table.Metadata.Name}}:{{ShortName .Table.Metadata.Name}}}
+func New{{TableName .Table}}Reader({{ShortName (TableName .Table)}} *{{TableName .Table}}) *{{TableName .Table}}Reader{
+	if {{ShortName  (TableName .Table)}}!=nil{
+		return &{{TableName .Table}}Reader{
+		                                   _{{ToLower (TableName .Table)}}:{{ShortName (TableName .Table)}},{{DeepInit .Table}}
+		                                   }
 	}
 	return nil
 }`)
@@ -114,7 +113,7 @@ func (t *TableReaderGenerator) Table() corev1.TableReader {
 }
 
 func (t *TableReaderGenerator) StartStruct() (err error) {
-	tmpl, err := template.New("TableReaderGenerator::Native::StartStruct").Funcs(t.funcMap).Parse(`
+	tmpl, err := template.New("TableReaderGenerator::Native::StartStruct").Funcs(golang.DefaultTemplateFunctions).Parse(`
 {{GoDoc (print (TableName .) "Reader") .Metadata.Documentation}}
 type {{TableName .}}Reader struct {
     _{{ToLower (TableName .)}} *{{TableName .}}`)
@@ -136,11 +135,10 @@ func (t *TableReaderGenerator) EndStruct() (err error) {
 }
 
 func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
-	var i int32
 	var field corev1.FieldReader
 
 	//create Accessors
-	for i = 0; i < t.table.Fields().Len(); i++ {
+	for i := 0; i < t.table.Fields().Len(); i++ {
 		field, err = t.table.Fields().Get(i)
 		fieldNumber := offset + uint16(i)
 		if err != nil {
@@ -267,11 +265,11 @@ func (t *TableReaderGenerator) Generate(wr io.Writer) (err error) {
 //resource
 func (t *TableReaderGenerator) StringAccessor(freader corev1.FieldReader, fn uint16) (err error) {
 
-	tmpl, err := template.New("StringAccessor").
-		Funcs(t.funcMap).Parse(`
+	tmpl, err := template.New("TableReaderGenerator::Native::StringAccessor").
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
 {{GoDoc .Field.Name .Field.Documentation}}
-func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (value string) {
-	value = {{ShortName}}._{{ToLower (TableName .Table)}}.{{Capitalize .Field.Name}}
+func ({{ShortName (TableName .Table)}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() (value string) {
+	value = {{ShortName (TableName .Table)}}._{{ToLower (TableName .Table)}}.{{Capitalize .Field.Name}}
 	return
 }
 `)
@@ -331,11 +329,11 @@ func (t *TableReaderGenerator) VectorStringAccessor(freader corev1.FieldReader, 
 		return
 	}
 	tmpl, err := template.New("TableReaderGenerator::Native::VectorStringAccessor").
-		Funcs(t.funcMap).Parse(`
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
 {{GoDoc .Field.Name .Field.Documentation}}
-func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() hybrids.VectorStringReader {
-	if {{ShortName}}.{{ToLower .Field.Name}} != nil {
-		return {{ShortName}}.{{ToLower .Field.Name}}
+func ({{ShortName (TableName .Table)}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() hybrids.VectorStringReader {
+	if {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}} != nil {
+		return {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}}
 	}
 	return nil
 }
@@ -360,13 +358,13 @@ func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, f
 		return
 	}
 
-	tmpl, err := template.New("StringAccessor").
-		Funcs(t.funcMap).Parse(`
+	tmpl, err := template.New("TableReaderGenerator::Native::VectorTableAccessor").
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
 {{GoDoc .Field.Name .Field.Documentation}}
-func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{.PackageName}}.{{.TypeTableName}}Reader {
+func ({{ShortName (TableName .Table)}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{.PackageName}}.{{.TypeTableName}}Reader {
 
-	if {{ShortName}}.{{ToLower .Field.Name}} != nil {
-		return {{ShortName}}.{{ToLower .Field.Name}}
+	if {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}} != nil {
+		return {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}}
 	}
 
 	return nil
@@ -397,15 +395,15 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint
 	}
 
 	tmpl, err := template.New("TableReaderGenerator::Native::TableAccessor").
-		Funcs(t.funcMap).Parse(`
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
 {{GoDoc .Field.Name .Field.Documentation}}
-func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{.PackageName}}.{{.TypeTableName}}Reader {
+func ({{ShortName (TableName .Table)}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() ({{ShortName (print .TypeTableName "Reader")}} {{.PackageName}}.{{.TypeTableName}}Reader, err error) {
 
-	if {{ShortName}}.{{ToLower .Field.Name}} != nil {
-		return {{ShortName}}.{{ToLower .Field.Name}}
+	if {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}} != nil {
+		{{ShortName (print .TypeTableName "Reader")}}  =  {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}}
 	}
 
-	return nil
+	return
 }
 `)
 	if err != nil {
@@ -427,43 +425,53 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{
 }
 
 func (t *TableReaderGenerator) CreateVector() (err error) {
+	t.imports.AddImport("github.com/nebtex/hybrids/golang/hybrids")
+	t.imports.AddImport(t.interfacePackage)
 
 	tmpl, err := template.New("TableReaderGenerator::GenerateVector").
-		Funcs(t.funcMap).Parse(`
+		Funcs(golang.DefaultTemplateFunctions).Parse(`
 
+//Vector{{TableName .Table}}Reader ...
 type Vector{{TableName .Table}}Reader struct {
     _vector  []*{{TableName .Table}}Reader
 }
 
-func (v{{ShortName}} *Vector{{TableName .Table}}Reader) Len() (size int) {
-    size = len(v{{ShortName}}._vector)
+//Len Returns the current size of this vector
+func (v{{ShortName (TableName .Table)}} *Vector{{TableName .Table}}Reader) Len() (size int) {
+    size = len(v{{ShortName (TableName .Table)}}._vector)
     return
 }
 
-func (v{{ShortName}} *Vector{{TableName .Table}}Reader) Get(i int) (item {{.PackageName}}.{{TableName .Table}}Reader, err error) {
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
+func (v{{ShortName (TableName .Table)}} *Vector{{TableName .Table}}Reader) Get(i int) (item {{.PackageName}}.{{TableName .Table}}Reader, err error) {
 
 	if i < 0 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName}}._vector)}
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName (TableName .Table)}}._vector)}
 		return
 	}
 
-	if i > len(v{{ShortName}}._vector)-1 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName}}._vector)}
+	if i > len(v{{ShortName (TableName .Table)}}._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName (TableName .Table)}}._vector)}
 		return
 	}
 
-	item = v{{ShortName}}._vector[i]
+	item = v{{ShortName (TableName .Table)}}._vector[i]
 	return
 
 
 }
 
+//NewVector{{TableName .Table}}Reader ...
+func NewVector{{TableName .Table}}Reader(v{{ShortName (TableName .Table)}} []*{{TableName .Table}}) (v{{ShortName (print (TableName .Table) "Reader")}} *Vector{{TableName .Table}}Reader) {
+    v{{ShortName (print (TableName .Table) "Reader")}} = &Vector{{TableName .Table}}Reader{}
+	v{{ShortName (print (TableName .Table) "Reader")}}._vector = make([]*{{TableName .Table}}Reader, len(v{{ShortName (TableName .Table)}}))
 
-func NewVector{{TableName .Table}}Reader(v hybrids.VectorTableReader) {{.PackageName}}.Vector{{TableName .Table}}Reader {
-    if v == nil {
-        return nil
-    }
-    return &Vector{{TableName .Table}}Reader{_vectorHybrid: v}
+	for i := 0; i < len(v{{ShortName (TableName .Table)}}); i++ {
+		v{{ShortName (print (TableName .Table) "Reader")}}._vector[i] = New{{TableName .Table}}Reader(v{{ShortName (TableName .Table)}}[i])
+	}
+	return
 }
 `)
 

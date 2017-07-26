@@ -1,5 +1,8 @@
 package Nextcorev1Native
-
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+)
 //Field ...
 type Field struct {
 
@@ -28,13 +31,13 @@ func (f *FieldReader) Type() (value string) {
 }
 
 //Documentation ...
-func (f *FieldReader) Documentation() Nextcorev1.DocumentationReader {
+func (f *FieldReader) Documentation() (dr Nextcorev1.DocumentationReader, err error) {
 
 	if f.documentation != nil {
-		return f.documentation
+		dr  =  f.documentation
 	}
 
-	return nil
+	return
 }
 
 //Default String representation of the default value
@@ -44,22 +47,30 @@ func (f *FieldReader) Default() (value string) {
 }
 
 //NewFieldReader ...
-func NewFieldReader(f *FieldReader) Nextcorev1.FieldReader{
+func NewFieldReader(f *Field) *FieldReader{
 	if f!=nil{
-		return &FieldReader{_field:f}
+		return &FieldReader{
+		                                   _field:f,
+documentation: NewDocumentationReader(f.Documentation),
+		                                   }
 	}
 	return nil
 }
 
+//VectorFieldReader ...
 type VectorFieldReader struct {
     _vector  []*FieldReader
 }
 
+//Len Returns the current size of this vector
 func (vf *VectorFieldReader) Len() (size int) {
     size = len(vf._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (vf *VectorFieldReader) Get(i int) (item Nextcorev1.FieldReader, err error) {
 
 	if i < 0 {
@@ -78,10 +89,13 @@ func (vf *VectorFieldReader) Get(i int) (item Nextcorev1.FieldReader, err error)
 
 }
 
+//NewVectorFieldReader ...
+func NewVectorFieldReader(vf []*Field) (vfr *VectorFieldReader) {
+    vfr = &VectorFieldReader{}
+	vfr._vector = make([]*FieldReader, len(vf))
 
-func NewVectorFieldReader(v hybrids.VectorTableReader) Nextcorev1.VectorFieldReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorFieldReader{_vectorHybrid: v}
+	for i := 0; i < len(vf); i++ {
+		vfr._vector[i] = NewFieldReader(vf[i])
+	}
+	return
 }

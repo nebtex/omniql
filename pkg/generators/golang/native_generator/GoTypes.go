@@ -87,11 +87,10 @@ func (g *GoTypeGenerator) Generate(wr io.Writer) (err error) {
 }
 
 func (t *GoTypeGenerator) CreateAccessors() (err error) {
-	var i int32
 	var field corev1.FieldReader
 
 	//create Accessors
-	for i = 0; i < t.table.Fields().Len(); i++ {
+	for i := 0; i < t.table.Fields().Len(); i++ {
 		field, err = t.table.Fields().Get(i)
 		if err != nil {
 			t.zap.Error(err.Error())

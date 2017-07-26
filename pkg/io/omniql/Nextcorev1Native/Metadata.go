@@ -1,6 +1,7 @@
 package Nextcorev1Native
 import(
     "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+    "github.com/nebtex/hybrids/golang/hybrids"
 )
 //Metadata ...
 type Metadata struct {
@@ -48,32 +49,40 @@ func (m *MetadataReader) Parent() (value string) {
 }
 
 //Documentation ...
-func (m *MetadataReader) Documentation() Nextcorev1.DocumentationReader {
+func (m *MetadataReader) Documentation() (dr Nextcorev1.DocumentationReader, err error) {
 
 	if m.documentation != nil {
-		return m.documentation
+		dr  =  m.documentation
 	}
 
-	return nil
+	return
 }
 
 //NewMetadataReader ...
-func NewMetadataReader(m *MetadataReader) Nextcorev1.MetadataReader{
+func NewMetadataReader(m *Metadata) *MetadataReader{
 	if m!=nil{
-		return &MetadataReader{_metadata:m}
+		return &MetadataReader{
+		                                   _metadata:m,
+documentation: NewDocumentationReader(m.Documentation),
+		                                   }
 	}
 	return nil
 }
 
+//VectorMetadataReader ...
 type VectorMetadataReader struct {
     _vector  []*MetadataReader
 }
 
+//Len Returns the current size of this vector
 func (vm *VectorMetadataReader) Len() (size int) {
     size = len(vm._vector)
     return
 }
 
+//Get the item in the position i, if i < Len(),
+//if item does not exist should return the default value for the underlying data type
+//when i > Len() should return an VectorInvalidIndexError
 func (vm *VectorMetadataReader) Get(i int) (item Nextcorev1.MetadataReader, err error) {
 
 	if i < 0 {
@@ -92,10 +101,13 @@ func (vm *VectorMetadataReader) Get(i int) (item Nextcorev1.MetadataReader, err 
 
 }
 
+//NewVectorMetadataReader ...
+func NewVectorMetadataReader(vm []*Metadata) (vmr *VectorMetadataReader) {
+    vmr = &VectorMetadataReader{}
+	vmr._vector = make([]*MetadataReader, len(vm))
 
-func NewVectorMetadataReader(v hybrids.VectorTableReader) Nextcorev1.VectorMetadataReader {
-    if v == nil {
-        return nil
-    }
-    return &VectorMetadataReader{_vectorHybrid: v}
+	for i := 0; i < len(vm); i++ {
+		vmr._vector[i] = NewMetadataReader(vm[i])
+	}
+	return
 }

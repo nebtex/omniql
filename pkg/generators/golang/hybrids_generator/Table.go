@@ -127,11 +127,10 @@ func (t *TableReaderGenerator) EndStruct() (err error) {
 }
 
 func (t *TableReaderGenerator) CreateAccessors(offset uint16) (err error) {
-	var i int32
 	var field corev1.FieldReader
 
 	//create Accessors
-	for i = 0; i < t.table.Fields().Len(); i++ {
+	for i := 0; i < t.table.Fields().Len(); i++ {
 		field, err = t.table.Fields().Get(i)
 		fieldNumber := offset + uint16(i)
 		if err != nil {
