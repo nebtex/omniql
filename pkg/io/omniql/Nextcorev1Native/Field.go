@@ -30,6 +30,8 @@ func (f *FieldReader) Type() (value string) {
 	return
 }
 
+
+
 //Documentation ...
 func (f *FieldReader) Documentation() (dr Nextcorev1.DocumentationReader, err error) {
 
@@ -56,6 +58,8 @@ documentation: NewDocumentationReader(f.Documentation),
 	}
 	return nil
 }
+
+
 
 //VectorFieldReader ...
 type VectorFieldReader struct {

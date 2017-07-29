@@ -24,6 +24,8 @@ func (eg *EnumerationGroupReader) Name() (value string) {
 	return
 }
 
+
+
 //Documentation ...
 func (eg *EnumerationGroupReader) Documentation() (dr Nextcorev1.DocumentationReader, err error) {
 
@@ -47,11 +49,13 @@ func NewEnumerationGroupReader(eg *EnumerationGroup) *EnumerationGroupReader{
 	if eg!=nil{
 		return &EnumerationGroupReader{
 		                                   _enumerationgroup:eg,
-documentation: NewDocumentationReader(g.Documentation),
+documentation: NewDocumentationReader(eg.Documentation),
 		                                   }
 	}
 	return nil
 }
+
+
 
 //VectorEnumerationGroupReader ...
 type VectorEnumerationGroupReader struct {

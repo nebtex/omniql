@@ -1,38 +1,39 @@
 package Nextcorev1Native
-
-import (
-	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
 )
-
 //UnionResource ...
 type UnionResource struct {
+
 }
 
 //UnionResourceReader ...
 type UnionResourceReader struct {
-	_unionresource *UnionResource
+    _unionresource *UnionResource
 }
 
 //NewUnionResourceReader ...
-func NewUnionResourceReader(ur *UnionResource) *UnionResourceReader {
-	if ur != nil {
+func NewUnionResourceReader(ur *UnionResource) *UnionResourceReader{
+	if ur!=nil{
 		return &UnionResourceReader{
-			_unionresource: ur,
-		}
+		                                   _unionresource:ur,
+		                                   }
 	}
 	return nil
 }
 
+
+
 //VectorUnionResourceReader ...
 type VectorUnionResourceReader struct {
-	_vector []*UnionResourceReader
+    _vector  []*UnionResourceReader
 }
 
 //Len Returns the current size of this vector
 func (vur *VectorUnionResourceReader) Len() (size int) {
-	size = len(vur._vector)
-	return
+    size = len(vur._vector)
+    return
 }
 
 //Get the item in the position i, if i < Len(),
@@ -53,11 +54,12 @@ func (vur *VectorUnionResourceReader) Get(i int) (item Nextcorev1.UnionResourceR
 	item = vur._vector[i]
 	return
 
+
 }
 
 //NewVectorUnionResourceReader ...
 func NewVectorUnionResourceReader(vur []*UnionResource) (vurr *VectorUnionResourceReader) {
-	vurr = &VectorUnionResourceReader{}
+    vurr = &VectorUnionResourceReader{}
 	vurr._vector = make([]*UnionResourceReader, len(vur))
 
 	for i := 0; i < len(vur); i++ {

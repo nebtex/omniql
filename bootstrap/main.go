@@ -18,9 +18,9 @@ import (
 )
 
 type YamlFile struct {
-	Api   string `json:"api"`
-	RID string `json:"rid"`
-	Spec  interface{} `json:"spec"`
+	Api  string `json:"api"`
+	RID  string `json:"rid"`
+	Spec interface{} `json:"spec"`
 }
 
 type Application struct {
@@ -165,7 +165,7 @@ func WriteNative(app *Application, baseDir string, packageName string, logger *z
 
 	for _, resource := range app.Resources {
 
-		trg := native_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
+		trg := native_generator.NewResourceReaderGenerator(corev1Native.NewResourceReader(resource), "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1", logger)
 		//create file
 		f, err := os.Create(baseDir + resource.Metadata.Name + ".go")
 		CheckPanic(err)
@@ -181,6 +181,35 @@ func WriteNative(app *Application, baseDir string, packageName string, logger *z
 
 func WriteInterface(app *Application, baseDir string, packageName string, logger *zap.Logger) {
 
+	//create base file
+	f, err := os.Create(baseDir + "base.go")
+	CheckPanic(err)
+	_, err = f.Write([]byte("package " + packageName + "\n"))
+	CheckPanic(err)
+
+	_, err = f.Write([]byte(`
+//ShardHolder ...
+type ShardHolder interface {
+    Hold(val bool)
+}
+
+
+//ShardDisposer ...
+type ShardDisposer interface {
+	Dispose(val bool)
+}
+
+//ShardHolderAndDisposer ...
+type ShardHolderAndDisposer interface {
+	ShardHolder
+	ShardDisposer
+}
+	`))
+	CheckPanic(err)
+
+	//close
+	f.Close()
+
 	for _, table := range app.Tables {
 
 		trg := interface_generator.NewTableReaderGenerator(corev1Native.NewTableReader(table), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
@@ -191,6 +220,11 @@ func WriteInterface(app *Application, baseDir string, packageName string, logger
 		CheckPanic(err)
 
 		err = trg.Generate(f)
+		CheckPanic(err)
+
+		// generate shards
+		shardG := interface_generator.NewShardGenerator(corev1Native.NewTableReader(table), logger)
+		err = shardG.Generate(f)
 		CheckPanic(err)
 
 		//close
@@ -207,6 +241,11 @@ func WriteInterface(app *Application, baseDir string, packageName string, logger
 		CheckPanic(err)
 
 		err = trg.Generate(f)
+		CheckPanic(err)
+
+		// generate shards
+		shardG := interface_generator.NewShardGenerator(corev1Native.NewResourceReader(resource), logger)
+		err = shardG.Generate(f)
 		CheckPanic(err)
 
 		f.Close()
@@ -231,26 +270,26 @@ func WriteInterface(app *Application, baseDir string, packageName string, logger
 func main() {
 	app, err := Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")
 	CheckPanic(err)
-/*
-	//generate application types enum
-	appEnum := `
-api: io.omniql.core.v1
-oqlid: io.omniql.core.v1/Enumeration/BasicTypes
-spec:
-  meta:
-    application: io.omniql.core.v1
-    kind: Enumeration
-    name: ApplicationType
-  kind: UnsignedShort
-  items:`
-	for _, r := range app.Resources {
-		appEnum += "\n  - name: " + r.Meta.Name
-	}
-	for _, t := range app.Tables {
-		appEnum += "\n  - name: " +   utils.TableName(corev1Native.NewTableReader(t))
-	}
-	ioutil.WriteFile("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf/enumeration/ApplicationType.yml", []byte(appEnum), os.ModePerm)
-	app, _ = Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")*/
+	/*
+		//generate application types enum
+		appEnum := `
+	api: io.omniql.core.v1
+	oqlid: io.omniql.core.v1/Enumeration/BasicTypes
+	spec:
+	  meta:
+		application: io.omniql.core.v1
+		kind: Enumeration
+		name: ApplicationType
+	  kind: UnsignedShort
+	  items:`
+		for _, r := range app.Resources {
+			appEnum += "\n  - name: " + r.Meta.Name
+		}
+		for _, t := range app.Tables {
+			appEnum += "\n  - name: " +   utils.TableName(corev1Native.NewTableReader(t))
+		}
+		ioutil.WriteFile("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf/enumeration/ApplicationType.yml", []byte(appEnum), os.ModePerm)
+		app, _ = Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")*/
 	baseDir := "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/corev1Hybrids/"
 
 	logger, _ := zap.NewProduction()

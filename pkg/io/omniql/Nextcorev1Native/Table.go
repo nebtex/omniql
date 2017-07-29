@@ -1,19 +1,12 @@
 package Nextcorev1Native
-
-//Table ...
-type Table struct {
-
-    RID []byte `json:"rid"`
-    Metadata *Metadata `json:"metadata"`
-    Fields []*Field `json:"fields"`
-}
 import(
     "github.com/nebtex/hybrids/golang/hybrids"
-    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
 )
 //Table ...
 type Table struct {
 
+    RID []byte `json:"rid"`
     Metadata *Metadata `json:"metadata"`
     Fields []*Field `json:"fields"`
 }
@@ -26,12 +19,14 @@ type TableReader struct {
 }
 
 //RID get resource id
-func (t *TableReader) RID() corev1.ResourceIDReader {
+func (t *TableReader) RID() Nextcorev1.ResourceIDReader {
 	return t._rid
 }
 
+
+
 //Metadata ...
-func (t *TableReader) Metadata() (mr corev1.MetadataReader, err error) {
+func (t *TableReader) Metadata() (mr Nextcorev1.MetadataReader, err error) {
 
 	if t.metadata != nil {
 		mr  =  t.metadata
@@ -41,7 +36,7 @@ func (t *TableReader) Metadata() (mr corev1.MetadataReader, err error) {
 }
 
 //Fields ...
-func (t *TableReader) Fields() corev1.VectorFieldReader {
+func (t *TableReader) Fields() Nextcorev1.VectorFieldReader {
 
 	if t.fields != nil {
 		return t.fields
@@ -61,6 +56,8 @@ metadata: NewMetadataReader(t.Metadata),
 	return nil
 }
 
+
+
 //VectorTableReader ...
 type VectorTableReader struct {
     _vector  []*TableReader
@@ -75,7 +72,7 @@ func (vt *VectorTableReader) Len() (size int) {
 //Get the item in the position i, if i < Len(),
 //if item does not exist should return the default value for the underlying data type
 //when i > Len() should return an VectorInvalidIndexError
-func (vt *VectorTableReader) Get(i int) (item corev1.TableReader, err error) {
+func (vt *VectorTableReader) Get(i int) (item Nextcorev1.TableReader, err error) {
 
 	if i < 0 {
 		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(vt._vector)}

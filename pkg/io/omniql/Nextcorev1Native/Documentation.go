@@ -37,6 +37,8 @@ func NewDocumentationReader(d *Documentation) *DocumentationReader{
 	return nil
 }
 
+
+
 //VectorDocumentationReader ...
 type VectorDocumentationReader struct {
     _vector  []*DocumentationReader

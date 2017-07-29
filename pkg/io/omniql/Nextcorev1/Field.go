@@ -28,3 +28,29 @@ type VectorFieldReader interface {
     //when i > Len() should return an VectorInvalidIndexError
     Get(i int) (item FieldReader, err error)
 }
+
+//FieldShard ...
+type FieldShard interface {
+
+    Name() ShardHolderAndDisposer
+    Type() ShardHolderAndDisposer
+    Documentation(func(DocumentationShard)) ShardHolderAndDisposer
+    Default() ShardHolderAndDisposer
+}
+
+//FieldWildcardShard ...
+func FieldWildcardShard(s FieldShard){
+
+    s.Name()
+    s.Type()
+    s.Default()
+}
+
+//FieldForwardShard ...
+func FieldForwardShard(s FieldShard){
+
+    s.Name()
+    s.Type()
+    s.Documentation(DocumentationForwardShard)
+    s.Default()
+}

@@ -22,3 +22,23 @@ type VectorEnumerationItemReader interface {
     //when i > Len() should return an VectorInvalidIndexError
     Get(i int) (item EnumerationItemReader, err error)
 }
+
+//EnumerationItemShard ...
+type EnumerationItemShard interface {
+
+    Name() ShardHolderAndDisposer
+    Documentation(func(DocumentationShard)) ShardHolderAndDisposer
+}
+
+//EnumerationItemWildcardShard ...
+func EnumerationItemWildcardShard(s EnumerationItemShard){
+
+    s.Name()
+}
+
+//EnumerationItemForwardShard ...
+func EnumerationItemForwardShard(s EnumerationItemShard){
+
+    s.Name()
+    s.Documentation(DocumentationForwardShard)
+}

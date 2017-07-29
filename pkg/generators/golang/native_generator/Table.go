@@ -13,7 +13,6 @@ import (
 	"github.com/nebtex/omnibuff/pkg/generators/golang"
 )
 
-//TODO: create initializators
 type TableReaderGenerator struct {
 	table                 corev1.TableReader
 	interfacePackage      string
@@ -24,6 +23,7 @@ type TableReaderGenerator struct {
 	implementationBuffer  *bytes.Buffer
 	functionsBuffer       *bytes.Buffer
 	imports               *golang.Imports
+	gt                    *GoTypeGenerator
 }
 
 func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Logger) *TableReaderGenerator {
@@ -41,25 +41,11 @@ func NewTableReaderGenerator(table corev1.TableReader, ip string, logger *zap.Lo
 	items := strings.Split(ip, "/")
 	t.interfacePackageShort = items[len(items)-1]
 	t.imports = golang.NewImports()
+	t.gt = NewGoTypeGenerator(t.table, t.zap)
 
 	return t
 }
 
-func ScalarFieldReaderAccessor(freader corev1.FieldReader, wr io.Writer) (err error) {
-
-	tmpl, err := template.New("ScalarFieldReaderAccessor").Parse(`
-func (t *TableSpec) {{.Field.Name}}() (value {{ToNativeType .Field.Type}}, ok bool) {
-    value, ok := t.table.{{.Field.Type}}()
-    if !ok{
-		value = {{.Field.Default}}f
-    }
-}`)
-	if err != nil {
-		return
-	}
-	err = tmpl.Execute(wr, nil)
-	return
-}
 func (t *TableReaderGenerator) CreateAllocator() (err error) {
 
 	tmpl, err := template.New("TableReaderGenerator::CreateAllocator").
@@ -77,7 +63,7 @@ func (t *TableReaderGenerator) CreateAllocator() (err error) {
 					continue
 				}
 				if pid.Kind() == "Table" {
-					value += fmt.Sprintf("\n%s: %s,", strings.ToLower(field.Name()), fmt.Sprintf("New%sReader(%s.%s)", utils.TableNameFromID(pid), golang.ShortName(reader.Metadata().Name()), strings.Title(field.Name())))
+					value += fmt.Sprintf("\n%s: %s,", strings.ToLower(field.Name()), fmt.Sprintf("New%sReader(%s.%s)", utils.TableNameFromID(pid), golang.ShortName(utils.TableName(reader)), strings.Title(field.Name())))
 
 				}
 
@@ -204,8 +190,7 @@ func (t *TableReaderGenerator) FlushBuffers(wr io.Writer) (err error) {
 		return err
 	}
 
-	gt := NewGoTypeGenerator(t.table, t.zap)
-	err = gt.Generate(wr)
+	err = t.gt.Generate(wr)
 	if err != nil {
 		return err
 	}
@@ -396,11 +381,13 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, fn uint
 
 	tmpl, err := template.New("TableReaderGenerator::Native::TableAccessor").
 		Funcs(golang.DefaultTemplateFunctions).Parse(`
+{{$table_name:=(TableName .Table)}}
+{{$short_name:=(ShortName $table_name)}}
 {{GoDoc .Field.Name .Field.Documentation}}
-func ({{ShortName (TableName .Table)}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() ({{ShortName (print .TypeTableName "Reader")}} {{.PackageName}}.{{.TypeTableName}}Reader, err error) {
+func ({{$short_name}} *{{$table_name}}Reader) {{Capitalize .Field.Name}}() ({{ShortName (print .TypeTableName "Reader")}} {{.PackageName}}.{{.TypeTableName}}Reader, err error) {
 
-	if {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}} != nil {
-		{{ShortName (print .TypeTableName "Reader")}}  =  {{ShortName (TableName .Table)}}.{{ToLower .Field.Name}}
+	if {{$short_name}}.{{ToLower .Field.Name}} != nil {
+		{{ShortName (print .TypeTableName "Reader")}}  =  {{$short_name}}.{{ToLower .Field.Name}}
 	}
 
 	return
@@ -430,46 +417,48 @@ func (t *TableReaderGenerator) CreateVector() (err error) {
 
 	tmpl, err := template.New("TableReaderGenerator::GenerateVector").
 		Funcs(golang.DefaultTemplateFunctions).Parse(`
+{{$table_name:=(TableName .Table)}}
+{{$short_name:=(ShortName $table_name)}}
 
-//Vector{{TableName .Table}}Reader ...
-type Vector{{TableName .Table}}Reader struct {
-    _vector  []*{{TableName .Table}}Reader
+//Vector{{$table_name}}Reader ...
+type Vector{{$table_name}}Reader struct {
+    _vector  []*{{$table_name}}Reader
 }
 
 //Len Returns the current size of this vector
-func (v{{ShortName (TableName .Table)}} *Vector{{TableName .Table}}Reader) Len() (size int) {
-    size = len(v{{ShortName (TableName .Table)}}._vector)
+func (v{{$short_name}} *Vector{{$table_name}}Reader) Len() (size int) {
+    size = len(v{{$short_name}}._vector)
     return
 }
 
 //Get the item in the position i, if i < Len(),
 //if item does not exist should return the default value for the underlying data type
 //when i > Len() should return an VectorInvalidIndexError
-func (v{{ShortName (TableName .Table)}} *Vector{{TableName .Table}}Reader) Get(i int) (item {{.PackageName}}.{{TableName .Table}}Reader, err error) {
+func (v{{$short_name}} *Vector{{$table_name}}Reader) Get(i int) (item {{.PackageName}}.{{$table_name}}Reader, err error) {
 
 	if i < 0 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName (TableName .Table)}}._vector)}
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{$short_name}}._vector)}
 		return
 	}
 
-	if i > len(v{{ShortName (TableName .Table)}}._vector)-1 {
-		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{ShortName (TableName .Table)}}._vector)}
+	if i > len(v{{$short_name}}._vector)-1 {
+		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(v{{$short_name}}._vector)}
 		return
 	}
 
-	item = v{{ShortName (TableName .Table)}}._vector[i]
+	item = v{{$short_name}}._vector[i]
 	return
 
 
 }
 
-//NewVector{{TableName .Table}}Reader ...
-func NewVector{{TableName .Table}}Reader(v{{ShortName (TableName .Table)}} []*{{TableName .Table}}) (v{{ShortName (print (TableName .Table) "Reader")}} *Vector{{TableName .Table}}Reader) {
-    v{{ShortName (print (TableName .Table) "Reader")}} = &Vector{{TableName .Table}}Reader{}
-	v{{ShortName (print (TableName .Table) "Reader")}}._vector = make([]*{{TableName .Table}}Reader, len(v{{ShortName (TableName .Table)}}))
+//NewVector{{$table_name}}Reader ...
+func NewVector{{$table_name}}Reader(v{{$short_name}} []*{{$table_name}}) (v{{ShortName (print $table_name "Reader")}} *Vector{{$table_name}}Reader) {
+    v{{ShortName (print $table_name "Reader")}} = &Vector{{$table_name}}Reader{}
+	v{{ShortName (print $table_name "Reader")}}._vector = make([]*{{$table_name}}Reader, len(v{{$short_name}}))
 
-	for i := 0; i < len(v{{ShortName (TableName .Table)}}); i++ {
-		v{{ShortName (print (TableName .Table) "Reader")}}._vector[i] = New{{TableName .Table}}Reader(v{{ShortName (TableName .Table)}}[i])
+	for i := 0; i < len(v{{$short_name}}); i++ {
+		v{{ShortName (print $table_name "Reader")}}._vector[i] = New{{$table_name}}Reader(v{{$short_name}}[i])
 	}
 	return
 }

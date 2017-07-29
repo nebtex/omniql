@@ -1,21 +1,12 @@
 package Nextcorev1Native
-
-//Enumeration ...
-type Enumeration struct {
-
-    RID []byte `json:"rid"`
-    Metadata *Metadata `json:"metadata"`
-    Kind string `json:"kind"`
-    Items []*EnumerationItem `json:"items"`
-    Groups []*EnumerationGroup `json:"groups"`
-}
 import(
-    "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
     "github.com/nebtex/hybrids/golang/hybrids"
 )
 //Enumeration ...
 type Enumeration struct {
 
+    RID []byte `json:"rid"`
     Metadata *Metadata `json:"metadata"`
     Kind string `json:"kind"`
     Items []*EnumerationItem `json:"items"`
@@ -31,12 +22,14 @@ type EnumerationReader struct {
 }
 
 //RID get resource id
-func (e *EnumerationReader) RID() corev1.ResourceIDReader {
+func (e *EnumerationReader) RID() Nextcorev1.ResourceIDReader {
 	return e._rid
 }
 
+
+
 //Metadata ...
-func (e *EnumerationReader) Metadata() (mr corev1.MetadataReader, err error) {
+func (e *EnumerationReader) Metadata() (mr Nextcorev1.MetadataReader, err error) {
 
 	if e.metadata != nil {
 		mr  =  e.metadata
@@ -46,18 +39,18 @@ func (e *EnumerationReader) Metadata() (mr corev1.MetadataReader, err error) {
 }
 
 //Kind ...
-func (e *EnumerationReader) Kind() (value corev1.BasicType) {
-	value = corev1.FromStringToBasicType(e._enumeration.Kind)
+func (e *EnumerationReader) Kind() (value Nextcorev1.BasicType) {
+	value = Nextcorev1.FromStringToBasicType(e._enumeration.Kind)
 
-	if !value.IsScalars(){
-		value = corev1.BasicTypeNone
+	if !value.IsScalar(){
+		value = Nextcorev1.BasicTypeNone
 	}
 
 	return
 }
 
 //Items ...
-func (e *EnumerationReader) Items() corev1.VectorEnumerationItemReader {
+func (e *EnumerationReader) Items() Nextcorev1.VectorEnumerationItemReader {
 
 	if e.items != nil {
 		return e.items
@@ -67,7 +60,7 @@ func (e *EnumerationReader) Items() corev1.VectorEnumerationItemReader {
 }
 	
 //Groups ...
-func (e *EnumerationReader) Groups() corev1.VectorEnumerationGroupReader {
+func (e *EnumerationReader) Groups() Nextcorev1.VectorEnumerationGroupReader {
 
 	if e.groups != nil {
 		return e.groups
@@ -87,6 +80,8 @@ metadata: NewMetadataReader(e.Metadata),
 	return nil
 }
 
+
+
 //VectorEnumerationReader ...
 type VectorEnumerationReader struct {
     _vector  []*EnumerationReader
@@ -101,7 +96,7 @@ func (ve *VectorEnumerationReader) Len() (size int) {
 //Get the item in the position i, if i < Len(),
 //if item does not exist should return the default value for the underlying data type
 //when i > Len() should return an VectorInvalidIndexError
-func (ve *VectorEnumerationReader) Get(i int) (item corev1.EnumerationReader, err error) {
+func (ve *VectorEnumerationReader) Get(i int) (item Nextcorev1.EnumerationReader, err error) {
 
 	if i < 0 {
 		err = &hybrids.VectorInvalidIndexError{Index: i, Len: len(ve._vector)}

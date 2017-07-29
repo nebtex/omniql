@@ -22,6 +22,8 @@ func (ei *EnumerationItemReader) Name() (value string) {
 	return
 }
 
+
+
 //Documentation ...
 func (ei *EnumerationItemReader) Documentation() (dr Nextcorev1.DocumentationReader, err error) {
 
@@ -37,11 +39,13 @@ func NewEnumerationItemReader(ei *EnumerationItem) *EnumerationItemReader{
 	if ei!=nil{
 		return &EnumerationItemReader{
 		                                   _enumerationitem:ei,
-documentation: NewDocumentationReader(i.Documentation),
+documentation: NewDocumentationReader(ei.Documentation),
 		                                   }
 	}
 	return nil
 }
+
+
 
 //VectorEnumerationItemReader ...
 type VectorEnumerationItemReader struct {

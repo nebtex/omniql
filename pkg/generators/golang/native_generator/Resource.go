@@ -26,16 +26,11 @@ func NewResourceReaderGenerator(resource corev1.ResourceReader, ip string, logge
 	return
 }
 func (r *ResourceReaderGenerator) Generate(wr io.Writer) (err error) {
-	gt := NewGoTypeGenerator(r.resource, r.zap)
-	err = gt.StructAddField("RID", "[]byte")
+	err = r.trg.gt.StructAddField("RID", "[]byte")
 	if err != nil {
 		return err
 	}
 
-	err = gt.Generate(wr)
-	if err != nil {
-		return err
-	}
 
 	//add imports
 	err = r.trg.StartStruct()

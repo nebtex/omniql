@@ -1,38 +1,39 @@
 package Nextcorev1Native
-
-import (
-	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
+import(
+    "github.com/nebtex/hybrids/golang/hybrids"
+    "github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1"
 )
-
 //UnionTable ...
 type UnionTable struct {
+
 }
 
 //UnionTableReader ...
 type UnionTableReader struct {
-	_uniontable *UnionTable
+    _uniontable *UnionTable
 }
 
 //NewUnionTableReader ...
-func NewUnionTableReader(ut *UnionTable) *UnionTableReader {
-	if ut != nil {
+func NewUnionTableReader(ut *UnionTable) *UnionTableReader{
+	if ut!=nil{
 		return &UnionTableReader{
-			_uniontable: ut,
-		}
+		                                   _uniontable:ut,
+		                                   }
 	}
 	return nil
 }
 
+
+
 //VectorUnionTableReader ...
 type VectorUnionTableReader struct {
-	_vector []*UnionTableReader
+    _vector  []*UnionTableReader
 }
 
 //Len Returns the current size of this vector
 func (vut *VectorUnionTableReader) Len() (size int) {
-	size = len(vut._vector)
-	return
+    size = len(vut._vector)
+    return
 }
 
 //Get the item in the position i, if i < Len(),
@@ -53,11 +54,12 @@ func (vut *VectorUnionTableReader) Get(i int) (item Nextcorev1.UnionTableReader,
 	item = vut._vector[i]
 	return
 
+
 }
 
 //NewVectorUnionTableReader ...
 func NewVectorUnionTableReader(vut []*UnionTable) (vutr *VectorUnionTableReader) {
-	vutr = &VectorUnionTableReader{}
+    vutr = &VectorUnionTableReader{}
 	vutr._vector = make([]*UnionTableReader, len(vut))
 
 	for i := 0; i < len(vut); i++ {
