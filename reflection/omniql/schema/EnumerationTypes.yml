@@ -1,0 +1,12 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Enumeration/EnumerationTypes
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    kind: Enumeration
+    name: EnumerationTypes
+  kind: Uint8
+  items:
+  - name: Uint8
+  - name: Uint16
+  - name: Uint32

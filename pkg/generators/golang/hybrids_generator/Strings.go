@@ -4,7 +4,7 @@ package hybrids_generator
 import (
 	"text/template"
 	"io"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
 )
 
 func StringFieldReaderAccessor(freader corev1.FieldReader, wr io.Writer) (fn string, err error) {

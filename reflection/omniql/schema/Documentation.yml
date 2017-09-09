@@ -1,0 +1,14 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Table/Documentation
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    kind: Table
+    name: Documentation
+    documentation:
+      short: documentation type
+  fields:
+  - name: short
+    type: String
+  - name: long
+    type: String

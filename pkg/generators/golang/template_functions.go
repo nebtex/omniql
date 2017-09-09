@@ -1,7 +1,7 @@
 package golang
 
 import (
-	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omniql/pkg/utils"
 	"strings"
 )
 

@@ -1,0 +1,12 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Enumeration/UnionTypes
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    kind: Enumeration
+    name: UnionTypes
+  kind: Uint8
+  items:
+  - name: Table
+  - name: Resources
+  - name: ExternalResources

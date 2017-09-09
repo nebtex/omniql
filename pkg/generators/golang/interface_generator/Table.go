@@ -3,14 +3,14 @@ package interface_generator
 import (
 	"text/template"
 	"io"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/utils"
 	"go.uber.org/zap"
 	"fmt"
 	"strings"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1Native"
 	"bytes"
-	"github.com/nebtex/omnibuff/pkg/generators/golang"
+	"github.com/nebtex/omniql/pkg/generators/golang"
 )
 
 type TableReaderGenerator struct {
@@ -255,10 +255,10 @@ func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, f
 	}
 
 	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table,
-		"Field":                                                            freader,
-		"FieldNumber":                                                      fn,
-		"TypeTableName":                                                    "Vector" + tableName,
-		"PackageName":                                                      t.interfacePackageShort,
+		"Field": freader,
+		"FieldNumber": fn,
+		"TypeTableName": "Vector" + tableName,
+		"PackageName": t.interfacePackageShort,
 	})
 	if err != nil {
 		return
@@ -279,8 +279,8 @@ func (t *TableReaderGenerator) TableAccessor(freader corev1.FieldReader, tableNa
 	}
 
 	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table,
-		"Field":                                                            freader,
-		"TypeTableName":                                                    tableName,
+		"Field": freader,
+		"TypeTableName": tableName,
 	})
 	if err != nil {
 		return
@@ -302,8 +302,8 @@ func (t *TableReaderGenerator) EnumerationAccessor(freader corev1.FieldReader, e
 	}
 
 	err = tmpl.Execute(t.definitionsBuffer, map[string]interface{}{"Table": t.table,
-		"Field":                                                            freader,
-		"EnumerationName":                                                  enumName,
+		"Field": freader,
+		"EnumerationName": enumName,
 	})
 	if err != nil {
 		return

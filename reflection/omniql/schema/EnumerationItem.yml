@@ -1,0 +1,13 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Table/EnumerationItem
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    name: EnumerationItem
+    kind: Table
+  fields:
+  - name: name
+    type: String
+    required: true
+  - name: documentation
+    type: Table/Documentation

@@ -1,0 +1,27 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Enumeration/SchemaTypes
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    kind: Enumeration
+    name: SchemaTypes
+  kind: Uint16
+  items:
+  - name: Enumeration
+  - name: Resource
+  - name: Table
+  - name: Union
+  - name: EnumerationGroup
+  - name: EnumerationItem
+  - name: UnionResource
+  - name: UnionTable
+  - name: Documentation
+  - name: Field
+  - name: Metadata
+  groups:
+  - name: Resource
+    items:
+    - Table
+    - Union
+    - Resource
+    - Enumeration

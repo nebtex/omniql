@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/omnibuff.iml" filepath="$PROJECT_DIR$/.idea/omnibuff.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/omniql.iml" filepath="$PROJECT_DIR$/.idea/omniql.iml" />
     </modules>
   </component>
 </project>

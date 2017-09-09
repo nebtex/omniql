@@ -1,6 +1,6 @@
 package corev1Native
 
-import "github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+import "github.com/nebtex/omniql/pkg/io/omniql/corev1"
 
 type Field struct {
 	RID           []byte `json:"rid"`

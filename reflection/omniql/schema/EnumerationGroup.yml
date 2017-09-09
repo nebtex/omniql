@@ -1,0 +1,17 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Table/EnumerationGroup
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    name: EnumerationGroup
+    kind: Table
+    documentation:
+      short: allow to group enumerations
+  fields:
+  - name: name
+    type: String
+  - name: documentation
+    type: Table/Documentation
+  - name: items
+    type: Vector
+    items: String

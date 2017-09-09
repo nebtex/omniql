@@ -2,7 +2,7 @@ package corev1Native
 
 import (
 	"bytes"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
 )
 
 type IDReader struct {

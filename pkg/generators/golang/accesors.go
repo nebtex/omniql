@@ -1,9 +1,9 @@
 package golang
 
 import (
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1Native"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/utils"
 )
 
 type AccessorsGenerators interface {

@@ -1,7 +1,7 @@
 package corev1Native
 
 import (
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
 )
 
 type Metadata struct {

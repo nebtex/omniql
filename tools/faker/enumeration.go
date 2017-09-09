@@ -1,155 +1,157 @@
 package faker
 
-import "github.com/nebtex/omnibuff/commons/golang/tools/oreflection"
-
-
 import (
-"github.com/nebtex/omnibuff/tools/golang/tools/oreflection"
-"github.com/nebtex/hybrids/golang/hybrids"
+	"github.com/nebtex/omniql/commons/golang/oreflection"
+	"github.com/nebtex/hybrids/golang/hybrids"
+	"github.com/jmcvetta/randutil"
 )
 
-func (e *Encoder) encodeEnum(out map[string]interface{}, fieldName string, ot oreflection.OType, fn hybrids.FieldNumber, tr hybrids.ScalarReader) {
+func (j *Json) fakeEnum(out map[string]interface{}, fieldName string, ot oreflection.OType) (err error) {
 	var enum string
+	var ok bool
+	maxEnum := ot.Enumeration().Items().Len()
+
+	value, err := randutil.IntRange(0, maxEnum)
+
+	if err != nil {
+		return err
+	}
 
 	switch ot.HybridType() {
 
 	case hybrids.Uint8:
-		v, ok := tr.Uint8(fn)
-		if !ok {
-			// value is not defined
-			return
-		}
-		enum, ok = ot.LookupEnumeration().ByUint8ToCamelCase(v)
+		enum, ok = ot.LookupEnumeration().ByUint8ToCamelCase(uint8(value))
+
 		if ok {
 			//write the enum as string
 			out[fieldName] = enum
 		} else {
 			//write the enum as json number
-			out[fieldName] = float64(v)
+			out[fieldName] = float64(value)
 		}
 		return
 
 	case hybrids.Uint16:
-		v, ok := tr.Uint16(fn)
-		if !ok {
-			// value is not defined
-			return
-		}
-		enum, ok = ot.LookupEnumeration().ByUint16ToCamelCase(v)
+		enum, ok = ot.LookupEnumeration().ByUint16ToCamelCase(uint16(value))
+
 		if ok {
 			//write the enum as string
 			out[fieldName] = enum
 		} else {
 			//write the enum as json number
-			out[fieldName] = float64(v)
+			out[fieldName] = float64(value)
 		}
 		return
 
 	case hybrids.Uint32:
-		v, ok := tr.Uint32(fn)
-		if !ok {
-			// value is not defined
-			return
-		}
-		enum, ok = ot.LookupEnumeration().ByUint32ToCamelCase(v)
+		enum, ok = ot.LookupEnumeration().ByUint32ToCamelCase(uint32(value))
+
 		if ok {
 			//write the enum as string
 			out[fieldName] = enum
 		} else {
 			//write the enum as json number
-			out[fieldName] = float64(v)
+			out[fieldName] = float64(value)
 		}
 		return
 
 	}
 }
 
-func (e *Encoder) encodeVectorEnum(out map[string]interface{}, fieldName string, ot oreflection.OType, fn hybrids.FieldNumber, vrb hybrids.VectorScalarReaderAccessor) {
-	var enum string
-	var r []interface{}
+func (j *Json) fakeVectorEnum(out map[string]interface{}, fieldName string, ot oreflection.OType) (err error) {
+	var choice randutil.Choice
+	var vLen int
+
+	// generate nil or vector
+	nullVector := randutil.Choice{10, int(0)}
+	newVector := randutil.Choice{100, int(1)}
+
+	choice, err = randutil.WeightedChoice([]randutil.Choice{nullVector, newVector})
+
+	if err != nil {
+		return err
+	}
+
+	item, _ := choice.Item.(int)
+
+	if item == 0 {
+		out[fieldName] = nil
+		return
+	}
+
+	//generate vector len
+	vLen, err = randutil.IntRange(1, 127)
+
+	if err != nil {
+		return err
+	}
+
+	r := make([]interface{}, 0, vLen)
+
+	maxEnum := ot.Enumeration().Items().Len()
 
 	switch ot.Items().HybridType() {
 
 	case hybrids.Uint8:
 
-		vu, ok := vrb.VectorUint8(fn)
-		if !ok {
-			//vector undefined
-			return
-		}
-		if vu.Len() == 0 {
-			//vector is null
-			out[fieldName] = nil
-			return
-		}
-		r = make([]interface{}, 0, vu.Len())
+		for i := 0; i < vLen; i++ {
+			value, err := randutil.IntRange(0, maxEnum)
 
-		for i := 0; i < vu.Len(); i++ {
-			enum, ok = ot.LookupEnumeration().ByUint8ToCamelCase(vu.Get(i))
+			if err != nil {
+				return err
+			}
+
+			enumName, ok := ot.LookupEnumeration().ByUint8ToCamelCase(uint8(value))
+
 			if ok {
 				//write the enum as string
-				r = append(r, enum)
+				r = append(r, enumName)
 			} else {
 				//write the enum as json number
-				r = append(r, float64(vu.Get(i)))
+				r = append(r, float64(value))
 			}
 		}
-
-		out[fieldName] = r
-		return
 
 	case hybrids.Uint16:
-		vu, ok := vrb.VectorUint16(fn)
-		if !ok {
-			//vector undefined
-			return
-		}
-		if vu.Len() == 0 {
-			//vector is null
-			out[fieldName] = nil
-			return
-		}
-		r = make([]interface{}, 0, vu.Len())
+		for i := 0; i < vLen; i++ {
+			value, err := randutil.IntRange(0, maxEnum)
 
-		for i := 0; i < vu.Len(); i++ {
-			enum, ok = ot.LookupEnumeration().ByUint16ToCamelCase(vu.Get(i))
+			if err != nil {
+				return err
+			}
+
+			enumName, ok := ot.LookupEnumeration().ByUint16ToCamelCase(uint16(value))
+
 			if ok {
 				//write the enum as string
-				r = append(r, enum)
+				r = append(r, enumName)
 			} else {
 				//write the enum as json number
-				r = append(r, float64(vu.Get(i)))
+				r = append(r, float64(value))
 			}
 		}
-
-		out[fieldName] = r
-		return
 
 	case hybrids.Uint32:
-		vu, ok := vrb.VectorUint32(fn)
-		if !ok {
-			//vector undefined
-			return
-		}
-		if vu.Len() == 0 {
-			//vector is null
-			out[fieldName] = nil
-			return
-		}
-		r = make([]interface{}, 0, vu.Len())
+		for i := 0; i < vLen; i++ {
+			value, err := randutil.IntRange(0, maxEnum)
 
-		for i := 0; i < vu.Len(); i++ {
-			enum, ok = ot.LookupEnumeration().ByUint32ToCamelCase(vu.Get(i))
+			if err != nil {
+				return err
+			}
+
+			enumName, ok := ot.LookupEnumeration().ByUint32ToCamelCase(uint32(value))
+
 			if ok {
 				//write the enum as string
-				r = append(r, enum)
+				r = append(r, enumName)
 			} else {
 				//write the enum as json number
-				r = append(r, float64(vu.Get(i)))
+				r = append(r, float64(value))
 			}
 		}
 
-		out[fieldName] = r
-		return
 	}
+
+	out[fieldName] = r
+	return
 }

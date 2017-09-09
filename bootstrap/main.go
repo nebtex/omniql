@@ -9,12 +9,12 @@ import (
 	"github.com/jjeffery/errors"
 	"strings"
 	"fmt"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
-	"github.com/nebtex/omnibuff/pkg/generators/golang/hybrids_generator"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1Native"
+	"github.com/nebtex/omniql/pkg/generators/golang/hybrids_generator"
 	"go.uber.org/zap"
-	"github.com/nebtex/omnibuff/pkg/utils"
-	"github.com/nebtex/omnibuff/pkg/generators/golang/interface_generator"
-	"github.com/nebtex/omnibuff/pkg/generators/golang/native_generator"
+	"github.com/nebtex/omniql/pkg/utils"
+	"github.com/nebtex/omniql/pkg/generators/golang/interface_generator"
+	"github.com/nebtex/omniql/pkg/generators/golang/native_generator"
 )
 
 type YamlFile struct {
@@ -269,7 +269,7 @@ type ShardHolderAndDisposer interface {
 }
 
 func main() {
-	app, err := Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")
+	app, err := Load("/home/cristian/nebtex/go/src/github.com/nebtex/omniql/reflection/omniql/schema")
 	CheckPanic(err)
 	/*
 		//generate application types enum
@@ -291,7 +291,7 @@ func main() {
 		}
 		ioutil.WriteFile("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf/enumeration/ApplicationType.yml", []byte(appEnum), os.ModePerm)
 		app, _ = Load("/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/reflection/omniql/omnibuf")*/
-	baseDir := "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/corev1Hybrids/"
+	baseDir := "/home/cristian/nebtex/go/src/github.com/nebtex/omniql/pkg/io/omniql/corev1Hybrids/"
 
 	logger, _ := zap.NewProduction()
 	defer logger.Sync()
@@ -300,10 +300,10 @@ func main() {
 
 	//WriteHybrids(app, baseDir, logger)
 
-	baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1/"
-	WriteInterface(app, baseDir, "Nextcorev1", logger)
+	baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omniql/pkg/next/corev1/"
+	WriteInterface(app, baseDir, "corev1", logger)
 
-	baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1Native/"
-	WriteNative(app, baseDir, "Nextcorev1Native", logger)
+	//baseDir = "/home/cristian/nebtex/go/src/github.com/nebtex/omnibuff/pkg/io/omniql/Nextcorev1Native/"
+	//WriteNative(app, baseDir, "Nextcorev1Native", logger)
 
 }

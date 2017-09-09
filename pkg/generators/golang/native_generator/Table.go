@@ -3,14 +3,14 @@ package native_generator
 import (
 	"text/template"
 	"io"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/utils"
 	"go.uber.org/zap"
 	"fmt"
 	"strings"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1Native"
 	"bytes"
-	"github.com/nebtex/omnibuff/pkg/generators/golang"
+	"github.com/nebtex/omniql/pkg/generators/golang"
 )
 
 type TableReaderGenerator struct {

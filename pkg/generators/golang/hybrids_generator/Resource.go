@@ -2,10 +2,10 @@ package hybrids_generator
 
 import (
 	"io"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
 	"go.uber.org/zap"
 	"fmt"
-	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omniql/pkg/utils"
 	"text/template"
 )
 

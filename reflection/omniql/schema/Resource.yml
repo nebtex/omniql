@@ -1,0 +1,16 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.*/Resource/Resource
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    name: Resource
+    kind: Resource
+    documentation:
+      short: Resource type
+  fields:
+  - name: metadata
+    type: Table/Metadata
+    required: true
+  - name: fields
+    type: Vector
+    items: Table/Field

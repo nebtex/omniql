@@ -3,12 +3,12 @@ package hybrids_generator
 import (
 	"text/template"
 	"io"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/omnibuff/pkg/utils"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/utils"
 	"go.uber.org/zap"
 	"fmt"
 	"strings"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1Native"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1Native"
 	"bytes"
 )
 
@@ -93,7 +93,7 @@ func New{{TableName .Table}}Reader(t hybrids.TableReader) {{.PackageName}}.{{Tab
 
 	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{
 		"Table":       t.Table(),
-		"PackageName": t.interfacePackageShort, })
+		"PackageName": t.interfacePackageShort,})
 	return
 
 }
@@ -285,8 +285,8 @@ func (t *TableReaderGenerator) VectorTableAccessor(freader corev1.FieldReader, f
 		return err
 	}
 
-		tmpl, err := template.New("StringAccessor").
-			Funcs(t.funcMap).Parse(`
+	tmpl, err := template.New("StringAccessor").
+		Funcs(t.funcMap).Parse(`
 {{GoDoc .Field.Name .Field.Documentation}}
 func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{.PackageName}}.{{.TypeTableName}}Reader {
 
@@ -297,19 +297,19 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{
 	return New{{.TypeTableName}}Reader({{ShortName}}._table.VectorTable({{.FieldNumber}}))
 }
 	`)
-		if err != nil {
-			return
-		}
+	if err != nil {
+		return
+	}
 
-		err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{"Table": t.table,
-			"Field":                                                          freader,
-			"FieldNumber":                                                    fn,
-			"TypeTableName":                                                  "Vector"+tableName,
-			"PackageName":                                                    t.interfacePackageShort,
-		})
-		if err != nil {
-			return
-		}
+	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{"Table": t.table,
+		"Field": freader,
+		"FieldNumber": fn,
+		"TypeTableName": "Vector" + tableName,
+		"PackageName": t.interfacePackageShort,
+	})
+	if err != nil {
+		return
+	}
 
 	return
 }
@@ -338,10 +338,10 @@ func ({{ShortName}} *{{TableName .Table}}Reader) {{Capitalize .Field.Name}}() {{
 	}
 
 	err = tmpl.Execute(t.functionsBuffer, map[string]interface{}{"Table": t.table,
-		"Field":                                                          freader,
-		"FieldNumber":                                                    fn,
-		"TypeTableName":                                                  tableName,
-		"PackageName":                                                    t.interfacePackageShort,
+		"Field": freader,
+		"FieldNumber": fn,
+		"TypeTableName": tableName,
+		"PackageName": t.interfacePackageShort,
 	})
 	if err != nil {
 		return

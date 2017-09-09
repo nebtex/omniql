@@ -4,9 +4,9 @@ import (
 	"go.uber.org/zap"
 	"io"
 	"text/template"
-	"github.com/nebtex/omnibuff/pkg/generators/golang"
+	"github.com/nebtex/omniql/pkg/generators/golang"
 	"bytes"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
 	"strings"
 	"fmt"
 )

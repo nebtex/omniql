@@ -1,7 +1,7 @@
 package faker
 
 import (
-	"github.com/nebtex/omnibuff/commons/golang/tools/oreflection"
+	"github.com/nebtex/omniql/commons/golang/oreflection"
 	"github.com/nebtex/hybrids/golang/hybrids"
 	"github.com/jmcvetta/randutil"
 	"fmt"

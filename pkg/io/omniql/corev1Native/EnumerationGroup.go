@@ -2,22 +2,38 @@ package corev1Native
 
 import (
 	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/nebtex/omnibuff/pkg/io/omniql/corev1"
-	"github.com/nebtex/hybrids/golang/hybrids/native"
+	"github.com/nebtex/omniql/pkg/io/omniql/corev1"
 )
+
+type VectorStringReader struct {
+	_vector []string
+}
+
+func NewVectorStringReader(items []string) *VectorStringReader {
+	return &VectorStringReader{items}
+}
+
+func (v *VectorStringReader) Len() int {
+	return len(v._vector)
+}
+
+func (v *VectorStringReader) Get(i int) (s string, err error) {
+	s = v._vector[i]
+	return
+}
 
 //EnumerationGroup allow to group enumerations
 type EnumerationGroup struct {
-	Name          string `json:"name"`
+	Name          string         `json:"name"`
 	Documentation *Documentation `json:"documentation"`
-	Items         []string `json:"items"`
+	Items         []string       `json:"items"`
 }
 
 //EnumerationGroupReader allow to group enumerations
 type EnumerationGroupReader struct {
 	_enumerationgroup *EnumerationGroup
 	documentation     *DocumentationReader
-	items             *native.VectorStringReader
+	items             *VectorStringReader
 }
 
 //Name ...
@@ -51,7 +67,7 @@ func NewEnumerationGroupReader(e *EnumerationGroup) *EnumerationGroupReader {
 	return &EnumerationGroupReader{
 		_enumerationgroup: e,
 		documentation:     NewDocumentationReader(e.Documentation),
-		items:             native.NewVectorStringReader(e.Items),
+		items:             NewVectorStringReader(e.Items),
 	}
 }
 

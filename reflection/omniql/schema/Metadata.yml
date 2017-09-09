@@ -1,0 +1,23 @@
+api: io.almagest.omniql.schema.v1
+rid: Application/io.almagest.omniql.schema.*/Table/Metadata
+spec:
+  metadata:
+    application: io.almagest.omniql.schema.*
+    name: Metadata
+    kind: Table
+    documentation:
+      short: meta data
+  fields:
+  - name: application
+    type: String
+    required: true
+  - name: name
+    type: String
+    required: true
+  - name: kind
+    type: Enumeration/ApplicationType/EnumerationGroup/Resource
+    required: true
+  - name: Parent
+    type: String
+  - name: documentation
+    type: Table/Documentation
