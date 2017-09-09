@@ -38,14 +38,6 @@ type MetadataShard interface {
 	Documentation(func(DocumentationShard)) ShardHolderAndDisposer
 }
 
-//MetadataWildcardShard ...
-func MetadataWildcardShard(s MetadataShard) {
-
-	s.Application()
-	s.Name()
-	s.Kind()
-	s.Parent()
-}
 
 //MetadataForwardShard ...
 func MetadataForwardShard(s MetadataShard) {
@@ -55,4 +47,10 @@ func MetadataForwardShard(s MetadataShard) {
 	s.Kind()
 	s.Parent()
 	s.Documentation(DocumentationForwardShard)
+}
+
+
+//MetadataWildcardShard ...
+func MetadataWildcardTransform(store struct{}, prop, s MetadataShard) {
+
 }

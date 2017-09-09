@@ -28,14 +28,12 @@ type DocumentationShard interface {
 
 //DocumentationWildcardShard ...
 func DocumentationWildcardShard(s DocumentationShard) {
-
 	s.Short()
 	s.Long()
 }
 
 //DocumentationForwardShard ...
 func DocumentationForwardShard(s DocumentationShard) {
-
 	s.Short()
 	s.Long()
 }

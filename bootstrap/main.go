@@ -214,7 +214,8 @@ type ShardHolderAndDisposer interface {
 
 		trg := interface_generator.NewTableReaderGenerator(corev1Native.NewTableReader(table), "github.com/nebtex/omnibuff/pkg/io/omniql/corev1", logger)
 		//create file
-		f, err := os.Create(baseDir + utils.TableName(corev1Native.NewTableReader(table)) + ".go")
+		f, err := os.Create(
+			baseDir + utils.TableName(corev1Native.NewTableReader(table)) + ".go")
 		CheckPanic(err)
 		_, err = f.Write([]byte("package " + packageName + "\n"))
 		CheckPanic(err)

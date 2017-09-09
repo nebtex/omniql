@@ -4,34 +4,40 @@ spec:
   metadata:
     application: io.almagest.omniql.*
     kind: Enumeration
-    name: BasicType
-  kind: Integer8
+    name: BasicTypes
+  kind: Int8
   items:
-  - name: Integer8
-  - name: UnsignedInteger8
   - name: Boolean
-  - name: Short
-  - name: UnsignedShort
-  - name: Integer
-  - name: UnsignedInteger
-  - name: Float
-  - name: Long
-  - name: UnsignedLong
-  - name: Double
-  - name: Vector
+  - name: Int8
+  - name: Uint8
+  - name: Int16
+  - name: Uint16
+  - name: Int32
+  - name: Uint32
+  - name: Int64
+  - name: Uint64
+  - name: Float32
+  - name: Float64
+  - name: Struct
   - name: String
   - name: Bytes
+  - name: Vector
+  - name: Table
+  - name: Union
+  - name: Resource
+  - name: Enumeration
+  - name: EnumerationGroup
   groups:
   - name: Scalar
     items:
-    - Integer8
-    - UnsignedInteger8
     - Boolean
-    - Short
-    - UnsignedShort
-    - Integer
-    - UnsignedInteger
-    - Float
-    - Long
-    - UnsignedLong
-    - Double
+    - Int8
+    - Uint8
+    - Int16
+    - Uint16
+    - Int32
+    - Uint32
+    - Int64
+    - Uint64
+    - Float32
+    - Float64

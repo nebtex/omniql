@@ -4,7 +4,7 @@ spec:
   metadata:
     application: io.almagest.omniql.*
     kind: Enumeration
-    name: ApplicationType
+    name: ApplicationTypes
   kind: UnsignedShort
   items:
   - name: Enumeration
