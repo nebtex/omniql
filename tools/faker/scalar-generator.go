@@ -21,71 +21,79 @@ func RenderScalarFakers(f io.Writer) {
 	var tmp *template.Template
 
 	tmp, err = template.New("ScalarFakers").Parse(`
-func (j *Json) get{{.scalar.String}}() (r {{.jsonType}}, err error) {
-	var v int
+func (j *Json) fake{{.scalar.String}}(path string, out map[string]interface{}, fieldName string, parentType oreflection.OType, fn hybrids.FieldNumber) (err error) {
+	var v {{.scalar.NativeType}}
 
-	v, err = randutil.IntRange({{.min}}, {{.max}})
+	v, err = j.fieldGen.{{.scalar.String}}(path, parentType, fn)
 
 	if err != nil {
+		err = &Error{
+			Path:        path,
+			HybridType:  hybrids.{{.scalar.String}},
+			OmniqlType:  parentType.Id(),
+			Application: parentType.Application(),
+			ErrorMsg:    err.Error(),
+		}
 		return
 	}
 
-	r = {{.jsTransform}}
-
-	return
-}
-
-func (j *Json) fake{{.scalar.String}}(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v {{.jsonType}}
-
-	v, err = j.get{{.scalar.String}}()
-
-	if err != nil {
-		return
-	}
-
-	out[fieldName] = v
+	out[fieldName] = {{.jsTransform}}
 
 	return
 }
 	
-func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interface{}, fieldName string) (err error) {
-	var choice randutil.Choice
+func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interface{}, fieldName string, parentType oreflection.OType, fn hybrids.FieldNumber) (err error) {
+	var shouldNil bool
 	var vLen int
-	var v {{.jsonType}}
+	var v {{.scalar.NativeType}}
 
-	// generate nil or vector
-	nullVector := randutil.Choice{10, int(0)}
-	newVector := randutil.Choice{100, int(1)}
-
-	choice, err = randutil.WeightedChoice([]randutil.Choice{nullVector, newVector})
+	shouldNil, err = j.fieldGen.ShouldBeNil(path, parentType, fn)
 
 	if err != nil {
-		return err
+		err = &Error{
+			Path:        path,
+			HybridType:  hybrids.Vector{{.scalar.String}},
+			OmniqlType:  parentType.Id(),
+			Application: parentType.Application(),
+			ErrorMsg:    err.Error(),
+		}
+		return
 	}
 
-	item, _ := choice.Item.(int)
-
-	if item == 0 {
+	if shouldNil {
 		out[fieldName] = nil
 		return
 	}
 
 	//generate vector len
-	vLen, err = randutil.IntRange(1, 127)
+	vLen, err = j.fieldGen.VectorLen(path, parentType, fn)
 
 	if err != nil {
-		return err
+		err = &Error{
+			Path:        path,
+			HybridType:  hybrids.Vector{{.scalar.String}},
+			OmniqlType:  parentType.Id(),
+			Application: parentType.Application(),
+			ErrorMsg:    err.Error(),
+		}
+		return
 	}
 
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		v, err =  j.get{{.scalar.String}}()
+		v, err =  j.fieldGen.{{.scalar.String}}(path, parentType, fn)
 		if err != nil {
-	        return err
+			err = &Error{
+				Path:        path+fmt.Sprintf("[%d]", i),
+				HybridType:  hybrids.{{.scalar.String}},
+				OmniqlType:  parentType.Id(),
+				Application: parentType.Application(),
+				ErrorMsg:    err.Error(),
+			}
+			return
 	    }
-		r[i] = v
+		r[i] = {{.jsTransform}}
 	}
 
 	out[fieldName] = r
@@ -110,7 +118,7 @@ func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interfac
 		hybrids.Float64,
 	}
 	jsonFunction := []string{
-		"iToBool(v)",
+		"v",
 		"float64(v)",
 		"float64(v)",
 		"float64(v)",
@@ -178,25 +186,41 @@ func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interfac
 
 	decodeScalarTemplate, err := template.New("decodeScalarTemplate").Parse(`
 
-func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types)(err error){
+func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types, parentType oreflection.OType, fn hybrids.FieldNumber)(err error){
+
 	switch fieldType{
 {{ range $index, $value := .scalars }}
 	case hybrids.{{$value.String}}:
-		err = j.fake{{$value.String}}(path, out, fieldName)
-
+		err = j.fake{{$value.String}}(path, out, fieldName, parentType, fn)
 {{ end }}
+	default:
+		err = &Error{
+			Path:        path,
+			HybridType:  fieldType,
+			OmniqlType:  parentType.Id(),
+			Application: parentType.Application(),
+			ErrorMsg:    "path not recognized as  scalar",
+		}
     }
 	return
 }
 
 
-func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types)(err error){
+func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types, parentType oreflection.OType, fn hybrids.FieldNumber)(err error){
+
 	switch fieldType{
 {{ range $index, $value := .scalars }}
 	case hybrids.Vector{{$value.String}}:
-		err = j.fakeVector{{$value.String}}(path, out, fieldName)
-
+		err = j.fakeVector{{$value.String}}(path, out, fieldName, parentType, fn)
 {{ end }}
+	default:
+		err = &Error{
+			Path:        path,
+			HybridType:  fieldType,
+			OmniqlType:  parentType.Id(),
+			Application: parentType.Application(),
+			ErrorMsg:    "path not recognized as vector of scalar",
+		}
 	}
 	return
 }
@@ -225,7 +249,8 @@ func main() {
 import (
 	"github.com/nebtex/hybrids/golang/hybrids"
 	"strconv"
-	"github.com/jmcvetta/randutil"
+	"github.com/nebtex/omniql/commons/golang/oreflection"
+	"fmt"
 )
 `))
 	die(err)

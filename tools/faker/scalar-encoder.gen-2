@@ -6,31 +6,58 @@ import (
 	"strconv"
 	"github.com/jmcvetta/randutil"
 )
+func (j *Json) get{{.scalar.String}}() (r {{.jsonType}}, err error) {
+	var v int
 
-func (j *Json) getBoolean() (v bool, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinBoolean, hybrids.MaxBoolean)
+	v, err = randutil.IntRange({{.min}}, {{.max}})
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = {{.jsTransform}}
+
+	return
+}
+
+	// generate nil or vector
+	nullVector := randutil.Choice{10, int(0)}
+	newVector := randutil.Choice{100, int(1)}
+
+	choice, err = randutil.WeightedChoice([]randutil.Choice{nullVector, newVector})
+func (j *Json) getBoolean() (r bool, err error) {
+	var v int
+
+	v, err = randutil.IntRange(hybrids.MinBoolean, hybrids.MaxBoolean)
+
+	if err != nil {
+		return
+	}
+
+	r = iToBool(v)
+
 	return
 }
 
 func (j *Json) fakeBoolean(path string, out map[string]interface{}, fieldName string) (err error) {
 	var v bool
+
 	v, err = j.getBoolean()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorBoolean(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorBoolean(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v bool
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -58,7 +85,11 @@ func (j *Json) fakeVectorBoolean(out map[string]interface{}, fieldName string) (
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getBoolean()
+		v, err =  j.getBoolean()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -67,31 +98,39 @@ func (j *Json) fakeVectorBoolean(out map[string]interface{}, fieldName string) (
 }
 
 
+func (j *Json) getInt8() (r float64, err error) {
+	var v int
 
-func (j *Json) getInt8() (v int8, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinInt8, hybrids.MaxInt8)
+	v, err = randutil.IntRange(hybrids.MinInt8, hybrids.MaxInt8)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeInt8(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v int8
+	var v float64
+
 	v, err = j.getInt8()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorInt8(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorInt8(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -119,7 +158,11 @@ func (j *Json) fakeVectorInt8(out map[string]interface{}, fieldName string) (err
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getInt8()
+		v, err =  j.getInt8()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -128,31 +171,39 @@ func (j *Json) fakeVectorInt8(out map[string]interface{}, fieldName string) (err
 }
 
 
+func (j *Json) getUint8() (r float64, err error) {
+	var v int
 
-func (j *Json) getUint8() (v uint8, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinUint8, hybrids.MaxUint8)
+	v, err = randutil.IntRange(hybrids.MinUint8, hybrids.MaxUint8)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeUint8(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v uint8
+	var v float64
+
 	v, err = j.getUint8()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorUint8(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorUint8(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -180,7 +231,11 @@ func (j *Json) fakeVectorUint8(out map[string]interface{}, fieldName string) (er
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getUint8()
+		v, err =  j.getUint8()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -189,31 +244,39 @@ func (j *Json) fakeVectorUint8(out map[string]interface{}, fieldName string) (er
 }
 
 
+func (j *Json) getInt16() (r float64, err error) {
+	var v int
 
-func (j *Json) getInt16() (v int16, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinInt16, hybrids.MaxInt16)
+	v, err = randutil.IntRange(hybrids.MinInt16, hybrids.MaxInt16)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeInt16(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v int16
+	var v float64
+
 	v, err = j.getInt16()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorInt16(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorInt16(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -241,7 +304,11 @@ func (j *Json) fakeVectorInt16(out map[string]interface{}, fieldName string) (er
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getInt16()
+		v, err =  j.getInt16()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -250,31 +317,39 @@ func (j *Json) fakeVectorInt16(out map[string]interface{}, fieldName string) (er
 }
 
 
+func (j *Json) getUint16() (r float64, err error) {
+	var v int
 
-func (j *Json) getUint16() (v uint16, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinUint16, hybrids.MaxUint16)
+	v, err = randutil.IntRange(hybrids.MinUint16, hybrids.MaxUint16)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeUint16(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v uint16
+	var v float64
+
 	v, err = j.getUint16()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorUint16(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorUint16(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -302,7 +377,11 @@ func (j *Json) fakeVectorUint16(out map[string]interface{}, fieldName string) (e
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getUint16()
+		v, err =  j.getUint16()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -311,31 +390,39 @@ func (j *Json) fakeVectorUint16(out map[string]interface{}, fieldName string) (e
 }
 
 
+func (j *Json) getInt32() (r float64, err error) {
+	var v int
 
-func (j *Json) getInt32() (v int32, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinInt32, hybrids.MaxInt32)
+	v, err = randutil.IntRange(hybrids.MinInt32, hybrids.MaxInt32)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeInt32(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v int32
+	var v float64
+
 	v, err = j.getInt32()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorInt32(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorInt32(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -363,7 +450,11 @@ func (j *Json) fakeVectorInt32(out map[string]interface{}, fieldName string) (er
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getInt32()
+		v, err =  j.getInt32()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -372,31 +463,39 @@ func (j *Json) fakeVectorInt32(out map[string]interface{}, fieldName string) (er
 }
 
 
+func (j *Json) getUint32() (r float64, err error) {
+	var v int
 
-func (j *Json) getUint32() (v uint32, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinUint32, hybrids.MaxUint32)
+	v, err = randutil.IntRange(hybrids.MinUint32, hybrids.MaxUint32)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeUint32(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v uint32
+	var v float64
+
 	v, err = j.getUint32()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorUint32(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorUint32(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -424,7 +523,11 @@ func (j *Json) fakeVectorUint32(out map[string]interface{}, fieldName string) (e
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getUint32()
+		v, err =  j.getUint32()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -433,31 +536,39 @@ func (j *Json) fakeVectorUint32(out map[string]interface{}, fieldName string) (e
 }
 
 
+func (j *Json) getInt64() (r string, err error) {
+	var v int
 
-func (j *Json) getInt64() (v int64, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinInt64, hybrids.MaxInt64)
+	v, err = randutil.IntRange(-200000000, -200000000)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = strconv.FormatInt(int64(v), 10)
+
 	return
 }
 
 func (j *Json) fakeInt64(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v int64
+	var v string
+
 	v, err = j.getInt64()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorInt64(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorInt64(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v string
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -485,7 +596,11 @@ func (j *Json) fakeVectorInt64(out map[string]interface{}, fieldName string) (er
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getInt64()
+		v, err =  j.getInt64()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -494,31 +609,39 @@ func (j *Json) fakeVectorInt64(out map[string]interface{}, fieldName string) (er
 }
 
 
+func (j *Json) getUint64() (r string, err error) {
+	var v int
 
-func (j *Json) getUint64() (v uint64, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinUint64, hybrids.MaxUint64)
+	v, err = randutil.IntRange(0, 0)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = strconv.FormatUint(uint64(v), 10)
+
 	return
 }
 
 func (j *Json) fakeUint64(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v uint64
+	var v string
+
 	v, err = j.getUint64()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorUint64(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorUint64(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v string
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -546,7 +669,11 @@ func (j *Json) fakeVectorUint64(out map[string]interface{}, fieldName string) (e
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getUint64()
+		v, err =  j.getUint64()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -555,31 +682,39 @@ func (j *Json) fakeVectorUint64(out map[string]interface{}, fieldName string) (e
 }
 
 
+func (j *Json) getFloat32() (r float64, err error) {
+	var v int
 
-func (j *Json) getFloat32() (v float32, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinFloat32, hybrids.MaxFloat32)
+	v, err = randutil.IntRange(-158, -158)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeFloat32(path string, out map[string]interface{}, fieldName string) (err error) {
-	var v float32
+	var v float64
+
 	v, err = j.getFloat32()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorFloat32(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorFloat32(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -607,7 +742,11 @@ func (j *Json) fakeVectorFloat32(out map[string]interface{}, fieldName string) (
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getFloat32()
+		v, err =  j.getFloat32()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -616,31 +755,39 @@ func (j *Json) fakeVectorFloat32(out map[string]interface{}, fieldName string) (
 }
 
 
+func (j *Json) getFloat64() (r float64, err error) {
+	var v int
 
-func (j *Json) getFloat64() (v float64, err error) {
-	var r int
-	r, err = randutil.IntRange(hybrids.MinFloat64, hybrids.MaxFloat64)
+	v, err = randutil.IntRange(-3500, -3500)
+
 	if err != nil {
 		return
 	}
-	v = iToBool(r)
+
+	r = float64(v)
+
 	return
 }
 
 func (j *Json) fakeFloat64(path string, out map[string]interface{}, fieldName string) (err error) {
 	var v float64
+
 	v, err = j.getFloat64()
+
 	if err != nil {
 		return
 	}
+
 	out[fieldName] = v
 
 	return
 }
 	
-func (j *Json) fakeVectorFloat64(out map[string]interface{}, fieldName string) (err error) {
+func (j *Json) fakeVectorFloat64(path string, out map[string]interface{}, fieldName string) (err error) {
 	var choice randutil.Choice
 	var vLen int
+	var v float64
+
 	// generate nil or vector
 	nullVector := randutil.Choice{10, int(0)}
 	newVector := randutil.Choice{100, int(1)}
@@ -668,7 +815,11 @@ func (j *Json) fakeVectorFloat64(out map[string]interface{}, fieldName string) (
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		r[i] = j.getFloat64()
+		v, err =  j.getFloat64()
+		if err != nil {
+	        return err
+	    }
+		r[i] = v
 	}
 
 	out[fieldName] = r
@@ -678,43 +829,107 @@ func (j *Json) fakeVectorFloat64(out map[string]interface{}, fieldName string) (
 
 
 
-
-func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types){
+func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types)(err error){
 	switch fieldType{
 
 	case hybrids.Boolean:
-		j.fakeBoolean(path, out, fieldName)
+		err = j.fakeBoolean(path, out, fieldName)
+	
 
 	case hybrids.Int8:
-		j.fakeInt8(path, out, fieldName)
+		err = j.fakeInt8(path, out, fieldName)
+	
 
 	case hybrids.Uint8:
-		j.fakeUint8(path, out, fieldName)
+		err = j.fakeUint8(path, out, fieldName)
+	
 
 	case hybrids.Int16:
-		j.fakeInt16(path, out, fieldName)
+		err = j.fakeInt16(path, out, fieldName)
+	
 
 	case hybrids.Uint16:
-		j.fakeUint16(path, out, fieldName)
+		err = j.fakeUint16(path, out, fieldName)
+	
 
 	case hybrids.Int32:
-		j.fakeInt32(path, out, fieldName)
+		err = j.fakeInt32(path, out, fieldName)
+	
 
 	case hybrids.Uint32:
-		j.fakeUint32(path, out, fieldName)
+		err = j.fakeUint32(path, out, fieldName)
+	
 
 	case hybrids.Int64:
-		j.fakeInt64(path, out, fieldName)
+		err = j.fakeInt64(path, out, fieldName)
+	
 
 	case hybrids.Uint64:
-		j.fakeUint64(path, out, fieldName)
+		err = j.fakeUint64(path, out, fieldName)
+	
 
 	case hybrids.Float32:
-		j.fakeFloat32(path, out, fieldName)
+		err = j.fakeFloat32(path, out, fieldName)
+	
 
 	case hybrids.Float64:
-		j.fakeFloat64(path, out, fieldName)
+		err = j.fakeFloat64(path, out, fieldName)
+	
 
     }
 	return
 }
+
+
+func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types)(err error){
+	switch fieldType{
+
+	case hybrids.VectorBoolean:
+		err = j.fakeVectorBoolean(path, out, fieldName)
+
+
+	case hybrids.VectorInt8:
+		err = j.fakeVectorInt8(path, out, fieldName)
+
+
+	case hybrids.VectorUint8:
+		err = j.fakeVectorUint8(path, out, fieldName)
+
+
+	case hybrids.VectorInt16:
+		err = j.fakeVectorInt16(path, out, fieldName)
+
+
+	case hybrids.VectorUint16:
+		err = j.fakeVectorUint16(path, out, fieldName)
+
+
+	case hybrids.VectorInt32:
+		err = j.fakeVectorInt32(path, out, fieldName)
+
+
+	case hybrids.VectorUint32:
+		err = j.fakeVectorUint32(path, out, fieldName)
+
+
+	case hybrids.VectorInt64:
+		err = j.fakeVectorInt64(path, out, fieldName)
+
+
+	case hybrids.VectorUint64:
+		err = j.fakeVectorUint64(path, out, fieldName)
+
+
+	case hybrids.VectorFloat32:
+		err = j.fakeVectorFloat32(path, out, fieldName)
+
+
+	case hybrids.VectorFloat64:
+		err = j.fakeVectorFloat64(path, out, fieldName)
+
+
+	}
+	return
+}
+
+

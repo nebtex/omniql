@@ -3,7 +3,6 @@ package oreflection
 import (
 	"sync"
 	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/nebtex/omniql/pkg/next/corev1"
 )
 
 //go:generate mockery -name=ReflectStore
@@ -49,6 +48,7 @@ type LookupTableOnUnion interface {
 type OType interface {
 	Id() string
 	Application() string
+	Kind() uint16
 	Name() string
 	Items() OType
 	HybridType() hybrids.Types
@@ -56,8 +56,10 @@ type OType interface {
 	LookupFields() LookupFields
 	LookupEnumeration() LookupEnumeration
 	LookupTableOnUnion() LookupTableOnUnion
-	Enumeration() corev1.EnumerationReader
-	Union() corev1.UnionReader
+	Enumeration() hybrids.TableReader
+	Union() hybrids.TableReader
+	Table() hybrids.TableReader
+	Resource() hybrids.TableReader
 }
 
 type reflectStore struct {
