@@ -1,5 +1,5 @@
 package faker
-
+/*
 import (
 	"github.com/nebtex/omniql/commons/golang/oreflection"
 	"github.com/nebtex/hybrids/golang/hybrids"
@@ -155,3 +155,4 @@ func (j *Json) fakeVectorEnum(out map[string]interface{}, fieldName string, ot o
 	out[fieldName] = r
 	return
 }
+*/

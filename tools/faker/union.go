@@ -1,5 +1,5 @@
 package faker
-
+/*
 import (
 	"github.com/nebtex/omniql/commons/golang/oreflection"
 	"github.com/nebtex/hybrids/golang/hybrids"
@@ -122,3 +122,4 @@ func (j *Json) fakeVectorUnion(path string, out map[string]interface{}, fieldNam
 	}
 	return
 }
+*/

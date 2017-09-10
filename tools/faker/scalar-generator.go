@@ -236,6 +236,112 @@ func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldNa
 
 }
 
+func RenderTestScalarFaker(f io.Writer){
+	var err error
+	var tmp *template.Template
+
+	tmp, err = template.New("ScalarFakersTest").Parse(`
+
+func Test_Fake{{.scalar.String}}(t *testing.T) {
+	Convey("Should populate field with the data of FieldGenerator", t, func() {
+		fieldNumber := hybrids.FieldNumber(2)
+		fg := &fmocks.FieldGenerator{}
+		f := &Json{fieldGen: fg}
+		otype := &rmocks.OType{}
+
+		fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, nil)
+		out := map[string]interface{}{}
+
+		err := f.fake{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+
+		So(err, ShouldBeNil)
+		So(out["field"], ShouldEqual, {{.jsonValue}})
+		fg.AssertCalled(t, "{{.scalar.String}}", "test.field", otype, fieldNumber)
+
+	})
+
+	Convey("Should return error if the generator returns an error", t, func() {
+
+		fieldNumber := hybrids.FieldNumber(2)
+		fg := &fmocks.FieldGenerator{}
+		f := &Json{fieldGen: fg}
+		otype := &rmocks.OType{}
+		otype.On("Id").Return("Table/Test")
+		otype.On("Application").Return("io.test.app")
+
+		fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, fmt.Errorf("failed entropy"))
+		out := map[string]interface{}{}
+
+		err := f.fake{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+		So(err, ShouldNotBeNil)
+		ef := err.(*Error)
+		So(ef.Application, ShouldEqual, "io.test.app")
+		So(ef.HybridType, ShouldEqual, hybrids.{{.scalar.String}})
+		So(ef.OmniqlType, ShouldEqual, "Table/Test")
+		So(ef.Path, ShouldEqual, "test.field")
+
+		
+	})
+
+}
+
+`)
+	die(err)
+	scalars := []hybrids.Types{
+		hybrids.Boolean,
+		hybrids.Int8,
+		hybrids.Uint8,
+		hybrids.Int16,
+		hybrids.Uint16,
+		hybrids.Int32,
+		hybrids.Uint32,
+		hybrids.Int64,
+		hybrids.Uint64,
+		hybrids.Float32,
+		hybrids.Float64,
+	}
+	testValue := []string{
+		"true",
+		"int8(-60)",
+		"uint8(87)",
+		"int16(-500)",
+		"uint16(458)",
+		"int32(-60000)",
+		"uint32(23568778)",
+		"int64(-54545788)",
+		"uint64(123587)",
+		"float32(25.50)",
+		"float64(-356.4545)",
+	}
+
+	jsonValue := []string{
+		"true",
+		"float64(-60)",
+		"float64(87)",
+		"float64(-500)",
+		"float64(458)",
+		"float64(-60000)",
+		"float64(23568778)",
+		"\"-54545788\"",
+		"\"123587\"",
+		"float64(25.50)",
+		"float64(-356.4545)",
+	}
+
+	for index, v := range scalars {
+		err = tmp.Execute(f, map[string]interface{}{
+			"scalar":      v,
+			"value": testValue[index],
+			"jsonValue": jsonValue[index],
+
+		})
+		die(err)
+	}
+
+
+
+}
+
 func main() {
 	f, err := os.Create("scalar-encoder.gen.go")
 	die(err)
@@ -255,6 +361,30 @@ import (
 `))
 	die(err)
 	RenderScalarFakers(f)
+
+	test, err := os.Create("scalar-faker_test.go")
+	die(err)
+	defer test.Close()
+	_, err = test.Write([]byte("// Code generated, DO NOT EDIT.\n"))
+	die(err)
+	_, err = test.Write([]byte(`package faker
+`))
+	die(err)
+
+	_, err = test.Write([]byte(`
+import (
+	"testing"
+	. "github.com/smartystreets/goconvey/convey"
+	fmocks "github.com/nebtex/omniql/tools/faker/mocks"
+	rmocks "github.com/nebtex/omniql/commons/golang/oreflection/mocks"
+	"github.com/nebtex/hybrids/golang/hybrids"
+	"fmt"
+)
+`))
+	die(err)
+	RenderTestScalarFaker(test)
+	
+	
 	/*RenderVectorScalarDecoders(f)
 
 	test, err := os.Create("scalar-decoder_test.go")

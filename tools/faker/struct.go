@@ -1,5 +1,5 @@
 package faker
-
+/*
 import (
 	"github.com/nebtex/omniql/commons/golang/oreflection"
 	"github.com/nebtex/hybrids/golang/hybrids"
@@ -75,3 +75,4 @@ func (j *Json) fakeVectorStruct(path string, out map[string]interface{}, fieldNa
 
 	return
 }
+*/

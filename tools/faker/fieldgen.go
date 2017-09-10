@@ -6,7 +6,7 @@ import (
 )
 
 //go:generate mockery -name=FieldGenerator
-
+//FieldGenerator generate random data using the reflection interface
 type FieldGenerator interface {
 	//generate random vector len
 	VectorLen(path string, ot oreflection.OType, fn hybrids.FieldNumber) (int, error)
