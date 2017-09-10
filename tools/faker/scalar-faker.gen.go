@@ -80,7 +80,8 @@ func (j *Json) fakeVectorBoolean(path string, out map[string]interface{}, fieldN
 			}
 			return
 	    }
-		r[i] = v
+		r = append(r, v)
+
 	}
 
 	out[fieldName] = r
@@ -161,7 +162,8 @@ func (j *Json) fakeVectorInt8(path string, out map[string]interface{}, fieldName
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -242,7 +244,8 @@ func (j *Json) fakeVectorUint8(path string, out map[string]interface{}, fieldNam
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -323,7 +326,8 @@ func (j *Json) fakeVectorInt16(path string, out map[string]interface{}, fieldNam
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -404,7 +408,8 @@ func (j *Json) fakeVectorUint16(path string, out map[string]interface{}, fieldNa
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -485,7 +490,8 @@ func (j *Json) fakeVectorInt32(path string, out map[string]interface{}, fieldNam
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -566,7 +572,8 @@ func (j *Json) fakeVectorUint32(path string, out map[string]interface{}, fieldNa
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -647,7 +654,8 @@ func (j *Json) fakeVectorInt64(path string, out map[string]interface{}, fieldNam
 			}
 			return
 	    }
-		r[i] = strconv.FormatInt(int64(v), 10)
+		r = append(r, strconv.FormatInt(int64(v), 10))
+
 	}
 
 	out[fieldName] = r
@@ -728,7 +736,8 @@ func (j *Json) fakeVectorUint64(path string, out map[string]interface{}, fieldNa
 			}
 			return
 	    }
-		r[i] = strconv.FormatUint(uint64(v), 10)
+		r = append(r, strconv.FormatUint(uint64(v), 10))
+
 	}
 
 	out[fieldName] = r
@@ -809,7 +818,8 @@ func (j *Json) fakeVectorFloat32(path string, out map[string]interface{}, fieldN
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
@@ -890,7 +900,8 @@ func (j *Json) fakeVectorFloat64(path string, out map[string]interface{}, fieldN
 			}
 			return
 	    }
-		r[i] = float64(v)
+		r = append(r, float64(v))
+
 	}
 
 	out[fieldName] = r
