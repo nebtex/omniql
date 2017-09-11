@@ -78,7 +78,7 @@ func (j *Json) fakeVectorUnion(path string, out map[string]interface{}, fieldNam
 
 			err = &EncoderError{
 				Path:        path,
-				Application: e.application,
+				Package: e.application,
 				OmniqlType:  ot.Id(),
 				HybridType:  hybrids.Union,
 				ErrorMsg:    err.Error(),
@@ -99,7 +99,7 @@ func (j *Json) fakeVectorUnion(path string, out map[string]interface{}, fieldNam
 				zap.Uint16("Table position in the union", uint16(kind)),
 				zap.String("Union type", ot.Id()),
 				zap.String("Path", path),
-				zap.String("Application", e.application))
+				zap.String("Package", e.application))
 			r = append(r, nil)
 			continue
 		}
@@ -110,7 +110,7 @@ func (j *Json) fakeVectorUnion(path string, out map[string]interface{}, fieldNam
 		if err != nil {
 			err = &EncoderError{
 				Path:        path,
-				Application: e.application,
+				Package: e.application,
 				OmniqlType:  ot.Id(),
 				HybridType:  hybrids.Union,
 				ErrorMsg:    err.Error(),

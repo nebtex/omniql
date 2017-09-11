@@ -4,7 +4,7 @@ import(
     "strings"
 )
 //EnumerationTypes ...
-type EnumerationTypes 
+type EnumerationTypes uint16
 
 const (
     //EnumerationTypesNone ...

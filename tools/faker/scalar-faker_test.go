@@ -38,7 +38,7 @@ func Test_FakeBoolean(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Boolean", "test.field", otype, fieldNumber).Return(true, fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -46,7 +46,7 @@ func Test_FakeBoolean(t *testing.T) {
 			err := f.fakeBoolean("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Boolean)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -67,7 +67,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -76,7 +76,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorBoolean)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -90,7 +90,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -110,7 +110,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -122,7 +122,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorBoolean)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -136,7 +136,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Boolean", "test.field", otype, fieldNumber).Return(true, fmt.Errorf("entropy error"))
@@ -149,7 +149,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Boolean)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -163,7 +163,7 @@ func Test_FakeVectorBoolean(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Boolean", "test.field", otype, fieldNumber).Return(true, nil)
@@ -210,7 +210,7 @@ func Test_FakeInt8(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Int8", "test.field", otype, fieldNumber).Return(int8(-60), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -218,7 +218,7 @@ func Test_FakeInt8(t *testing.T) {
 			err := f.fakeInt8("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int8)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -239,7 +239,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -248,7 +248,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt8)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -262,7 +262,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -282,7 +282,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -294,7 +294,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt8)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -308,7 +308,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int8", "test.field", otype, fieldNumber).Return(int8(-60), fmt.Errorf("entropy error"))
@@ -321,7 +321,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int8)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -335,7 +335,7 @@ func Test_FakeVectorInt8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int8", "test.field", otype, fieldNumber).Return(int8(-60), nil)
@@ -382,7 +382,7 @@ func Test_FakeUint8(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Uint8", "test.field", otype, fieldNumber).Return(uint8(87), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -390,7 +390,7 @@ func Test_FakeUint8(t *testing.T) {
 			err := f.fakeUint8("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint8)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -411,7 +411,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -420,7 +420,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint8)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -434,7 +434,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -454,7 +454,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -466,7 +466,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint8)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -480,7 +480,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint8", "test.field", otype, fieldNumber).Return(uint8(87), fmt.Errorf("entropy error"))
@@ -493,7 +493,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint8)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -507,7 +507,7 @@ func Test_FakeVectorUint8(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint8", "test.field", otype, fieldNumber).Return(uint8(87), nil)
@@ -554,7 +554,7 @@ func Test_FakeInt16(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Int16", "test.field", otype, fieldNumber).Return(int16(-500), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -562,7 +562,7 @@ func Test_FakeInt16(t *testing.T) {
 			err := f.fakeInt16("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int16)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -583,7 +583,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -592,7 +592,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt16)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -606,7 +606,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -626,7 +626,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -638,7 +638,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt16)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -652,7 +652,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int16", "test.field", otype, fieldNumber).Return(int16(-500), fmt.Errorf("entropy error"))
@@ -665,7 +665,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int16)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -679,7 +679,7 @@ func Test_FakeVectorInt16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int16", "test.field", otype, fieldNumber).Return(int16(-500), nil)
@@ -726,7 +726,7 @@ func Test_FakeUint16(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Uint16", "test.field", otype, fieldNumber).Return(uint16(458), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -734,7 +734,7 @@ func Test_FakeUint16(t *testing.T) {
 			err := f.fakeUint16("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint16)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -755,7 +755,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -764,7 +764,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint16)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -778,7 +778,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -798,7 +798,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -810,7 +810,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint16)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -824,7 +824,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint16", "test.field", otype, fieldNumber).Return(uint16(458), fmt.Errorf("entropy error"))
@@ -837,7 +837,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint16)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -851,7 +851,7 @@ func Test_FakeVectorUint16(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint16", "test.field", otype, fieldNumber).Return(uint16(458), nil)
@@ -898,7 +898,7 @@ func Test_FakeInt32(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Int32", "test.field", otype, fieldNumber).Return(int32(-60000), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -906,7 +906,7 @@ func Test_FakeInt32(t *testing.T) {
 			err := f.fakeInt32("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int32)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -927,7 +927,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -936,7 +936,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -950,7 +950,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -970,7 +970,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -982,7 +982,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -996,7 +996,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int32", "test.field", otype, fieldNumber).Return(int32(-60000), fmt.Errorf("entropy error"))
@@ -1009,7 +1009,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -1023,7 +1023,7 @@ func Test_FakeVectorInt32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int32", "test.field", otype, fieldNumber).Return(int32(-60000), nil)
@@ -1070,7 +1070,7 @@ func Test_FakeUint32(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Uint32", "test.field", otype, fieldNumber).Return(uint32(23568778), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -1078,7 +1078,7 @@ func Test_FakeUint32(t *testing.T) {
 			err := f.fakeUint32("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint32)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1099,7 +1099,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -1108,7 +1108,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1122,7 +1122,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -1142,7 +1142,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -1154,7 +1154,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1168,7 +1168,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint32", "test.field", otype, fieldNumber).Return(uint32(23568778), fmt.Errorf("entropy error"))
@@ -1181,7 +1181,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -1195,7 +1195,7 @@ func Test_FakeVectorUint32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint32", "test.field", otype, fieldNumber).Return(uint32(23568778), nil)
@@ -1242,7 +1242,7 @@ func Test_FakeInt64(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Int64", "test.field", otype, fieldNumber).Return(int64(-54545788), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -1250,7 +1250,7 @@ func Test_FakeInt64(t *testing.T) {
 			err := f.fakeInt64("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int64)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1271,7 +1271,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -1280,7 +1280,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1294,7 +1294,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -1314,7 +1314,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -1326,7 +1326,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorInt64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1340,7 +1340,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int64", "test.field", otype, fieldNumber).Return(int64(-54545788), fmt.Errorf("entropy error"))
@@ -1353,7 +1353,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Int64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -1367,7 +1367,7 @@ func Test_FakeVectorInt64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Int64", "test.field", otype, fieldNumber).Return(int64(-54545788), nil)
@@ -1414,7 +1414,7 @@ func Test_FakeUint64(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Uint64", "test.field", otype, fieldNumber).Return(uint64(123587), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -1422,7 +1422,7 @@ func Test_FakeUint64(t *testing.T) {
 			err := f.fakeUint64("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint64)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1443,7 +1443,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -1452,7 +1452,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1466,7 +1466,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -1486,7 +1486,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -1498,7 +1498,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorUint64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1512,7 +1512,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint64", "test.field", otype, fieldNumber).Return(uint64(123587), fmt.Errorf("entropy error"))
@@ -1525,7 +1525,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Uint64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -1539,7 +1539,7 @@ func Test_FakeVectorUint64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Uint64", "test.field", otype, fieldNumber).Return(uint64(123587), nil)
@@ -1586,7 +1586,7 @@ func Test_FakeFloat32(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Float32", "test.field", otype, fieldNumber).Return(float32(25.50), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -1594,7 +1594,7 @@ func Test_FakeFloat32(t *testing.T) {
 			err := f.fakeFloat32("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Float32)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1615,7 +1615,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -1624,7 +1624,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorFloat32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1638,7 +1638,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -1658,7 +1658,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -1670,7 +1670,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorFloat32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1684,7 +1684,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Float32", "test.field", otype, fieldNumber).Return(float32(25.50), fmt.Errorf("entropy error"))
@@ -1697,7 +1697,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Float32)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -1711,7 +1711,7 @@ func Test_FakeVectorFloat32(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Float32", "test.field", otype, fieldNumber).Return(float32(25.50), nil)
@@ -1758,7 +1758,7 @@ func Test_FakeFloat64(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("Float64", "test.field", otype, fieldNumber).Return(float64(-356.4545), fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -1766,7 +1766,7 @@ func Test_FakeFloat64(t *testing.T) {
 			err := f.fakeFloat64("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Float64)
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1787,7 +1787,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -1796,7 +1796,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorFloat64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1810,7 +1810,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -1830,7 +1830,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -1842,7 +1842,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.VectorFloat64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -1856,7 +1856,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Float64", "test.field", otype, fieldNumber).Return(float64(-356.4545), fmt.Errorf("entropy error"))
@@ -1869,7 +1869,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Float64)
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -1883,7 +1883,7 @@ func Test_FakeVectorFloat64(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("Float64", "test.field", otype, fieldNumber).Return(float64(-356.4545), nil)

@@ -1,11 +1,12 @@
 package oreflection
 
 import (
-	"sync"
 	"github.com/nebtex/hybrids/golang/hybrids"
+	"github.com/nebtex/omniql/pkg/next/corev1"
 )
 
 //go:generate mockery -name=ReflectStore
+//ReflectStore ...
 type ReflectStore interface {
 	//OReflect return the reflection, of a omniql type using the magic string Type and Items
 	//This method should be thread safe for read
@@ -18,6 +19,7 @@ type ReflectStore interface {
 }
 
 //go:generate mockery -name=LookupFields
+//LookupFields ...
 type LookupFields interface {
 	ByNumber(fn hybrids.FieldNumber) (fieldName string, t OType, ok bool)
 	BySnakeCase(fieldName string) (fn hybrids.FieldNumber, t OType, ok bool)
@@ -25,6 +27,7 @@ type LookupFields interface {
 }
 
 //go:generate mockery -name=LookupEnumeration
+//LookupEnumeration ...
 type LookupEnumeration interface {
 	ByUint8ToCamelCase(input uint8) (value string, ok bool)
 	ByUint16ToCamelCase(input uint16) (value string, ok bool)
@@ -38,33 +41,85 @@ type LookupEnumeration interface {
 }
 
 //go:generate mockery -name=LookupTableOnUnion
+//LookupTableOnUnion ...
 type LookupTableOnUnion interface {
 	ByString(input string) (position hybrids.UnionKind, tableType OType, ok bool)
 	ByPositionToCamelCase(input hybrids.UnionKind) (value string, tableType OType, ok bool)
 	ByPositionToSnakeCase(input hybrids.UnionKind) (value string, tableType OType, ok bool)
 }
 
-//go:generate mockery -name=OType
-type OType interface {
-	Id() string
-	Application() string
-	Kind() uint16
-	Name() string
-	Items() OType
-	HybridType() hybrids.Types
+//go:generate mockery -name=Table
+//Table ...
+type Table interface {
+	Schema() corev1.TableReader
 	FieldCount() hybrids.FieldNumber
 	LookupFields() LookupFields
-	LookupEnumeration() LookupEnumeration
-	LookupTableOnUnion() LookupTableOnUnion
-	Enumeration() hybrids.TableReader
-	Union() hybrids.TableReader
-	Table() hybrids.TableReader
-	Resource() hybrids.TableReader
 }
 
-type reflectStore struct {
-	store  map[string]*OType
-	wrLock sync.RWMutex
+//go:generate mockery -name=Resource
+//Resource ...
+type Resource interface {
+	Schema() corev1.ResourceReader
+	FieldCount() hybrids.FieldNumber
+	LookupFields() LookupFields
+}
+
+//go:generate mockery -name=Items
+//Items ...
+type Items interface {
+	Type() OType
+	HybridType() hybrids.Types
+}
+
+//go:generate mockery -name=Field
+//Field ...
+type Field interface {
+	Schema() corev1.FieldReader
+	ParentType() OType
+	Type() OType
+	//position of this field in the table
+	FieldPosition() hybrids.FieldNumber
+	//field name
+	Name() string
+	//the underlying data type
+	HybridType() hybrids.Types
+	Items() Items
+}
+
+//go:generate mockery -name=Enumeration
+//Enumeration ...
+type Enumeration interface {
+	Schema() corev1.EnumerationReader
+	Lookup() LookupEnumeration
+	//the underlying data type
+	HybridType() hybrids.Types
+}
+
+//go:generate mockery -name=Union
+//Union ...
+type Union interface {
+	Schema() corev1.UnionReader
+	LookupTable() LookupTableOnUnion
+}
+
+//go:generate mockery -name=OType
+//OType represent any omniql type
+type OType interface {
+	//example Table/Documentation/StringField/0
+	Id() string
+
+	//Package name, example: schema.omniql.almagest.io/omniql/schema.v1.1
+	Package() string
+
+	//Table, Field, Enumeration, etc..
+	Kind() corev1.SchemaTypes
+
+	//if this is a vector this will return the item type
+	Enumeration() Enumeration
+	Union() Union
+	Table() Table
+	Resource() Resource
+	Field() Field
 }
 
 /*

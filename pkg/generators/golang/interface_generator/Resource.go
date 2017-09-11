@@ -18,7 +18,7 @@ type ResourceReaderGenerator struct {
 func NewResourceReaderGenerator(resource corev1.ResourceReader, ip string, logger *zap.Logger) (r *ResourceReaderGenerator) {
 	zap := logger.With(zap.String("ResourceName", resource.Metadata().Name()),
 		zap.String("Type", "Reader implementation"),
-		zap.String("Application", resource.Metadata().Application()),
+		zap.String("Package", resource.Metadata().Application()),
 	)
 	r = &ResourceReaderGenerator{zap: zap, resource: resource}
 	r.trg = NewTableReaderGenerator(resource, ip, zap)

@@ -10,7 +10,7 @@ type MetadataReader interface {
     Name() string
 
     //Kind ...
-    Kind() ApplicationType
+    Kind() SchemaTypes
 
     //Parent ...
     Parent() string

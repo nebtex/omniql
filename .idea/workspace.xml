@@ -6,11 +6,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42073251-b563-4837-9566-5f32c75a4804" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/tools/faker/scalar-encoder.gen.go" afterPath="$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Field.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Resource.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Table.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/faker/enumeration_test.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tools/faker/mocks/EnumerationGenerator.go" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/projectFilesBackup/.idea/workspace.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/aa_test.go" afterPath="$PROJECT_DIR$/tools/faker/aa_test.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go" afterPath="$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" afterPath="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go" afterPath="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/next/corev1/EnumerationTypes.go" afterPath="$PROJECT_DIR$/pkg/next/corev1/EnumerationTypes.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/next/corev1/Metadata.go" afterPath="$PROJECT_DIR$/pkg/next/corev1/Metadata.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/enumeration.go" afterPath="$PROJECT_DIR$/tools/faker/enumeration.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/errors.go" afterPath="$PROJECT_DIR$/tools/faker/errors.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/fieldgen.go" afterPath="$PROJECT_DIR$/tools/faker/fieldgen.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/mocks/FieldGenerator.go" afterPath="$PROJECT_DIR$/tools/faker/mocks/FieldGenerator.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" afterPath="$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/scalar-faker_test.go" afterPath="$PROJECT_DIR$/tools/faker/scalar-faker_test.go" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/scalar-generator.go" afterPath="$PROJECT_DIR$/tools/faker/scalar-generator.go" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tools/faker/union.go" afterPath="$PROJECT_DIR$/tools/faker/union.go" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,11 +54,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="aa_test.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/faker/aa_test.go">
+      <file leaf-file-name="table.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/faker/table.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -52,46 +67,41 @@
       <file leaf-file-name="union.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tools/faker/union.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="455">
+            <state relative-caret-position="1860">
               <caret line="124" column="2" lean-forward="false" selection-start-line="124" selection-start-column="2" selection-end-line="124" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="0">
-                <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                <folding />
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scalar-faker.gen.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker.gen.go">
+      <file leaf-file-name="enumeration.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tools/faker/enumeration.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="317" column="8" lean-forward="false" selection-start-line="317" selection-start-column="8" selection-end-line="317" selection-end-column="8" />
+            <state relative-caret-position="1322">
+              <caret line="245" column="0" lean-forward="true" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
               <folding>
-                <element signature="e#47#174#0" expanded="true" />
+                <element signature="e#15#131#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="scalar-faker_test.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker_test.go">
+      <file leaf-file-name="fieldgen.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/faker/fieldgen.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1130">
-              <caret line="588" column="0" lean-forward="true" selection-start-line="588" selection-start-column="0" selection-end-line="588" selection-end-column="0" />
-              <folding>
-                <element signature="e#47#286#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-403">
+              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EnumerationGenerator.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/faker/mocks/EnumerationGenerator.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -99,8 +109,30 @@
       <file leaf-file-name="FieldGenerator.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tools/faker/mocks/FieldGenerator.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
+            <state relative-caret-position="-3538">
               <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scalar-faker_test.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding>
+                <element signature="e#47#286#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="struct.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/faker/struct.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1155">
+              <caret line="77" column="2" lean-forward="false" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -109,38 +141,20 @@
       <file leaf-file-name="scalar-generator.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tools/faker/scalar-generator.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="287" column="6" lean-forward="false" selection-start-line="287" selection-start-column="6" selection-end-line="287" selection-end-column="6" />
-              <folding />
+            <state relative-caret-position="-2250">
+              <caret line="219" column="55" lean-forward="false" selection-start-line="219" selection-start-column="55" selection-end-line="219" selection-end-column="55" />
+              <folding>
+                <element signature="e#196#305#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enumeration.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/faker/enumeration.go">
+      <file leaf-file-name="enumeration_test.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tools/faker/enumeration_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2055">
-              <caret line="152" column="5" lean-forward="false" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="faker.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/faker/faker.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fieldgen.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tools/faker/fieldgen.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="8" column="68" lean-forward="false" selection-start-line="8" selection-start-column="68" selection-end-line="8" selection-end-column="68" />
+            <state relative-caret-position="-28">
+              <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -157,9 +171,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Load</find>
-      <find>f.Name()</find>
-      <find>Nextcorev1</find>
       <find>ScalarToGolangType</find>
       <find>print</find>
       <find>io.almagest.omniql.v1</find>
@@ -187,6 +198,9 @@
       <find>bool</find>
       <find>next</find>
       <find>Boolean</find>
+      <find>Uint8</find>
+      <find>Uint16</find>
+      <find>table</find>
     </findStrings>
     <replaceStrings>
       <replace>documentation</replace>
@@ -209,6 +223,9 @@
       <replace>{{$table_name}}</replace>
       <replace>{{.scalar.NativeType}}</replace>
       <replace>{{.scalar.String}}</replace>
+      <replace>Uint32</replace>
+      <replace>Uint16</replace>
+      <replace>field</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/examples/omniql/AdminService</dir>
@@ -227,10 +244,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/EnumerationTypes.yml" />
-        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/SchemaTypes.yml" />
-        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/Union.yml" />
-        <option value="$PROJECT_DIR$/reflection/omniql/omnibuf/schema/UnionTypes.yml" />
         <option value="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Table.go" />
         <option value="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Shards.go" />
         <option value="$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go" />
@@ -260,24 +273,28 @@
         <option value="$PROJECT_DIR$/pkg/next/corev1/SchemaTypes.go" />
         <option value="$PROJECT_DIR$/pkg/next/corev1/UnionTypes.go" />
         <option value="$PROJECT_DIR$/reflection/omniql/omega/Function.yml" />
-        <option value="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" />
         <option value="$PROJECT_DIR$/tools/faker/interface.go" />
         <option value="$PROJECT_DIR$/tools/faker/faker.go" />
         <option value="$PROJECT_DIR$/tools/faker/scalar-encoder.gen-2" />
         <option value="$PROJECT_DIR$/reflection/omniql/omega/README.md" />
         <option value="$PROJECT_DIR$/reflection/omniql/omega/Resource.yml" />
-        <option value="$PROJECT_DIR$/tools/faker/errors.go" />
-        <option value="$PROJECT_DIR$/tools/faker/fieldgen.go" />
         <option value="$PROJECT_DIR$/tools/faker/struct.go" />
         <option value="$PROJECT_DIR$/tools/faker/union.go" />
-        <option value="$PROJECT_DIR$/tools/faker/enumeration.go" />
         <option value="$PROJECT_DIR$/tools/faker/test.go" />
         <option value="$PROJECT_DIR$/commons/golang/oreflection/mocks/ReflectStore.go" />
         <option value="$PROJECT_DIR$/tools/faker/scalar-encoder.gen.go" />
-        <option value="$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" />
         <option value="$PROJECT_DIR$/tools/faker/aa_test.go" />
+        <option value="$PROJECT_DIR$/pkg/next/corev1/Metadata.go" />
+        <option value="$PROJECT_DIR$/pkg/next/corev1/EnumerationTypes.go" />
+        <option value="$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go" />
+        <option value="$PROJECT_DIR$/tools/faker/enumeration_test.go" />
+        <option value="$PROJECT_DIR$/tools/faker/errors.go" />
+        <option value="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" />
         <option value="$PROJECT_DIR$/tools/faker/scalar-generator.go" />
         <option value="$PROJECT_DIR$/tools/faker/scalar-faker_test.go" />
+        <option value="$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" />
+        <option value="$PROJECT_DIR$/tools/faker/enumeration.go" />
+        <option value="$PROJECT_DIR$/tools/faker/fieldgen.go" />
       </list>
     </option>
   </component>
@@ -292,10 +309,9 @@
     <handled-path value="$PROJECT_DIR$/src/node_modules" />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="292" />
-    <option name="y" value="363" />
-    <option name="width" value="1660" />
-    <option name="height" value="768" />
+    <option name="y" value="30" />
+    <option name="width" value="1680" />
+    <option name="height" value="1020" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -370,20 +386,21 @@
             <path>
               <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
               <item name="omniql" type="462c0819:PsiDirectoryNode" />
-              <item name="reflection" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+              <item name="next" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
               <item name="omniql" type="462c0819:PsiDirectoryNode" />
-              <item name="reflection" type="462c0819:PsiDirectoryNode" />
-              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+              <item name="next" type="462c0819:PsiDirectoryNode" />
+              <item name="corev1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
               <item name="omniql" type="462c0819:PsiDirectoryNode" />
-              <item name="reflection" type="462c0819:PsiDirectoryNode" />
-              <item name="omniql" type="462c0819:PsiDirectoryNode" />
-              <item name="omega" type="462c0819:PsiDirectoryNode" />
+              <item name="pkg" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
@@ -417,11 +434,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tools/faker" />
       <recent name="$PROJECT_DIR$/reflection/omniql" />
       <recent name="$PROJECT_DIR$/pkg/next/corev1" />
       <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/schema" />
       <recent name="$PROJECT_DIR$/pkg/generators/golang/next" />
-      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/enumeration" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/reflection/omniql" />
@@ -629,7 +646,8 @@
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25214198" sideWeight="0.49541286" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.025703795" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.02998776" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2969629" sideWeight="0.4904762" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22947131" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32252142" sideWeight="0.5045872" order="2" side_tool="true" content_ui="tabs" />
@@ -639,7 +657,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2970852" sideWeight="0.4904762" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -691,7 +708,8 @@
     <MESSAGE value="update schema" />
     <MESSAGE value="end scalar faker" />
     <MESSAGE value="add scalar tests [faker]" />
-    <option name="LAST_COMMIT_MESSAGE" value="add scalar tests [faker]" />
+    <MESSAGE value="test vector scalar" />
+    <option name="LAST_COMMIT_MESSAGE" value="test vector scalar" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -702,145 +720,11 @@
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="49" />
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Enumeration.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Documentation.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Field.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Resource.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-349">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/ResourceID.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="17" lean-forward="false" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/SchemaTypes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1395">
-          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-          <folding>
-            <element signature="e#15#85#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Table.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Union.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding>
-            <marker date="1504979266317" expanded="true" signature="420:619" ph="/.../" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/UnionTypes.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765">
-          <caret line="6" column="22" lean-forward="false" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding>
-            <element signature="e#15#85#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/cmd/jsonfaker/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/UnionResource.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Union.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Table.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/EnumerationItem.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Metadata.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Documentation.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1/Collection.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -972,52 +856,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/struct.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="77" column="2" lean-forward="false" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/errors.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="15" selection-end-column="16" />
-          <folding>
-            <element signature="e#15#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/table.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/reflect.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-120">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/ReflectStore.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-649">
           <caret line="4" column="72" lean-forward="true" selection-start-line="4" selection-start-column="72" selection-end-line="4" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1440">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1034,22 +876,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/union.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="455">
-          <caret line="124" column="2" lean-forward="false" selection-start-line="124" selection-start-column="2" selection-end-line="124" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/enumeration.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2055">
-          <caret line="152" column="5" lean-forward="false" selection-start-line="152" selection-start-column="5" selection-end-line="152" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1073,19 +899,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/fieldgen.go">
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Documentation.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="68" lean-forward="false" selection-start-line="8" selection-start-column="68" selection-end-line="8" selection-end-column="68" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/mocks/FieldGenerator.go">
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/EnumerationGroup.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Field.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Metadata.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/ResourceID.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Table.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/UnionTypes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Enumeration.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-328">
+          <caret line="5" column="13" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Resource.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-328">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/EnumerationItem.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-193">
+          <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/EnumerationTypes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-810">
+          <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/SchemaTypes.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="30" column="20" lean-forward="false" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1845">
+          <caret line="126" column="45" lean-forward="false" selection-start-line="126" selection-start-column="45" selection-end-line="126" selection-end-column="45" />
+          <folding>
+            <marker date="1505123219119" expanded="true" signature="3313:3321" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1097,20 +1013,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker.gen.go">
+    <entry file="file://$PROJECT_DIR$/tools/faker/errors.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="317" column="8" lean-forward="false" selection-start-line="317" selection-start-column="8" selection-end-line="317" selection-end-column="8" />
-          <folding>
-            <element signature="e#47#174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/faker/scalar-generator.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="287" column="6" lean-forward="false" selection-start-line="287" selection-start-column="6" selection-end-line="287" selection-end-column="6" />
+        <state relative-caret-position="240">
+          <caret line="19" column="23" lean-forward="true" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -1123,12 +1029,124 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/Table.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-433">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/Resource.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-433">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/reflect.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-868">
+          <caret line="70" column="9" lean-forward="false" selection-start-line="70" selection-start-column="4" selection-end-line="70" selection-end-column="14" />
+          <folding>
+            <element signature="e#21#119#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker.gen.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="894" column="56" lean-forward="false" selection-start-line="894" selection-start-column="29" selection-end-line="894" selection-end-column="56" />
+          <folding>
+            <element signature="e#47#174#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/scalar-generator.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2250">
+          <caret line="219" column="55" lean-forward="false" selection-start-line="219" selection-start-column="55" selection-end-line="219" selection-end-column="55" />
+          <folding>
+            <element signature="e#196#305#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/enumeration_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="8" column="9" lean-forward="false" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1130">
-          <caret line="588" column="0" lean-forward="true" selection-start-line="588" selection-start-column="0" selection-end-line="588" selection-end-column="0" />
+        <state relative-caret-position="315">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
             <element signature="e#47#286#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/struct.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="77" column="2" lean-forward="false" selection-start-line="77" selection-start-column="2" selection-end-line="77" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/table.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/union.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1860">
+          <caret line="124" column="2" lean-forward="false" selection-start-line="124" selection-start-column="2" selection-end-line="124" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/fieldgen.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-403">
+          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/mocks/EnumerationGenerator.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="98" column="0" lean-forward="true" selection-start-line="98" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/mocks/FieldGenerator.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3538">
+          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/faker/enumeration.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1322">
+          <caret line="245" column="0" lean-forward="true" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#131#0" expanded="true" />
           </folding>
         </state>
       </provider>

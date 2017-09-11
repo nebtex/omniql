@@ -1,158 +1,249 @@
 package faker
-/*
+
 import (
 	"github.com/nebtex/omniql/commons/golang/oreflection"
 	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/jmcvetta/randutil"
+	"fmt"
 )
 
-func (j *Json) fakeEnum(out map[string]interface{}, fieldName string, ot oreflection.OType) (err error) {
-	var enum string
-	var ok bool
-	maxEnum := ot.Enumeration().Items().Len()
+func (j *Json) fakeEnum(path string, out map[string]interface{}, ft oreflection.OType, enumType oreflection.OType) (err error) {
+	var enumName string
+	var enumUint8 uint8
+	var enumUint16 uint16
+	var enumUint32 uint32
 
-	value, err := randutil.IntRange(0, maxEnum)
+	choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 	if err != nil {
-		return err
+		err = &Error{
+			Path:       path,
+			HybridType: ft.Field().HybridType(),
+			OmniqlType: ft.Id(),
+			Package:    ft.Package(),
+			ErrorMsg:   err.Error(),
+		}
+		return
 	}
 
-	switch ot.HybridType() {
+	if choiceString {
+		enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
+		if err != nil {
+			err = &Error{
+				Path:       path,
+				HybridType: ft.Field().HybridType(),
+				OmniqlType: ft.Id(),
+				Package:    ft.Package(),
+				ErrorMsg:   err.Error(),
+			}
+			return
+		}
+
+		out[ft.Field().Name()] = enumName
+		return
+	}
+
+	switch enumType.Enumeration().HybridType() {
 
 	case hybrids.Uint8:
-		enum, ok = ot.LookupEnumeration().ByUint8ToCamelCase(uint8(value))
-
-		if ok {
-			//write the enum as string
-			out[fieldName] = enum
-		} else {
-			//write the enum as json number
-			out[fieldName] = float64(value)
-		}
-		return
+		enumUint8, err = j.fieldGen.Enumeration().Uint8Enumeration(path, ft)
+		//write the enum as json number
+		out[ft.Field().Name()] = float64(enumUint8)
 
 	case hybrids.Uint16:
-		enum, ok = ot.LookupEnumeration().ByUint16ToCamelCase(uint16(value))
 
-		if ok {
-			//write the enum as string
-			out[fieldName] = enum
-		} else {
-			//write the enum as json number
-			out[fieldName] = float64(value)
-		}
-		return
+		enumUint16, err = j.fieldGen.Enumeration().Uint16Enumeration(path, ft)
+		//write the enum as json number
+		out[ft.Field().Name()] = float64(enumUint16)
 
 	case hybrids.Uint32:
-		enum, ok = ot.LookupEnumeration().ByUint32ToCamelCase(uint32(value))
-
-		if ok {
-			//write the enum as string
-			out[fieldName] = enum
-		} else {
-			//write the enum as json number
-			out[fieldName] = float64(value)
-		}
-		return
-
+		enumUint32, err = j.fieldGen.Enumeration().Uint32Enumeration(path, ft)
+		//write the enum as json number
+		out[ft.Field().Name()] = float64(enumUint32)
 	}
+	return
 }
 
-func (j *Json) fakeVectorEnum(out map[string]interface{}, fieldName string, ot oreflection.OType) (err error) {
-	var choice randutil.Choice
+func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft oreflection.OType) (err error) {
 	var vLen int
+	var shouldNil bool
+	var enumName string
+	var enumUint8 uint8
+	var enumUint16 uint16
+	var enumUint32 uint32
 
-	// generate nil or vector
-	nullVector := randutil.Choice{10, int(0)}
-	newVector := randutil.Choice{100, int(1)}
-
-	choice, err = randutil.WeightedChoice([]randutil.Choice{nullVector, newVector})
+	shouldNil, err = j.fieldGen.ShouldBeNil(path, ft)
 
 	if err != nil {
-		return err
+		err = &Error{
+			Path:       path,
+			HybridType: ft.Field().HybridType(),
+			OmniqlType: ft.Id(),
+			Package:    ft.Package(),
+			ErrorMsg:   err.Error(),
+		}
+		return
 	}
 
-	item, _ := choice.Item.(int)
-
-	if item == 0 {
-		out[fieldName] = nil
+	if shouldNil {
+		out[ft.Field().Name()] = nil
 		return
 	}
 
 	//generate vector len
-	vLen, err = randutil.IntRange(1, 127)
+	vLen, err = j.fieldGen.VectorLen(path, ft)
 
 	if err != nil {
+		err = &Error{
+			Path:       path,
+			HybridType: ft.Field().HybridType(),
+			OmniqlType: ft.Id(),
+			Package:    ft.Package(),
+			ErrorMsg:   err.Error(),
+		}
 		return err
 	}
 
 	r := make([]interface{}, 0, vLen)
 
-	maxEnum := ot.Enumeration().Items().Len()
-
-	switch ot.Items().HybridType() {
+	switch ft.Field().Items().HybridType() {
 
 	case hybrids.Uint8:
 
 		for i := 0; i < vLen; i++ {
-			value, err := randutil.IntRange(0, maxEnum)
+			choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 			if err != nil {
-				return err
+				err = &Error{
+					Path:       path+fmt.Sprintf("[%d]", i),
+					HybridType: ft.Field().Items().HybridType(),
+					OmniqlType: ft.Id(),
+					Package:    ft.Package(),
+					ErrorMsg:   err.Error(),
+				}
+				return
 			}
 
-			enumName, ok := ot.LookupEnumeration().ByUint8ToCamelCase(uint8(value))
+			if choiceString {
+				enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
+				if err != nil {
+					err = &Error{
+						Path:       path+fmt.Sprintf("[%d]", i),
+						HybridType: ft.Field().Items().HybridType(),
+						OmniqlType: ft.Id(),
+						Package:    ft.Package(),
+						ErrorMsg:   err.Error(),
+					}
+					return
+				}
 
-			if ok {
-				//write the enum as string
 				r = append(r, enumName)
 			} else {
-				//write the enum as json number
-				r = append(r, float64(value))
+				enumUint8, err = j.fieldGen.Enumeration().Uint8Enumeration(path, ft)
+				if err != nil {
+					err = &Error{
+						Path:       path+fmt.Sprintf("[%d]", i),
+						HybridType: ft.Field().Items().HybridType(),
+						OmniqlType: ft.Id(),
+						Package:    ft.Package(),
+						ErrorMsg:   err.Error(),
+					}
+					return
+				}
+				r = append(r, float64(enumUint8))
 			}
 		}
 
 	case hybrids.Uint16:
 		for i := 0; i < vLen; i++ {
-			value, err := randutil.IntRange(0, maxEnum)
+			choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 			if err != nil {
-				return err
+				err = &Error{
+					Path:       path+fmt.Sprintf("[%d]", i),
+					HybridType: ft.Field().Items().HybridType(),
+					OmniqlType: ft.Id(),
+					Package:    ft.Package(),
+					ErrorMsg:   err.Error(),
+				}
+				return
 			}
 
-			enumName, ok := ot.LookupEnumeration().ByUint16ToCamelCase(uint16(value))
+			if choiceString {
+				enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
+				if err != nil {
+					err = &Error{
+						Path:       path+fmt.Sprintf("[%d]", i),
+						HybridType: ft.Field().Items().HybridType(),
+						OmniqlType: ft.Id(),
+						Package:    ft.Package(),
+						ErrorMsg:   err.Error(),
+					}
+					return
+				}
 
-			if ok {
-				//write the enum as string
 				r = append(r, enumName)
 			} else {
-				//write the enum as json number
-				r = append(r, float64(value))
+				enumUint16, err = j.fieldGen.Enumeration().Uint16Enumeration(path, ft)
+				if err != nil {
+					err = &Error{
+						Path:       path+fmt.Sprintf("[%d]", i),
+						HybridType: ft.Field().Items().HybridType(),
+						OmniqlType: ft.Id(),
+						Package:    ft.Package(),
+						ErrorMsg:   err.Error(),
+					}
+					return
+				}
+				r = append(r, float64(enumUint16))
 			}
 		}
-
 	case hybrids.Uint32:
 		for i := 0; i < vLen; i++ {
-			value, err := randutil.IntRange(0, maxEnum)
+			choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 			if err != nil {
-				return err
+				err = &Error{
+					Path:       path+fmt.Sprintf("[%d]", i),
+					HybridType: ft.Field().Items().HybridType(),
+					OmniqlType: ft.Id(),
+					Package:    ft.Package(),
+					ErrorMsg:   err.Error(),
+				}
+				return
 			}
 
-			enumName, ok := ot.LookupEnumeration().ByUint32ToCamelCase(uint32(value))
+			if choiceString {
+				enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
+				if err != nil {
+					err = &Error{
+						Path:       path+fmt.Sprintf("[%d]", i),
+						HybridType: ft.Field().Items().HybridType(),
+						OmniqlType: ft.Id(),
+						Package:    ft.Package(),
+						ErrorMsg:   err.Error(),
+					}
+					return
+				}
 
-			if ok {
-				//write the enum as string
 				r = append(r, enumName)
 			} else {
-				//write the enum as json number
-				r = append(r, float64(value))
+				enumUint32, err = j.fieldGen.Enumeration().Uint32Enumeration(path, ft)
+				if err != nil {
+					err = &Error{
+						Path:       path+fmt.Sprintf("[%d]", i),
+						HybridType: ft.Field().Items().HybridType(),
+						OmniqlType: ft.Id(),
+						Package:    ft.Package(),
+						ErrorMsg:   err.Error(),
+					}
+					return
+				}
+				r = append(r, float64(enumUint32))
 			}
 		}
 
 	}
 
-	out[fieldName] = r
+	out[ft.Field().Name()] = r
 	return
 }
-*/

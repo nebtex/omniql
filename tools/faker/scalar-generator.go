@@ -21,59 +21,59 @@ func RenderScalarFakers(f io.Writer) {
 	var tmp *template.Template
 
 	tmp, err = template.New("ScalarFakers").Parse(`
-func (j *Json) fake{{.scalar.String}}(path string, out map[string]interface{}, fieldName string, parentType oreflection.OType, fn hybrids.FieldNumber) (err error) {
+func (j *Json) fake{{.scalar.String}}(path string, out map[string]interface{}, fieldType oreflection.OType) (err error) {
 	var v {{.scalar.NativeType}}
 
-	v, err = j.fieldGen.{{.scalar.String}}(path, parentType, fn)
+	v, err = j.fieldGen.{{.scalar.String}}(path, fieldType)
 
 	if err != nil {
 		err = &Error{
 			Path:        path,
-			HybridType:  hybrids.{{.scalar.String}},
-			OmniqlType:  parentType.Id(),
-			Application: parentType.Application(),
+			HybridType:  fieldType.Field().HybridType(),
+			OmniqlType:  fieldType.Id(),
+			Package:     fieldType.Package(),
 			ErrorMsg:    err.Error(),
 		}
 		return
 	}
 
-	out[fieldName] = {{.jsTransform}}
+	out[fieldType.Field().Name()] = v
 
 	return
 }
 	
-func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interface{}, fieldName string, parentType oreflection.OType, fn hybrids.FieldNumber) (err error) {
+func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interface{}, fieldType oreflection.OType) (err error) {
 	var shouldNil bool
 	var vLen int
 	var v {{.scalar.NativeType}}
 
-	shouldNil, err = j.fieldGen.ShouldBeNil(path, parentType, fn)
+	shouldNil, err = j.fieldGen.ShouldBeNil(path, fieldType)
 
 	if err != nil {
 		err = &Error{
 			Path:        path,
-			HybridType:  hybrids.Vector{{.scalar.String}},
-			OmniqlType:  parentType.Id(),
-			Application: parentType.Application(),
+			HybridType:  fieldType.Field().HybridType(),
+			OmniqlType:  fieldType.Id(),
+			Package:     fieldType.Package(),
 			ErrorMsg:    err.Error(),
 		}
 		return
 	}
 
 	if shouldNil {
-		out[fieldName] = nil
+		out[fieldType.Field().Name()] = nil
 		return
 	}
 
 	//generate vector len
-	vLen, err = j.fieldGen.VectorLen(path, parentType, fn)
+	vLen, err = j.fieldGen.VectorLen(path, fieldType)
 
 	if err != nil {
 		err = &Error{
 			Path:        path,
-			HybridType:  hybrids.Vector{{.scalar.String}},
-			OmniqlType:  parentType.Id(),
-			Application: parentType.Application(),
+			HybridType:  fieldType.Field().HybridType(),
+			OmniqlType:  fieldType.Id(),
+			Package:     fieldType.Package(),
 			ErrorMsg:    err.Error(),
 		}
 		return
@@ -82,13 +82,13 @@ func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interfac
 	r := make([]interface{}, 0, vLen)
 
 	for i := 0; i < vLen; i++ {
-		v, err =  j.fieldGen.{{.scalar.String}}(path, parentType, fn)
+		v, err =  j.fieldGen.{{.scalar.String}}(path, fieldType)
 		if err != nil {
 			err = &Error{
 				Path:        path+fmt.Sprintf("[%d]", i),
-				HybridType:  hybrids.{{.scalar.String}},
-				OmniqlType:  parentType.Id(),
-				Application: parentType.Application(),
+				HybridType:  fieldType.Field().Items().HybridType(),
+				OmniqlType:  fieldType.Id(),
+				Package:     fieldType.Package(),
 				ErrorMsg:    err.Error(),
 			}
 			return
@@ -97,7 +97,7 @@ func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interfac
 
 	}
 
-	out[fieldName] = r
+	out[fieldType.Field().Name()] = r
 
 	return
 }
@@ -187,19 +187,19 @@ func (j *Json) fakeVector{{.scalar.String}}(path string, out map[string]interfac
 
 	decodeScalarTemplate, err := template.New("decodeScalarTemplate").Parse(`
 
-func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types, parentType oreflection.OType, fn hybrids.FieldNumber)(err error){
+func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldType oreflection.OType)(err error){
 
-	switch fieldType{
+	switch fieldType.Field().HybridType(){
 {{ range $index, $value := .scalars }}
 	case hybrids.{{$value.String}}:
-		err = j.fake{{$value.String}}(path, out, fieldName, parentType, fn)
+		err = j.fake{{$value.String}}(path, out, fieldType)
 {{ end }}
 	default:
 		err = &Error{
 			Path:        path,
-			HybridType:  fieldType,
-			OmniqlType:  parentType.Id(),
-			Application: parentType.Application(),
+			HybridType:  fieldType.Field().HybridType(),
+			OmniqlType:  fieldType.Id(),
+			Package:     fieldType.Package(),
 			ErrorMsg:    "path not recognized as  scalar",
 		}
     }
@@ -207,19 +207,19 @@ func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldName str
 }
 
 
-func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldName string, fieldType hybrids.Types, parentType oreflection.OType, fn hybrids.FieldNumber)(err error){
+func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldType oreflection.OType)(err error){
 
-	switch fieldType{
+	switch fieldType.Field().HybridType{
 {{ range $index, $value := .scalars }}
 	case hybrids.Vector{{$value.String}}:
-		err = j.fakeVector{{$value.String}}(path, out, fieldName, parentType, fn)
+		err = j.fakeVector{{$value.String}}(path, out, fieldType)
 {{ end }}
 	default:
 		err = &Error{
 			Path:        path,
-			HybridType:  fieldType,
-			OmniqlType:  parentType.Id(),
-			Application: parentType.Application(),
+			HybridType:  fieldType.Field().HybridType(),
+			OmniqlType:  fieldType.Id(),
+			Package: 	 fieldType.Package(),
 			ErrorMsg:    "path not recognized as vector of scalar",
 		}
 	}
@@ -270,7 +270,7 @@ func Test_Fake{{.scalar.String}}(t *testing.T) {
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 			otype.On("Id").Return("Table/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 
 			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
@@ -278,7 +278,7 @@ func Test_Fake{{.scalar.String}}(t *testing.T) {
 			err := f.fake{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.{{.scalar.String}})
 			So(ef.OmniqlType, ShouldEqual, "Table/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -299,7 +299,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
@@ -308,7 +308,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 			So(err, ShouldNotBeNil)
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			ef := err.(*Error)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Vector{{.scalar.String}})
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -322,7 +322,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
 			out := map[string]interface{}{}
 
@@ -342,7 +342,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
 
@@ -354,7 +354,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Vector{{.scalar.String}})
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field")
@@ -368,7 +368,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, fmt.Errorf("entropy error"))
@@ -381,7 +381,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 
 			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
 			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
-			So(ef.Application, ShouldEqual, "io.test.app")
+			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.{{.scalar.String}})
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
 			So(ef.Path, ShouldEqual, "test.field[0]")
@@ -395,7 +395,7 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 			otype := &rmocks.OType{}
 
 			otype.On("Id").Return("Struct/Test")
-			otype.On("Application").Return("io.test.app")
+			otype.On("Package").Return("io.test.app")
 			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
 			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
 			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, nil)
