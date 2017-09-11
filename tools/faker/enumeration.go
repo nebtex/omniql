@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func (j *Json) fakeEnum(path string, out map[string]interface{}, ft oreflection.OType, enumType oreflection.OType) (err error) {
+func (j *Json) fakeEnum(path string, out map[string]interface{}, ft oreflection.OType, enumType oreflection.Enumeration) (err error) {
 	var enumName string
 	var enumUint8 uint8
 	var enumUint16 uint16
@@ -42,28 +42,58 @@ func (j *Json) fakeEnum(path string, out map[string]interface{}, ft oreflection.
 		return
 	}
 
-	switch enumType.Enumeration().HybridType() {
+	switch enumType.HybridType() {
 
 	case hybrids.Uint8:
 		enumUint8, err = j.fieldGen.Enumeration().Uint8Enumeration(path, ft)
+		if err != nil {
+			err = &Error{
+				Path:       path,
+				HybridType: ft.Field().HybridType(),
+				OmniqlType: ft.Id(),
+				Package:    ft.Package(),
+				ErrorMsg:   err.Error(),
+			}
+			return
+		}
 		//write the enum as json number
 		out[ft.Field().Name()] = float64(enumUint8)
 
 	case hybrids.Uint16:
 
 		enumUint16, err = j.fieldGen.Enumeration().Uint16Enumeration(path, ft)
+		if err != nil {
+			err = &Error{
+				Path:       path,
+				HybridType: ft.Field().HybridType(),
+				OmniqlType: ft.Id(),
+				Package:    ft.Package(),
+				ErrorMsg:   err.Error(),
+			}
+			return
+		}
 		//write the enum as json number
 		out[ft.Field().Name()] = float64(enumUint16)
 
 	case hybrids.Uint32:
 		enumUint32, err = j.fieldGen.Enumeration().Uint32Enumeration(path, ft)
+		if err != nil {
+			err = &Error{
+				Path:       path,
+				HybridType: ft.Field().HybridType(),
+				OmniqlType: ft.Id(),
+				Package:    ft.Package(),
+				ErrorMsg:   err.Error(),
+			}
+			return
+		}
 		//write the enum as json number
 		out[ft.Field().Name()] = float64(enumUint32)
 	}
 	return
 }
 
-func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft oreflection.OType) (err error) {
+func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft oreflection.OType, enumType oreflection.Enumeration) (err error) {
 	var vLen int
 	var shouldNil bool
 	var enumName string

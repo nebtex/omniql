@@ -59,7 +59,14 @@ type Table interface {
 //go:generate mockery -name=Resource
 //Resource ...
 type Resource interface {
-	Schema() corev1.ResourceReader
+	Table() Table
+	ResourceIDType() hybrids.ResourceIDType
+}
+
+//go:generate mockery -name=Struct
+//Struct ...
+type Struct interface {
+	Schema() corev1.TableReader
 	FieldCount() hybrids.FieldNumber
 	LookupFields() LookupFields
 }
@@ -75,14 +82,25 @@ type Items interface {
 //Field ...
 type Field interface {
 	Schema() corev1.FieldReader
+
+	//table struct or resource
 	ParentType() OType
+
+	//omniql type if field is of type Table/Documentation, this will return the OType of Table/Documentation
 	Type() OType
+
 	//position of this field in the table
 	FieldPosition() hybrids.FieldNumber
+
 	//field name
 	Name() string
+
+	IsEnumeration() bool //return true if the field is an enum
+
 	//the underlying data type
 	HybridType() hybrids.Types
+
+	//if is a vector the item type
 	Items() Items
 }
 
@@ -120,6 +138,7 @@ type OType interface {
 	Table() Table
 	Resource() Resource
 	Field() Field
+	Struct() Struct
 }
 
 /*

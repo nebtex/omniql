@@ -67,4 +67,6 @@ type FieldGenerator interface {
 
 	//return a random Enumeration,
 	Enumeration() EnumerationGenerator
+
+	ShouldGenerateField(path string, table oreflection.OType, fn hybrids.FieldNumber) (bool, error)
 }

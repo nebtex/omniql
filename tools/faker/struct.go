@@ -1,58 +1,71 @@
 package faker
-/*
+
 import (
 	"github.com/nebtex/omniql/commons/golang/oreflection"
 	"github.com/nebtex/hybrids/golang/hybrids"
-	"github.com/jmcvetta/randutil"
 	"fmt"
 )
 
-func (j *Json) fakeStruct(path string, out map[string]interface{}, fieldName string, ot oreflection.OType) (err error) {
+func (j *Json) fakeStruct(path string, out map[string]interface{}, fieldType oreflection.OType, structType oreflection.Struct) (err error) {
 
 	var i hybrids.FieldNumber
 
 	structObject := map[string]interface{}{}
-
-	for i = 0; i < ot.FieldCount(); i++ {
-		structFieldName, structFieldType, _ := ot.LookupFields().ByNumber(i)
-		err = j.fakeScalar(path+"."+structFieldName, structObject, structFieldName, structFieldType.HybridType())
-		if err != nil {
-			return
+	for i = 0; i < structType.FieldCount(); i++ {
+		structFieldName, structFieldType, _ := structType.LookupFields().ByNumber(i)
+		if structFieldType.Field().IsEnumeration() {
+			enumType := structFieldType.Field().Type()
+			err = j.fakeEnum(path+"."+structFieldName, structObject, structFieldType, enumType)
+			if err != nil {
+				return
+			}
+		} else {
+			err = j.fakeScalar(path+"."+structFieldName, structObject, structFieldType)
+			if err != nil {
+				return
+			}
 		}
 	}
 
-	out[fieldName] = structObject
+	out[fieldType.Field().Name()] = structObject
 	return
 }
 
-
-func (j *Json) fakeVectorStruct(path string, out map[string]interface{}, fieldName string, ot oreflection.OType) (err error) {
-	var choice randutil.Choice
+func (j *Json) fakeVectorStruct(path string, out map[string]interface{}, ft oreflection.OType, structType oreflection.Struct) (err error) {
+	var shouldNil bool
 	var vLen int
 	var field hybrids.FieldNumber
 
-	// generate nil or vector
-	nullVector := randutil.Choice{10, int(0)}
-	newVector := randutil.Choice{100, int(1)}
-
-	choice, err = randutil.WeightedChoice([]randutil.Choice{nullVector, newVector})
+	shouldNil, err = j.fieldGen.ShouldBeNil(path, ft)
 
 	if err != nil {
-		return err
+		err = &Error{
+			Path:       path,
+			HybridType: ft.Field().HybridType(),
+			OmniqlType: ft.Id(),
+			Package:    ft.Package(),
+			ErrorMsg:   err.Error(),
+		}
+		return
 	}
 
-	item, _ := choice.Item.(int)
-
-	if item == 0 {
-		out[fieldName] = nil
+	if shouldNil {
+		out[ft.Field().Name()] = nil
 		return
 	}
 
 	//generate vector len
-	vLen, err = randutil.IntRange(1, 127)
+	vLen, err = j.fieldGen.VectorLen(path, ft)
 
 	if err != nil {
-		return err
+		err = &Error{
+			Path:       path,
+			HybridType: ft.Field().HybridType(),
+			OmniqlType: ft.Id(),
+			Package:    ft.Package(),
+			ErrorMsg:   err.Error(),
+		}
+		return
 	}
 
 	r := make([]map[string]interface{}, 0, vLen)
@@ -60,19 +73,17 @@ func (j *Json) fakeVectorStruct(path string, out map[string]interface{}, fieldNa
 	for i := 0; i < vLen; i++ {
 		structObject := map[string]interface{}{}
 
-		for field = 0; field < ot.FieldCount(); field++ {
-			structFieldName, structFieldType, _ := ot.Items().LookupFields().ByNumber(field)
-			err = j.fakeScalar(path+fmt.Sprintf("[%d].%s", int(field), structFieldName), structObject, structFieldName, structFieldType.HybridType())
+		for field = 0; field < structType.FieldCount(); field++ {
+			structFieldName, structFieldType, _ := structType.LookupFields().ByNumber(field)
+			err = j.fakeScalar(path+fmt.Sprintf("[%d].%s", i, structFieldName), structObject, structFieldType)
 			if err != nil {
 				return
 			}
 		}
-
-		r[i] = structObject
+		r = append(r, structObject)
 	}
 
-	out[fieldName] = r
+	out[ft.Field().Name()] = r
 
 	return
 }
-*/
