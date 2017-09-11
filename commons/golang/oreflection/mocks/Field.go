@@ -11,20 +11,6 @@ type Field struct {
 	mock.Mock
 }
 
-// FieldName provides a mock function with given fields:
-func (_m *Field) FieldName() string {
-	ret := _m.Called()
-
-	var r0 string
-	if rf, ok := ret.Get(0).(func() string); ok {
-		r0 = rf()
-	} else {
-		r0 = ret.Get(0).(string)
-	}
-
-	return r0
-}
-
 // FieldPosition provides a mock function with given fields:
 func (_m *Field) FieldPosition() hybrids.FieldNumber {
 	ret := _m.Called()
@@ -34,6 +20,50 @@ func (_m *Field) FieldPosition() hybrids.FieldNumber {
 		r0 = rf()
 	} else {
 		r0 = ret.Get(0).(hybrids.FieldNumber)
+	}
+
+	return r0
+}
+
+// HybridType provides a mock function with given fields:
+func (_m *Field) HybridType() hybrids.Types {
+	ret := _m.Called()
+
+	var r0 hybrids.Types
+	if rf, ok := ret.Get(0).(func() hybrids.Types); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(hybrids.Types)
+	}
+
+	return r0
+}
+
+// Items provides a mock function with given fields:
+func (_m *Field) Items() oreflection.Items {
+	ret := _m.Called()
+
+	var r0 oreflection.Items
+	if rf, ok := ret.Get(0).(func() oreflection.Items); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(oreflection.Items)
+		}
+	}
+
+	return r0
+}
+
+// Name provides a mock function with given fields:
+func (_m *Field) Name() string {
+	ret := _m.Called()
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(string)
 	}
 
 	return r0
@@ -65,6 +95,22 @@ func (_m *Field) Schema() corev1.FieldReader {
 	} else {
 		if ret.Get(0) != nil {
 			r0 = ret.Get(0).(corev1.FieldReader)
+		}
+	}
+
+	return r0
+}
+
+// Type provides a mock function with given fields:
+func (_m *Field) Type() oreflection.OType {
+	ret := _m.Called()
+
+	var r0 oreflection.OType
+	if rf, ok := ret.Get(0).(func() oreflection.OType); ok {
+		r0 = rf()
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(oreflection.OType)
 		}
 	}
 

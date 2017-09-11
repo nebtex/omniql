@@ -963,7 +963,7 @@ func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldType ore
 
 func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldType oreflection.OType)(err error){
 
-	switch fieldType.Field().HybridType{
+	switch fieldType.Field().HybridType(){
 
 	case hybrids.VectorBoolean:
 		err = j.fakeVectorBoolean(path, out, fieldType)

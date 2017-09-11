@@ -70,6 +70,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 	var enumUint8 uint8
 	var enumUint16 uint16
 	var enumUint32 uint32
+	var choiceString bool
 
 	shouldNil, err = j.fieldGen.ShouldBeNil(path, ft)
 
@@ -110,11 +111,11 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 	case hybrids.Uint8:
 
 		for i := 0; i < vLen; i++ {
-			choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
+			choiceString, err = j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 			if err != nil {
 				err = &Error{
-					Path:       path+fmt.Sprintf("[%d]", i),
+					Path:       path + fmt.Sprintf("[%d]", i),
 					HybridType: ft.Field().Items().HybridType(),
 					OmniqlType: ft.Id(),
 					Package:    ft.Package(),
@@ -127,7 +128,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 				enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
 				if err != nil {
 					err = &Error{
-						Path:       path+fmt.Sprintf("[%d]", i),
+						Path:       path + fmt.Sprintf("[%d]", i),
 						HybridType: ft.Field().Items().HybridType(),
 						OmniqlType: ft.Id(),
 						Package:    ft.Package(),
@@ -141,7 +142,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 				enumUint8, err = j.fieldGen.Enumeration().Uint8Enumeration(path, ft)
 				if err != nil {
 					err = &Error{
-						Path:       path+fmt.Sprintf("[%d]", i),
+						Path:       path + fmt.Sprintf("[%d]", i),
 						HybridType: ft.Field().Items().HybridType(),
 						OmniqlType: ft.Id(),
 						Package:    ft.Package(),
@@ -155,11 +156,11 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 
 	case hybrids.Uint16:
 		for i := 0; i < vLen; i++ {
-			choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
+			choiceString, err = j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 			if err != nil {
 				err = &Error{
-					Path:       path+fmt.Sprintf("[%d]", i),
+					Path:       path + fmt.Sprintf("[%d]", i),
 					HybridType: ft.Field().Items().HybridType(),
 					OmniqlType: ft.Id(),
 					Package:    ft.Package(),
@@ -172,7 +173,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 				enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
 				if err != nil {
 					err = &Error{
-						Path:       path+fmt.Sprintf("[%d]", i),
+						Path:       path + fmt.Sprintf("[%d]", i),
 						HybridType: ft.Field().Items().HybridType(),
 						OmniqlType: ft.Id(),
 						Package:    ft.Package(),
@@ -186,7 +187,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 				enumUint16, err = j.fieldGen.Enumeration().Uint16Enumeration(path, ft)
 				if err != nil {
 					err = &Error{
-						Path:       path+fmt.Sprintf("[%d]", i),
+						Path:       path + fmt.Sprintf("[%d]", i),
 						HybridType: ft.Field().Items().HybridType(),
 						OmniqlType: ft.Id(),
 						Package:    ft.Package(),
@@ -199,11 +200,11 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 		}
 	case hybrids.Uint32:
 		for i := 0; i < vLen; i++ {
-			choiceString, err := j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
+			choiceString, err = j.fieldGen.Enumeration().ShouldGenerateString(path, ft)
 
 			if err != nil {
 				err = &Error{
-					Path:       path+fmt.Sprintf("[%d]", i),
+					Path:       path + fmt.Sprintf("[%d]", i),
 					HybridType: ft.Field().Items().HybridType(),
 					OmniqlType: ft.Id(),
 					Package:    ft.Package(),
@@ -216,7 +217,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 				enumName, err = j.fieldGen.Enumeration().StringEnumeration(path, ft)
 				if err != nil {
 					err = &Error{
-						Path:       path+fmt.Sprintf("[%d]", i),
+						Path:       path + fmt.Sprintf("[%d]", i),
 						HybridType: ft.Field().Items().HybridType(),
 						OmniqlType: ft.Id(),
 						Package:    ft.Package(),
@@ -230,7 +231,7 @@ func (j *Json) fakeVectorEnum(path string, out map[string]interface{}, ft orefle
 				enumUint32, err = j.fieldGen.Enumeration().Uint32Enumeration(path, ft)
 				if err != nil {
 					err = &Error{
-						Path:       path+fmt.Sprintf("[%d]", i),
+						Path:       path + fmt.Sprintf("[%d]", i),
 						HybridType: ft.Field().Items().HybridType(),
 						OmniqlType: ft.Id(),
 						Package:    ft.Package(),

@@ -2,7 +2,6 @@
 package mocks
 
 import corev1 "github.com/nebtex/omniql/pkg/next/corev1"
-import hybrids "github.com/nebtex/hybrids/golang/hybrids"
 import mock "github.com/stretchr/testify/mock"
 import oreflection "github.com/nebtex/omniql/commons/golang/oreflection"
 
@@ -11,30 +10,16 @@ type OType struct {
 	mock.Mock
 }
 
-// Package provides a mock function with given fields:
-func (_m *OType) Application() string {
-	ret := _m.Called()
-
-	var r0 string
-	if rf, ok := ret.Get(0).(func() string); ok {
-		r0 = rf()
-	} else {
-		r0 = ret.Get(0).(string)
-	}
-
-	return r0
-}
-
 // Enumeration provides a mock function with given fields:
-func (_m *OType) Enumeration() corev1.EnumerationReader {
+func (_m *OType) Enumeration() oreflection.Enumeration {
 	ret := _m.Called()
 
-	var r0 corev1.EnumerationReader
-	if rf, ok := ret.Get(0).(func() corev1.EnumerationReader); ok {
+	var r0 oreflection.Enumeration
+	if rf, ok := ret.Get(0).(func() oreflection.Enumeration); ok {
 		r0 = rf()
 	} else {
 		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(corev1.EnumerationReader)
+			r0 = ret.Get(0).(oreflection.Enumeration)
 		}
 	}
 
@@ -57,20 +42,6 @@ func (_m *OType) Field() oreflection.Field {
 	return r0
 }
 
-// HybridType provides a mock function with given fields:
-func (_m *OType) HybridType() hybrids.Types {
-	ret := _m.Called()
-
-	var r0 hybrids.Types
-	if rf, ok := ret.Get(0).(func() hybrids.Types); ok {
-		r0 = rf()
-	} else {
-		r0 = ret.Get(0).(hybrids.Types)
-	}
-
-	return r0
-}
-
 // Id provides a mock function with given fields:
 func (_m *OType) Id() string {
 	ret := _m.Called()
@@ -85,22 +56,6 @@ func (_m *OType) Id() string {
 	return r0
 }
 
-// Items provides a mock function with given fields:
-func (_m *OType) Items() oreflection.OType {
-	ret := _m.Called()
-
-	var r0 oreflection.OType
-	if rf, ok := ret.Get(0).(func() oreflection.OType); ok {
-		r0 = rf()
-	} else {
-		if ret.Get(0) != nil {
-			r0 = ret.Get(0).(oreflection.OType)
-		}
-	}
-
-	return r0
-}
-
 // Kind provides a mock function with given fields:
 func (_m *OType) Kind() corev1.SchemaTypes {
 	ret := _m.Called()
@@ -110,6 +65,20 @@ func (_m *OType) Kind() corev1.SchemaTypes {
 		r0 = rf()
 	} else {
 		r0 = ret.Get(0).(corev1.SchemaTypes)
+	}
+
+	return r0
+}
+
+// Package provides a mock function with given fields:
+func (_m *OType) Package() string {
+	ret := _m.Called()
+
+	var r0 string
+	if rf, ok := ret.Get(0).(func() string); ok {
+		r0 = rf()
+	} else {
+		r0 = ret.Get(0).(string)
 	}
 
 	return r0

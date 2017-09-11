@@ -1,4 +1,4 @@
-package faker
+package fieldgen
 
 import (
 	"github.com/nebtex/omniql/commons/golang/oreflection"

@@ -209,7 +209,7 @@ func (j *Json) fakeScalar(path string, out map[string]interface{}, fieldType ore
 
 func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldType oreflection.OType)(err error){
 
-	switch fieldType.Field().HybridType{
+	switch fieldType.Field().HybridType(){
 {{ range $index, $value := .scalars }}
 	case hybrids.Vector{{$value.String}}:
 		err = j.fakeVector{{$value.String}}(path, out, fieldType)
@@ -237,7 +237,7 @@ func (j *Json) fakeVectorScalar(path string, out map[string]interface{}, fieldTy
 
 }
 
-func RenderTestScalarFaker(f io.Writer){
+func RenderTestScalarFaker(f io.Writer) {
 	var err error
 	var tmp *template.Template
 
@@ -247,35 +247,43 @@ func Test_Fake{{.scalar.String}}(t *testing.T) {
 	Convey("Test_Fake{{.scalar.String}}", t, func() {
 
 		Convey("Should populate field with the data of FieldGenerator", func() {
-			fieldNumber := hybrids.FieldNumber(2)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
-			otype := &rmocks.OType{}
 
-			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, nil)
+			otype:= &rmocks.OType{}
+			fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+
+			fg.On("{{.scalar.String}}", "test.field", otype).Return({{.value}}, nil)
 			out := map[string]interface{}{}
 
-			err := f.fake{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fake{{.scalar.String}}("test.field", out, otype)
 
 			So(err, ShouldBeNil)
 			So(out["field"], ShouldEqual, {{.jsonValue}})
-			fg.AssertCalled(t, "{{.scalar.String}}", "test.field", otype, fieldNumber)
+			fg.AssertCalled(t, "{{.scalar.String}}", "test.field", otype)
 
 		})
 
 		Convey("Should return error if the generator returns an error", func() {
 
-			fieldNumber := hybrids.FieldNumber(2)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
-			otype := &rmocks.OType{}
+
+			otype:= &rmocks.OType{}
+	        fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+			fieldMock.On("HybridType").Return(hybrids.{{.scalar.String}})
+
 			otype.On("Id").Return("Table/Test")
 			otype.On("Package").Return("io.test.app")
 
-			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, fmt.Errorf("failed entropy"))
+			fg.On("{{.scalar.String}}", "test.field", otype).Return({{.value}}, fmt.Errorf("failed entropy"))
 			out := map[string]interface{}{}
 
-			err := f.fake{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fake{{.scalar.String}}("test.field", out, otype)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
 			So(ef.Package, ShouldEqual, "io.test.app")
@@ -293,20 +301,24 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 	Convey("Test_FakeVector{{.scalar.String}}", t, func() {
 
 		Convey("should return error if ShouldBeNil selector returns error", func() {
-			fieldNumber := hybrids.FieldNumber(3)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 
+			fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+			fieldMock.On("HybridType").Return(hybrids.Vector{{.scalar.String}})
+
 			otype.On("Id").Return("Struct/Test")
 			otype.On("Package").Return("io.test.app")
-			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, fmt.Errorf("entropy error"))
+			fg.On("ShouldBeNil", "test.field", otype).Return(false, fmt.Errorf("entropy error"))
 			out := map[string]interface{}{}
 
-			err := f.fakeVector{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fakeVector{{.scalar.String}}("test.field", out, otype)
 
 			So(err, ShouldNotBeNil)
-			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
+			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype)
 			ef := err.(*Error)
 			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Vector{{.scalar.String}})
@@ -316,19 +328,23 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 		})
 
 		Convey("should put the field nil if  ShouldBeNil returns true", func() {
-			fieldNumber := hybrids.FieldNumber(3)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 
+			fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+			fieldMock.On("HybridType").Return(hybrids.Vector{{.scalar.String}})
+
 			otype.On("Id").Return("Struct/Test")
 			otype.On("Package").Return("io.test.app")
-			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(true, nil)
+			fg.On("ShouldBeNil", "test.field", otype).Return(true, nil)
 			out := map[string]interface{}{}
 
-			err := f.fakeVector{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fakeVector{{.scalar.String}}("test.field", out, otype)
 			So(err, ShouldBeNil)
-			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
+			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype)
 			value, ok := out["field"]
 			So(value, ShouldEqual, nil)
 			So(ok, ShouldBeTrue)
@@ -336,24 +352,28 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 		})
 
 		Convey("should return error if the random vector len generator returns errors", func() {
-			fieldNumber := hybrids.FieldNumber(3)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 
+			fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+			fieldMock.On("HybridType").Return(hybrids.Vector{{.scalar.String}})
+
 			otype.On("Id").Return("Struct/Test")
 			otype.On("Package").Return("io.test.app")
-			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
-			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(0, fmt.Errorf("entropy error"))
+			fg.On("ShouldBeNil", "test.field", otype).Return(false, nil)
+			fg.On("VectorLen", "test.field", otype).Return(0, fmt.Errorf("entropy error"))
 
 			out := map[string]interface{}{}
 
-			err := f.fakeVector{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fakeVector{{.scalar.String}}("test.field", out, otype)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
 
-			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
-			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
+			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype)
+			fg.AssertCalled(t, "VectorLen", "test.field", otype)
 			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.Vector{{.scalar.String}})
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
@@ -362,25 +382,33 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 		})
 
 		Convey("should return error if the random value generator returns error", func() {
-			fieldNumber := hybrids.FieldNumber(3)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 
+			fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+			fieldMock.On("HybridType").Return(hybrids.Vector{{.scalar.String}})
+
+			itemsMock:= &rmocks.Items{}
+			fieldMock.On("Items").Return(itemsMock)
+			itemsMock.On("HybridType").Return(hybrids.{{.scalar.String}})
+
 			otype.On("Id").Return("Struct/Test")
 			otype.On("Package").Return("io.test.app")
-			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
-			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
-			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, fmt.Errorf("entropy error"))
+			fg.On("ShouldBeNil", "test.field", otype).Return(false, nil)
+			fg.On("VectorLen", "test.field", otype).Return(10, nil)
+			fg.On("{{.scalar.String}}", "test.field", otype).Return({{.value}}, fmt.Errorf("entropy error"))
 
 			out := map[string]interface{}{}
 
-			err := f.fakeVector{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fakeVector{{.scalar.String}}("test.field", out, otype)
 			So(err, ShouldNotBeNil)
 			ef := err.(*Error)
 
-			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype, fieldNumber)
-			fg.AssertCalled(t, "VectorLen", "test.field", otype, fieldNumber)
+			fg.AssertCalled(t, "ShouldBeNil", "test.field", otype)
+			fg.AssertCalled(t, "VectorLen", "test.field", otype)
 			So(ef.Package, ShouldEqual, "io.test.app")
 			So(ef.HybridType, ShouldEqual, hybrids.{{.scalar.String}})
 			So(ef.OmniqlType, ShouldEqual, "Struct/Test")
@@ -389,20 +417,24 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 		})
 
 		Convey("Should set a vector with the random len generated if all was ok", func() {
-			fieldNumber := hybrids.FieldNumber(3)
 			fg := &fmocks.FieldGenerator{}
 			f := &Json{fieldGen: fg}
 			otype := &rmocks.OType{}
 
+			fieldMock := &rmocks.Field{}
+			otype.On("Field").Return(fieldMock)
+			fieldMock.On("Name").Return("field")
+			fieldMock.On("HybridType").Return(hybrids.Vector{{.scalar.String}})
+
 			otype.On("Id").Return("Struct/Test")
 			otype.On("Package").Return("io.test.app")
-			fg.On("ShouldBeNil", "test.field", otype, fieldNumber).Return(false, nil)
-			fg.On("VectorLen", "test.field", otype, fieldNumber).Return(10, nil)
-			fg.On("{{.scalar.String}}", "test.field", otype, fieldNumber).Return({{.value}}, nil)
+			fg.On("ShouldBeNil", "test.field", otype).Return(false, nil)
+			fg.On("VectorLen", "test.field", otype).Return(10, nil)
+			fg.On("{{.scalar.String}}", "test.field", otype).Return({{.value}}, nil)
 
 			out := map[string]interface{}{}
 
-			err := f.fakeVector{{.scalar.String}}("test.field", out, "field", otype, fieldNumber)
+			err := f.fakeVector{{.scalar.String}}("test.field", out, otype)
 			So(err, ShouldBeNil)
 			vector, ok := out["field"].([]interface{})
 			So(ok, ShouldBeTrue)
@@ -458,15 +490,12 @@ func Test_FakeVector{{.scalar.String}}(t *testing.T) {
 
 	for index, v := range scalars {
 		err = tmp.Execute(f, map[string]interface{}{
-			"scalar":      v,
-			"value": testValue[index],
+			"scalar":    v,
+			"value":     testValue[index],
 			"jsonValue": jsonValue[index],
-
 		})
 		die(err)
 	}
-
-
 
 }
 
@@ -503,7 +532,7 @@ import (
 import (
 	"testing"
 	. "github.com/smartystreets/goconvey/convey"
-	fmocks "github.com/nebtex/omniql/tools/faker/mocks"
+	fmocks "github.com/nebtex/omniql/tools/faker/fieldgen/mocks"
 	rmocks "github.com/nebtex/omniql/commons/golang/oreflection/mocks"
 	"github.com/nebtex/hybrids/golang/hybrids"
 	"fmt"
@@ -511,8 +540,7 @@ import (
 `))
 	die(err)
 	RenderTestScalarFaker(test)
-	
-	
+
 	/*RenderVectorScalarDecoders(f)
 
 	test, err := os.Create("scalar-decoder_test.go")
