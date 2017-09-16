@@ -14,6 +14,14 @@ spec:
   - name: name
     type: String
     required: true
+    validators:
+    - name: asdsd
+      url: validator.omniql.almagest.io/criloz/stdlib/phone/autralia
+      version: 1.07
+      parameters:
+        slsls: sdsds
+        slddl: ldsdls
+        dlsdsd: sdsdsd
   - name: kind
     type: Enumeration/ApplicationType/EnumerationGroup/Resource
     required: true

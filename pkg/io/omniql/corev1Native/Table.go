@@ -3,15 +3,14 @@ package corev1Native
 import "github.com/nebtex/omniql/pkg/io/omniql/corev1"
 
 type Table struct {
-	RID    []byte  `json:"rid"`
-	Metadata   *Metadata `json:"meta"`
-	Fields []*Field `json:"fields"`
+	Metadata *Metadata `json:"meta"`
+	Fields   []*Field  `json:"fields"`
 }
 
 type TableReader struct {
-	table *Table
-	metadata  corev1.MetadataReader
-	doc   corev1.DocumentationReader
+	table    *Table
+	metadata corev1.MetadataReader
+	doc      corev1.DocumentationReader
 }
 
 func (t *TableReader) RID() corev1.ResourceIDReader {

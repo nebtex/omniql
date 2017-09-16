@@ -1,8 +1,7 @@
 api: io.almagest.omniql.schema.v1
-rid: Application/io.almagest.omniql.schema.*/Table/Documentation
+rid: Owner/omniql/Package/schema/Package/polarad/Table/Documentation
 spec:
   metadata:
-    application: io.almagest.omniql.schema.*
     kind: Table
     name: Documentation
     documentation:
