@@ -6,29 +6,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="42073251-b563-4837-9566-5f32c75a4804" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/cmd/jsonstub/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/cmd/main.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/enumeration.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/enumeration_test.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/errors.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/faker.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/fieldgen/fieldgen.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/fieldgen/mocks/EnumerationGenerator.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/fieldgen/mocks/FieldGenerator.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/scalar-faker_test.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/scalar-generator.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/stack.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/string.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/struct.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/table.go" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/union.go" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data-tree/base.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/examples/circles/circle.yml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/go/core.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hash/hash.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hash/hash_test.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/kkk/binary.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/kkk/binary_test.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pol/lol.go" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pol/lol_test.go" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Enumeration.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Field.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Items.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/LookupEnumeration.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/LookupFields.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/LookupTableOnUnion.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/ReflectStore.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Resource.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Table.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/mocks/Union.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Documentation.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Enumeration.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/EnumerationGroup.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/EnumerationItem.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/EnumerationTypes.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Field.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Metadata.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Resource.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/ResourceID.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/SchemaTypes.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Table.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/Union.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/UnionTypes.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pkg/next/corev1/base.go" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/tools/faker/aa_test.go" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/tools/cmd/README.md" afterPath="$PROJECT_DIR$/examples/circles/app.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" afterPath="$PROJECT_DIR$/commons/golang/oreflection/reflect.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Table.go" afterPath="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Table.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reflection/omniql/schema/Documentation.yml" afterPath="$PROJECT_DIR$/reflection/omniql/schema/Documentation.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reflection/omniql/schema/Metadata.yml" afterPath="$PROJECT_DIR$/reflection/omniql/schema/Metadata.yml" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,80 +72,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="reflect.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/reflect.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Union.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Union.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/bootstrap/main.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2925">
-              <caret line="50" column="18" lean-forward="false" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-              <folding>
-                <element signature="e#14#488#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Table.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Table.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Documentation.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/corev1Native/Documentation.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Metadata.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/corev1Native/Metadata.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Table.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pkg/io/omniql/corev1Native/Table.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-              <folding>
-                <element signature="e#22#76#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Documentation.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Documentation.yml">
           <provider selected="true" editor-type-id="text-editor">
@@ -139,6 +80,96 @@
               <folding>
                 <marker date="1505230652603" expanded="true" signature="45:102" ph="omniql/sc…umentation" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EnumerationItem.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationItem.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EnumerationTypes.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationTypes.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Field.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Field.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Resource.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Resource.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SchemaTypes.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/SchemaTypes.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Table.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Table.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Enumeration.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Enumeration.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EnumerationGroup.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationGroup.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="circle.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/circles/circle.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -154,8 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>io.almagest.omniql.v1</find>
-      <find>io.omniql.core.v1</find>
       <find>oqlid</find>
       <find>/Version/v1</find>
       <find>m</find>
@@ -184,6 +213,8 @@
       <find>table</find>
       <find>fieldNumber</find>
       <find>Struct</find>
+      <find>FieldCount</find>
+      <find>seed</find>
     </findStrings>
     <replaceStrings>
       <replace>documentation</replace>
@@ -228,21 +259,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pkg/generators/golang/template_functions.go" />
-        <option value="$PROJECT_DIR$/pkg/generators/golang/native_generator/GoTypes.go" />
-        <option value="$PROJECT_DIR$/pkg/generators/golang/native_generator/Resource.go" />
-        <option value="$PROJECT_DIR$/pkg/generators/golang/native_generator/Table.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Documentation.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Enumeration.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/EnumerationItem.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Field.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/ID.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Metadata.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Resource.go" />
-        <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/EnumerationGroup.go" />
-        <option value="$PROJECT_DIR$/reflection/omniql/schema/SchemaTypes.yml" />
-        <option value="$PROJECT_DIR$/pkg/next/corev1/ResourceID.go" />
-        <option value="$PROJECT_DIR$/pkg/next/corev1/SchemaTypes.go" />
         <option value="$PROJECT_DIR$/pkg/next/corev1/UnionTypes.go" />
         <option value="$PROJECT_DIR$/reflection/omniql/omega/Function.yml" />
         <option value="$PROJECT_DIR$/tools/faker/interface.go" />
@@ -279,6 +295,21 @@
         <option value="$PROJECT_DIR$/pkg/io/omniql/corev1Native/Table.go" />
         <option value="$PROJECT_DIR$/tools/fakerlib/enumeration.go" />
         <option value="$PROJECT_DIR$/bootstrap/main.go" />
+        <option value="$PROJECT_DIR$/go/core.go" />
+        <option value="$PROJECT_DIR$/kkk/test.go" />
+        <option value="$PROJECT_DIR$/kkk/binary.go" />
+        <option value="$PROJECT_DIR$/kkk/binary_test.go" />
+        <option value="$PROJECT_DIR$/data-tree/base.go" />
+        <option value="$PROJECT_DIR$/data-tree/gen_type_object_node.go" />
+        <option value="$PROJECT_DIR$/data-tree/gen_type_kind_node.go" />
+        <option value="$PROJECT_DIR$/hash/hash_test.go" />
+        <option value="$PROJECT_DIR$/hash/hash.go" />
+        <option value="$PROJECT_DIR$/data-tree/gen_type_bucket.go" />
+        <option value="$PROJECT_DIR$/data-tree/types.gen.go" />
+        <option value="$PROJECT_DIR$/pol/lol.go" />
+        <option value="$PROJECT_DIR$/pol/lol_test.go" />
+        <option value="$PROJECT_DIR$/examples/circles/circle.yml" />
+        <option value="$PROJECT_DIR$/examples/circles/app.yml" />
       </list>
     </option>
   </component>
@@ -292,9 +323,9 @@
     <handled-path value="$PROJECT_DIR$/docs/node_modules" />
     <handled-path value="$PROJECT_DIR$/src/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="300" />
-    <option name="y" value="616" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="20" />
+    <option name="y" value="282" />
     <option name="width" value="1660" />
     <option name="height" value="768" />
   </component>
@@ -314,7 +345,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -325,17 +355,88 @@
             <path>
               <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
               <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="chat" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="circles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="hash" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="kkk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="pol" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
               <item name="reflection" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="reflection" type="462c0819:PsiDirectoryNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="reflection" type="462c0819:PsiDirectoryNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="omnibuf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="reflection" type="462c0819:PsiDirectoryNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="schema" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="omniql" type="b2602c69:ProjectViewProjectNode" />
+              <item name="omniql" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="github.com" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../omniql/tools" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="/usr/bin/node" />
@@ -346,19 +447,19 @@
     <property name="go.vendoring.notification.had.been.shown" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/examples/circles" />
+      <recent name="$PROJECT_DIR$/tools/faker" />
+      <recent name="$PROJECT_DIR$/reflection/omniql" />
+      <recent name="$PROJECT_DIR$/pkg/next/corev1" />
+      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/schema" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tools" />
       <recent name="$PROJECT_DIR$/tools/cmd" />
       <recent name="$PROJECT_DIR$/tools/faker/fieldgen" />
       <recent name="$PROJECT_DIR$/reflection/omniql" />
       <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/schema" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tools/faker" />
-      <recent name="$PROJECT_DIR$/reflection/omniql" />
-      <recent name="$PROJECT_DIR$/pkg/next/corev1" />
-      <recent name="$PROJECT_DIR$/reflection/omniql/omnibuf/schema" />
-      <recent name="$PROJECT_DIR$/pkg/generators/golang/next" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -373,46 +474,38 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.Test_FakeEnumeration in enumeration_test.go">
-    <configuration name="Test_FakeEnumeration in enumeration_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+  <component name="RunManager" selected="Go Test.BenchmarkSample in lol_test.go">
+    <configuration name="BenchmarkSample in binary_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="omniql" />
-      <working_directory value="$PROJECT_DIR$/tools/faker" />
-      <framework value="gotest" />
+      <working_directory value="$PROJECT_DIR$/kkk" />
+      <framework value="gobench" />
       <kind value="PACKAGE" />
-      <package value="github.com/nebtex/omniql/tools/faker" />
-      <pattern value="^Test_FakeEnumeration$" />
+      <package value="github.com/nebtex/omniql/kkk" />
+      <pattern value="^BenchmarkSample$" />
     </configuration>
-    <configuration name="Test_FakeInt8 in scalar-faker_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+    <configuration name="BenchmarkSample in lol_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="omniql" />
-      <working_directory value="$PROJECT_DIR$/tools/faker" />
-      <framework value="gotest" />
+      <working_directory value="$PROJECT_DIR$/pol" />
+      <framework value="gobench" />
       <kind value="PACKAGE" />
-      <package value="github.com/nebtex/omniql/tools/faker" />
-      <pattern value="^Test_FakeInt8$" />
+      <package value="github.com/nebtex/omniql/pol" />
+      <pattern value="^BenchmarkSample$" />
     </configuration>
-    <configuration name="Test_FakeVectorBoolean in scalar-faker_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+    <configuration name="Test_hash in hash_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="omniql" />
-      <working_directory value="$PROJECT_DIR$/tools/faker" />
+      <working_directory value="$PROJECT_DIR$/hash" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="github.com/nebtex/omniql/tools/faker" />
-      <pattern value="^Test_FakeVectorBoolean$" />
+      <package value="github.com/nebtex/omniql/hash" />
+      <pattern value="^Test_hash$" />
     </configuration>
-    <configuration name="Test_FakeVectorFloat64 in scalar-faker_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
+    <configuration name="Test_hash in lol_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
       <module name="omniql" />
-      <working_directory value="$PROJECT_DIR$/tools/faker" />
+      <working_directory value="$PROJECT_DIR$/pol" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="github.com/nebtex/omniql/tools/faker" />
-      <pattern value="^Test_FakeVectorFloat64$" />
-    </configuration>
-    <configuration name="Test_FakeVectorInt32 in scalar-faker_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true">
-      <module name="omniql" />
-      <working_directory value="$PROJECT_DIR$/tools/faker" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="github.com/nebtex/omniql/tools/faker" />
-      <pattern value="^Test_FakeVectorInt32$" />
+      <package value="github.com/nebtex/omniql/pol" />
+      <pattern value="^Test_hash$" />
     </configuration>
     <configuration default="true" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
       <option name="channel" value="DEFAULT" />
@@ -481,20 +574,26 @@
       <envs />
       <method />
     </configuration>
+    <configuration name="lol.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="omniql" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/pol/lol.go" />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Go Test.Test_FakeInt8 in scalar-faker_test.go" />
-      <item index="1" class="java.lang.String" itemvalue="Go Test.Test_FakeVectorFloat64 in scalar-faker_test.go" />
-      <item index="2" class="java.lang.String" itemvalue="Go Test.Test_FakeVectorInt32 in scalar-faker_test.go" />
-      <item index="3" class="java.lang.String" itemvalue="Go Test.Test_FakeVectorBoolean in scalar-faker_test.go" />
-      <item index="4" class="java.lang.String" itemvalue="Go Test.Test_FakeEnumeration in enumeration_test.go" />
+      <item index="0" class="java.lang.String" itemvalue="Go Test.BenchmarkSample in binary_test.go" />
+      <item index="1" class="java.lang.String" itemvalue="Go Test.Test_hash in hash_test.go" />
+      <item index="2" class="java.lang.String" itemvalue="Go Application.lol.go" />
+      <item index="3" class="java.lang.String" itemvalue="Go Test.Test_hash in lol_test.go" />
+      <item index="4" class="java.lang.String" itemvalue="Go Test.BenchmarkSample in lol_test.go" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Go Test.Test_FakeEnumeration in enumeration_test.go" />
-        <item index="1" class="java.lang.String" itemvalue="Go Test.Test_FakeVectorBoolean in scalar-faker_test.go" />
-        <item index="2" class="java.lang.String" itemvalue="Go Test.Test_FakeVectorInt32 in scalar-faker_test.go" />
-        <item index="3" class="java.lang.String" itemvalue="Go Test.Test_FakeVectorFloat64 in scalar-faker_test.go" />
-        <item index="4" class="java.lang.String" itemvalue="Go Test.Test_FakeInt8 in scalar-faker_test.go" />
+        <item index="0" class="java.lang.String" itemvalue="Go Test.BenchmarkSample in lol_test.go" />
+        <item index="1" class="java.lang.String" itemvalue="Go Application.lol.go" />
+        <item index="2" class="java.lang.String" itemvalue="Go Test.Test_hash in lol_test.go" />
+        <item index="3" class="java.lang.String" itemvalue="Go Test.Test_hash in hash_test.go" />
+        <item index="4" class="java.lang.String" itemvalue="Go Test.BenchmarkSample in binary_test.go" />
       </list>
     </recent_temporary>
   </component>
@@ -508,35 +607,35 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 34m 59s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 37m 17s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 35m 47s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 37m 29s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 35m 58s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 37m 37s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 36m 35s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 37m 45s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 37m 11s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 38m 15s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 37m 35s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 39m 22s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 39m 37s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 39m 39s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 40m 25s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 39m 54s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 41m 46s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 40m 03s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="Test_FakeEnumeration_in_enumeration_test_go - 2017.09.11 at 09h 42m 58s.xml">
-      <configuration name="Test_FakeEnumeration in enumeration_test.go" configurationId="GoTestRunConfiguration" />
+    <history-entry file="BenchmarkSample_in_lol_test_go - 2017.10.01 at 22h 40m 22s.xml">
+      <configuration name="BenchmarkSample in lol_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -549,20 +648,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="30" width="1680" height="1020" extended-state="6" />
+    <frame x="20" y="282" width="1660" height="768" extended-state="0" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cargo" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23430493" sideWeight="0.50238097" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4015748" sideWeight="0.49761903" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34533185" sideWeight="0.49761903" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Quokka" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26866585" sideWeight="0.49541286" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29058242" sideWeight="0.49541286" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.249694" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22947131" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32252142" sideWeight="0.5045872" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -601,7 +700,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="replace kind with oqlid [omniql id]" />
     <MESSAGE value="change kind for omniql" />
     <MESSAGE value="now if s resource have child the resource should be defined in a folder" />
     <MESSAGE value="define enumeration groups" />
@@ -626,251 +724,16 @@
     <MESSAGE value="improve reflection interface" />
     <MESSAGE value="fix scalar tests" />
     <MESSAGE value="add table" />
-    <option name="LAST_COMMIT_MESSAGE" value="add table" />
+    <MESSAGE value="remove tools" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove tools" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go</url>
-          <line>2</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="55" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tools/faker/scalar-faker.gen.go" />
-    <entry file="file://$PROJECT_DIR$/tools/faker/stack.go" />
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Metadata.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/scalar-faker.gen.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/scalar-generator.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/union.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="63" column="30" lean-forward="false" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/struct.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="89" column="0" lean-forward="true" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/string.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="43" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/table.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="122" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="122" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/stack.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/faker.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/enumeration_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-136">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/errors.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fieldgen/mocks/FieldGenerator.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-135">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fieldgen/fieldgen.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="11" column="47" lean-forward="false" selection-start-line="11" selection-start-column="47" selection-end-line="11" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fieldgen/mocks/EnumerationGenerator.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-961">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/scalar-faker_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/Enumeration.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/mocks/OType.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="126" column="30" lean-forward="true" selection-start-line="126" selection-start-column="30" selection-end-line="126" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Enumeration.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationGroup.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationItem.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationTypes.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Field.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/base.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/Documentation.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/EnumerationGroup.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/EnumerationItem.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Documentation.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-270">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Enumeration.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/EnumerationGroup.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/EnumerationItem.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Field.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pkg/io/omniql/Nextcorev1Native/Metadata.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -917,7 +780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -925,7 +787,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -933,7 +794,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -941,9 +801,223 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="39" lean-forward="false" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
-          <folding>
-            <element signature="e#22#76#0" expanded="true" />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/reflect.go" />
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Union.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tools/cmd/main.go" />
+    <entry file="file://$PROJECT_DIR$/tools/fakerlib/enumeration.go" />
+    <entry file="file://$PROJECT_DIR$/bootstrap/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="21" column="28" lean-forward="false" selection-start-line="21" selection-start-column="28" selection-end-line="21" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/next/corev1/base.go" />
+    <entry file="file://$PROJECT_DIR$/go/core.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../delta/go/decoders.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-285">
+          <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/fmt/print.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="255" column="5" lean-forward="false" selection-start-line="255" selection-start-column="5" selection-end-line="255" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../spaolacci/murmur3/murmur32.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="46" column="1" lean-forward="true" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-tree/gen_type_bucket_item.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1163">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-tree/types.gen.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2975">
+          <caret line="184" column="22" lean-forward="false" selection-start-line="184" selection-start-column="22" selection-end-line="184" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-tree/gen_type_kind_node.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="36" lean-forward="false" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-tree/gen_type_object_node.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1870">
+          <caret line="113" column="1" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kkk/binary_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="90" column="0" lean-forward="false" selection-start-line="90" selection-start-column="0" selection-end-line="93" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/strings/compare.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="14" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pol/lol_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="40" column="10" lean-forward="false" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hash/hash_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pol/lol.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="44" lean-forward="false" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-tree/base.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data-tree/gen_type_bucket.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="13" column="17" lean-forward="false" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hash/hash.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="13" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kkk/binary.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="831">
+          <caret line="81" column="31" lean-forward="false" selection-start-line="81" selection-start-column="28" selection-end-line="81" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/hybrids_generator/Resource.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-943">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/hybrids_generator/Strings.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/hybrids_generator/Table.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/ResourceID.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Enumeration.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pkg/generators/golang/interface_generator/Resource.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/omnibuf/content.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/circles/app.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/circles/circle.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Enumeration.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationGroup.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -957,53 +1031,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/commons/golang/oreflection/reflect.go">
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationItem.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/EnumerationTypes.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Field.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Resource.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/SchemaTypes.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="26" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Table.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reflection/omniql/schema/Union.yml">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="15" />
+          <caret line="13" column="22" lean-forward="true" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/cmd/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tools/fakerlib/enumeration.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bootstrap/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2925">
-          <caret line="50" column="18" lean-forward="false" selection-start-line="50" selection-start-column="18" selection-end-line="50" selection-end-column="18" />
-          <folding>
-            <element signature="e#14#488#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

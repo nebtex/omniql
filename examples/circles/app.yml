@@ -1,0 +1,8 @@
+api: io.almagest.omniql.schemav1
+rid: Application/io.almagest.examples.circles/Table/Circle
+spec:
+  metadata:
+    kind: Application
+    name: Circles
+  resources:
+  - table: Circle
